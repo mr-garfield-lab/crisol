@@ -6,7 +6,7 @@
 > interfaces, los resultados y la estructura de carpetas. Todo lo que sigue dice si está **medido** o solo **estimado**.
 
 Crisol ejecuta en local modelos abiertos del tamaño que tú elijas con [llama.cpp](https://github.com/ggml-org/llama.cpp)
-(medidos hasta ahora: de 7B a 12B) y mide lo que de verdad saben hacer. Un verificador determinista, sin IA, decide si aprueban, y las reglas de decisión se escriben
+(medidos hasta ahora: de 7B a 26B) y mide lo que de verdad saben hacer. Un verificador determinista, sin IA, decide si aprueban, y las reglas de decisión se escriben
 **antes** de preguntar a ningún cerebro (preregistro).
 
 ## Qué hace hoy
@@ -48,6 +48,7 @@ como **medido** o **ESTIMADO**. Puedes cambiarlos tú, pero el tope de VRAM nunc
 | Qwen2.5-Coder 7B | entero | ~40 tokens/s |
 | Ministral 3 8B | entero | ~35 tokens/s |
 | Gemma 4 12B QAT | en parte (39 de 48 capas) | ~15 tokens/s |
+| Gemma 4 26B-A4B (mezcla de expertos, 17 GB) | en parte (10 de 30 capas; necesita ~21 GB de RAM libre para arrancar) | ~11 tokens/s |
 
 **Otros equipos (ESTIMADO, sin medir):**
 

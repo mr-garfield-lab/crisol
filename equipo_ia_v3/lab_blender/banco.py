@@ -383,6 +383,13 @@ def ejecutar(externos: Path, evidencia: Path, salida_blender: Path, modelos=MODE
                         perfil = _perfil_usuario(externos, BC.registro(modelo), V.CTX)
                         tope = perfil["tope_vram_mib"]
                         bloque_ngl = None if perfil["entero"] else perfil["ngl"]
+                        sys.path.insert(0, str(RAIZ / "perfiles"))
+                        import equipo_perfil as PERF
+                        espera_ram = PERF.esperar_ram(perfil["frenos"]["ram"]["necesaria_mib"], B.stop_global)
+                        res.setdefault("esperas_ram", []).append({"modelo": modelo, **espera_ram})
+                        if not espera_ram["ok"]:                # puerta de RAM: sin RAM libre no se carga
+                            raise EV.Abortada(f"{modelo}: no hay RAM libre para cargarlo (hay {espera_ram['libre_mib']}"
+                                              f" MiB, hacen falta {espera_ram['necesaria_mib']}): cierra programas")
                     B.E2 = _e2_de(modelo, V, bloque_ngl)  # dentro de entorno_v5: se deshace al salir
                     vigia = B.VigiaTermica(act=act, tope=tope).iniciar()
                     be = B.proteger_backend_v44(B.fabrica_e2(ver)(), {}, registro, "S1", termica)

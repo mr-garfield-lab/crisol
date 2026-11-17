@@ -37,6 +37,37 @@ RESERVA_FRACCION = 0.125       # en tarjetas grandes se reserva el 12,5 %
 SOBRECOSTE_MIB = 500           # buffers de cálculo y contexto CUDA (medido con gemma12: ~467 MiB)
 MARGEN_MIB = 350               # margen ante subidas de otros programas (el mismo que el reparto de capas medido)
 RAM_LIBRE_MIN_MIB = 2048       # lo que se deja a Windows al poner capas en la RAM
+# RAM que ocupa el proceso del modelo. Medido 2026-11-17 con gemma24 (16,2 GiB, 10 de 30 capas en GPU, archivo mapeado):
+# 13,2 GB al arrancar y hasta 17,7 GB durante una tanda larga (Windows deja en RAM todo lo que lee del archivo, también
+# las capas que ya están en la GPU). Con carga parcial se cuenta el archivo ENTERO. Antes no se contaba y el freno de
+# memoria del núcleo saltó dos veces con otros programas abiertos.
+RAM_EXTRA_FRACCION = 0.15      # modelo entero en la GPU: buffers y parte del archivo (sin medir aún: estimado)
+RAM_EXTRA_FIJO_MIB = 512
+RAM_MARGEN_ARRANQUE_MIB = 4096  # lo que debe quedar libre al arrancar (otros programas crecen; el núcleo corta a 300 MB)
+
+
+def ram_necesaria(peso_mib: float, en_ram_mib: float) -> int:
+    """RAM que ocupará el proceso del modelo. Con capas en la RAM (carga parcial): el archivo entero + 512 MiB, porque
+    Windows acaba reteniéndolo todo. Entero en la GPU: 15 % del peso + 512 MiB (estimado)."""
+    if en_ram_mib > 0:
+        return int(peso_mib + RAM_EXTRA_FIJO_MIB)
+    return int(RAM_EXTRA_FRACCION * peso_mib + RAM_EXTRA_FIJO_MIB)
+
+
+def esperar_ram(necesaria_mib: int, parar=lambda: False, leer=None, max_s: float = 1800, dormir=time.sleep,
+                cada_s: float = 30) -> dict:
+    """Espera a que haya RAM libre suficiente para arrancar (necesaria + margen), como la puerta de VRAM. No cierra
+    nada: si no llega a tiempo, devuelve ok=False y quien llama decide (los laboratorios paran con un motivo claro)."""
+    leer = leer or (lambda: _ram_mib().get("libre"))
+    falta, esperado = necesaria_mib + RAM_MARGEN_ARRANQUE_MIB, 0.0
+    while True:
+        libre = leer()
+        if libre is None or libre >= falta:
+            return {"ok": True, "libre_mib": libre, "necesaria_mib": falta, "esperado_s": esperado}
+        if parar() or esperado >= max_s:
+            return {"ok": False, "libre_mib": libre, "necesaria_mib": falta, "esperado_s": esperado}
+        dormir(cada_s)
+        esperado += cada_s
 CONTEXTOS = (4096, 8192, 16384, 32768)
 MEDIDO = {"gpu": "NVIDIA GeForce RTX 3050", "vram_mib": 8192, "ctx": 4096}
 # modelos medidos de verdad en esa tarjeta (SHA-256 → ¿iba entero en la GPU?)
@@ -236,14 +267,17 @@ def recomendar(hw: dict, modelo: dict, ctx=None, ngl=None) -> dict:
                       f"38 de 48 capas iba a 13–15 tokens/s)")
         if ngl < capas * 0.5:
             avisos.append("menos de la mitad cabe en la GPU: considera un modelo más pequeño o una cuantización menor")
-        if ram_libre is not None and en_ram + RAM_LIBRE_MIN_MIB > ram_libre:
-            avisos.append("la parte que va a la RAM no cabe en la RAM libre: no lo arranques así")
+    ram = ram_necesaria(peso_mib, en_ram)
+    if ram_libre is not None and ram + RAM_MARGEN_ARRANQUE_MIB > ram_libre:
+        avisos.append(f"necesita ~{ram} MiB de RAM y hay {ram_libre} libres (más {RAM_MARGEN_ARRANQUE_MIB} de margen): "
+                      "cierra programas antes de arrancarlo; los laboratorios esperan a que haya RAM libre")
     usada = otras + ngl * por_capa + G.kv_mib(meta, ctx) + SOBRECOSTE_MIB
     # medido = la tarjeta Y la configuración que se probaron de verdad (contexto 4096); lo demás es estimación
     medido = (gpu["nombre"] == MEDIDO["gpu"] and gpu["vram_mib"] == MEDIDO["vram_mib"] and ctx == MEDIDO["ctx"]
               and MODELOS_MEDIDOS.get(modelo.get("sha256")) == entero)   # y el mismo modelo, en la misma forma
     r.update(gpu=gpu["nombre"], vram_mib=gpu["vram_mib"], vram_otras_mib=otras, tope_vram_mib=tope, ctx=ctx,
              ngl=ngl, entero=entero, kv_mib=round(G.kv_mib(meta, ctx), 1), en_ram_mib=round(en_ram),
+             ram_necesaria_mib=ram,
              vram_prevista_mib=round(usada), modo="GPU entera" if entero else "GPU + RAM (carga parcial)",
              estimado=not medido, args_llama=["-ngl", "all" if entero else str(ngl), "-c", str(ctx),
                                               "-ctk", "q8_0", "-ctv", "q8_0", "-fa", "on"])
@@ -251,6 +285,7 @@ def recomendar(hw: dict, modelo: dict, ctx=None, ngl=None) -> dict:
         avisos.append("perfil ESTIMADO: solo está medida la RTX 3050 de 8 GB con contexto 4096; mide tu equipo y "
                       "compártelo")
     r["frenos"] = frenos(gpu, tope, usada - otras)
+    r["frenos"]["ram"] = {"necesaria_mib": ram, "libre_para_arrancar_mib": ram + RAM_MARGEN_ARRANQUE_MIB}
     return {**r, "avisos": avisos}
 
 

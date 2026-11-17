@@ -6,7 +6,7 @@
 > folder layout will change. Everything below says whether it was **measured** or is only **estimated**.
 
 Crisol (Spanish for *crucible*: where metal is melted and tested) runs open models of any size you choose locally
-with [llama.cpp](https://github.com/ggml-org/llama.cpp) (measured so far: 7B–12B) and measures what they can really do. A deterministic verifier with no
+with [llama.cpp](https://github.com/ggml-org/llama.cpp) (measured so far: 7B–26B) and measures what they can really do. A deterministic verifier with no
 AI in it decides pass/fail, and decision rules are written down **before** any brain is asked (pre-registration).
 
 ## What it does today
@@ -48,6 +48,7 @@ marked **measured** or **ESTIMATED**. You can override them; the VRAM cap is nev
 | Qwen2.5-Coder 7B | fully | ~40 tokens/s |
 | Ministral 3 8B | fully | ~35 tokens/s |
 | Gemma 4 12B QAT | partly (39 of 48 layers) | ~15 tokens/s |
+| Gemma 4 26B-A4B (mixture of experts, 17 GB) | partly (10 of 30 layers; needs ~21 GB of free RAM to start) | ~11 tokens/s |
 
 **Other hardware (ESTIMATED, not measured):**
 

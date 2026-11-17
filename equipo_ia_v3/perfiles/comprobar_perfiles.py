@@ -121,6 +121,22 @@ def main(modelos_reales=None):
     ok("VRAM de otros programas permitida = tope − modelo − margen (8 GB, modelo de 5000 MiB: 1818)",
        f3050["vram"]["otros_programas_max_mib"] == 7168 - 5000 - P.MARGEN_MIB)
     ok("la recomendación incluye sus frenos", "frenos" in r16 and r16["frenos"]["vram"]["tope_mib"] == P.tope_vram(16384))
+    # RAM (2026-11-17, tras los cortes de gemma24 por el freno de memoria del núcleo)
+    ok("RAM con carga parcial = archivo entero + 512 MiB; entera en GPU = 15 % + 512 MiB",
+       P.ram_necesaria(16163, 10780) == 16675 and P.ram_necesaria(4466, 0) == int(0.15 * 4466 + 512))
+    ok("la recomendación lleva su freno de RAM (necesaria y libre para arrancar)",
+       r8g["frenos"]["ram"]["libre_para_arrancar_mib"] == r8g["ram_necesaria_mib"] + P.RAM_MARGEN_ARRANQUE_MIB)
+    poca_ram = P.recomendar(hw(8192, libre=8000), grande)
+    ok("modelo grande con poca RAM libre: aviso de cerrar programas", any("cierra programas" in a for a in poca_ram["avisos"]))
+    lecturas, dormidos = iter([5000, 9000, 30000]), []
+    e = P.esperar_ram(10000, leer=lambda: next(lecturas), dormir=dormidos.append, cada_s=30)
+    ok("esperar_ram: espera hasta que hay RAM libre (necesaria + margen) y sigue", e["ok"] and e["esperado_s"] == 60
+       and len(dormidos) == 2)
+    e2 = P.esperar_ram(10000, leer=lambda: 5000, dormir=lambda s: None, max_s=90, cada_s=30)
+    ok("esperar_ram: si no llega a tiempo, ok=False (el laboratorio para con un motivo claro)", not e2["ok"]
+       and e2["esperado_s"] == 90)
+    e3 = P.esperar_ram(10000, parar=lambda: True, leer=lambda: 5000, dormir=lambda s: None)
+    ok("esperar_ram: respeta el STOP", not e3["ok"] and e3["esperado_s"] == 0)
     real = P.detectar()
     ok("detectar() devuelve un JSON válido en este equipo", json.loads(json.dumps(real))["cpu"] is not None)
     if modelos_reales:

@@ -582,6 +582,13 @@ def _perfil_auto(externos, registro: dict, ctx: int) -> dict:
                            ctx=ctx)
 
 
+def _esperar_ram(necesaria_mib: int, parar) -> dict:
+    """Puerta de RAM de perfiles/equipo_perfil.py: espera (hasta 30 min) a que haya RAM libre para el modelo."""
+    sys.path.insert(0, str(RAIZ / "perfiles"))
+    import equipo_perfil as PERF
+    return PERF.esperar_ram(necesaria_mib, parar)
+
+
 def ejecutar(externos: Path, evidencia: Path, modelos=MODELOS, reanudar=False, correr=None, pendientes_fn=None,
              requisito="contextos.json", permitir_uso=False, perfil_auto=False) -> dict:
     """Mismo armazón de seguridad que el banco de Blender: PC libre, térmica, vigía, reanudación y cierre limpio."""
@@ -622,6 +629,14 @@ def ejecutar(externos: Path, evidencia: Path, modelos=MODELOS, reanudar=False, c
                     # los modelos que solo registró el usuario no tienen topes medidos: perfil por hardware SIEMPRE
                     auto = perfil_auto or LB.es_solo_del_usuario(modelo, reg_original)
                     perfil = _perfil_auto(externos, BC.registro(modelo), V.CTX) if auto else None
+                    if perfil and perfil.get("frenos", {}).get("ram"):
+                        # puerta de RAM (2026-11-17): sin RAM libre para el modelo, se espera; nunca se cierra nada
+                        espera_ram = _esperar_ram(perfil["frenos"]["ram"]["necesaria_mib"], B.stop_global)
+                        res.setdefault("esperas_ram", []).append({"modelo": modelo, **espera_ram})
+                        guardar()
+                        if not espera_ram["ok"]:
+                            raise EV.Abortada(f"{modelo}: no hay RAM libre para cargarlo (hay {espera_ram['libre_mib']} "
+                                              f"MiB, hacen falta {espera_ram['necesaria_mib']}): cierra programas")
                     if perfil and not ok2["ok"] and not ok2.get("problemas") \
                             and (ok2.get("vram_otras_MiB") or 1e9) <= perfil["frenos"]["vram"]["otros_programas_max_mib"]:
                         # perfil por hardware: la VRAM ajena que se admite sale del modelo y de ESTA tarjeta (no de la 3050)
