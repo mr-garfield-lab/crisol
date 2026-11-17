@@ -5,8 +5,8 @@
 > **Estado: experimental y en evolución.** Crisol es un proyecto de investigación en pleno desarrollo. Cambiarán las
 > interfaces, los resultados y la estructura de carpetas. Todo lo que sigue dice si está **medido** o solo **estimado**.
 
-Crisol ejecuta modelos abiertos pequeños en local con [llama.cpp](https://github.com/ggml-org/llama.cpp) y mide lo que
-de verdad saben hacer. Un verificador determinista, sin IA, decide si aprueban, y las reglas de decisión se escriben
+Crisol ejecuta en local modelos abiertos del tamaño que tú elijas con [llama.cpp](https://github.com/ggml-org/llama.cpp)
+(medidos hasta ahora: de 7B a 12B) y mide lo que de verdad saben hacer. Un verificador determinista, sin IA, decide si aprueban, y las reglas de decisión se escriben
 **antes** de preguntar a ningún cerebro (preregistro).
 
 ## Qué hace hoy

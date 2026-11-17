@@ -5,8 +5,8 @@
 > **Status: experimental and still evolving.** Crisol is a research project in active development. Interfaces, results and
 > folder layout will change. Everything below says whether it was **measured** or is only **estimated**.
 
-Crisol (Spanish for *crucible*: where metal is melted and tested) runs small open models locally with
-[llama.cpp](https://github.com/ggml-org/llama.cpp) and measures what they can really do. A deterministic verifier with no
+Crisol (Spanish for *crucible*: where metal is melted and tested) runs open models of any size you choose locally
+with [llama.cpp](https://github.com/ggml-org/llama.cpp) (measured so far: 7B–12B) and measures what they can really do. A deterministic verifier with no
 AI in it decides pass/fail, and decision rules are written down **before** any brain is asked (pre-registration).
 
 ## What it does today
