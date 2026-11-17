@@ -39,6 +39,10 @@ MARGEN_MIB = 350               # margen ante subidas de otros programas (el mism
 RAM_LIBRE_MIN_MIB = 2048       # lo que se deja a Windows al poner capas en la RAM
 CONTEXTOS = (4096, 8192, 16384, 32768)
 MEDIDO = {"gpu": "NVIDIA GeForce RTX 3050", "vram_mib": 8192, "ctx": 4096}
+# modelos medidos de verdad en esa tarjeta (SHA-256 → ¿iba entero en la GPU?)
+MODELOS_MEDIDOS = {"509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c": True,    # qwen25
+                   "33e7a72cf5e6e2cfc2f2847075acc013d68bba023e35310cef86b5cf8fdca761": True,    # ministral3
+                   "90fd44e29e0d7cffeb0fd00dc73cfdab9ed0b0e95306ecf7821ea634c940c370": False}   # gemma12 (38–39 capas)
 
 
 # --- detección -------------------------------------------------------------------------------------------------------
@@ -236,7 +240,8 @@ def recomendar(hw: dict, modelo: dict, ctx=None, ngl=None) -> dict:
             avisos.append("la parte que va a la RAM no cabe en la RAM libre: no lo arranques así")
     usada = otras + ngl * por_capa + G.kv_mib(meta, ctx) + SOBRECOSTE_MIB
     # medido = la tarjeta Y la configuración que se probaron de verdad (contexto 4096); lo demás es estimación
-    medido = gpu["nombre"] == MEDIDO["gpu"] and gpu["vram_mib"] == MEDIDO["vram_mib"] and ctx == MEDIDO["ctx"]
+    medido = (gpu["nombre"] == MEDIDO["gpu"] and gpu["vram_mib"] == MEDIDO["vram_mib"] and ctx == MEDIDO["ctx"]
+              and MODELOS_MEDIDOS.get(modelo.get("sha256")) == entero)   # y el mismo modelo, en la misma forma
     r.update(gpu=gpu["nombre"], vram_mib=gpu["vram_mib"], vram_otras_mib=otras, tope_vram_mib=tope, ctx=ctx,
              ngl=ngl, entero=entero, kv_mib=round(G.kv_mib(meta, ctx), 1), en_ram_mib=round(en_ram),
              vram_prevista_mib=round(usada), modo="GPU entera" if entero else "GPU + RAM (carga parcial)",

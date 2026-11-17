@@ -80,8 +80,13 @@ def main(modelos_reales=None):
     poca = P.recomendar(hw(None, libre=3000), mod)
     ok("sin GPU y sin RAM libre suficiente: «no cabe»", poca["cabe"] is False)
     r8 = P.recomendar(hw(8192, nombre="NVIDIA GeForce RTX 3050"), mod)
-    ok("8 GB (la medida), modelo de 4 GB: entero, contexto 4096 o más, «medido» solo con 4096",
-       r8["entero"] and (r8["estimado"] == (r8["ctx"] != 4096)), f"ctx {r8['ctx']}")
+    ok("8 GB, modelo de 4 GB que nadie midió: entero y marcado ESTIMADO", r8["entero"] and r8["estimado"],
+       f"ctx {r8['ctx']}")
+    qwen = {**mod, "sha256": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c"}
+    rq = P.recomendar(hw(8192, nombre="NVIDIA GeForce RTX 3050"), qwen, ctx=4096)
+    rq2 = P.recomendar(hw(8192, usada=6000, nombre="NVIDIA GeForce RTX 3050"), qwen, ctx=4096)
+    ok("«medido» solo con la tarjeta, el contexto y el modelo medidos, y en la misma forma (entero/parcial)",
+       not rq["estimado"] and rq2["estimado"] and not rq2["entero"])
     r16 = P.recomendar(hw(16384), mod)
     ok("16 GB: entero y con más contexto que en 8 GB; marcado ESTIMADO", r16["entero"] and r16["ctx"] >= r8["ctx"]
        and r16["estimado"] and any("ESTIMADO" in a for a in r16["avisos"]))

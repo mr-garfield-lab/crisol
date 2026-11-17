@@ -73,10 +73,11 @@ py -B -X utf8 perfiles/equipo_perfil.py añadir_modelo ../../externos/modelos/qw
 py -B -X utf8 perfiles/equipo_perfil.py recomendar --modelo qwen25
 ```
 
-**Otro modelo distinto (limitación actual):** el perfil acepta cualquier GGUF. Los laboratorios, en cambio, todavía
-solo lanzan modelos de sus registros con huella. Para usar uno nuevo en ellos, añade su entrada (archivo, sha256,
-bytes y origen) a `lab_blender/cerebros_extra.json` siguiendo el ejemplo de `gemma12`. En una versión próxima los
-laboratorios leerán directamente los modelos registrados con `añadir_modelo`.
+**Cualquier otro modelo:** registra el GGUF que quieras con `añadir_modelo` y usa su alias en `--modelos`. Los
+laboratorios comprueban su huella SHA-256 y su tamaño antes de lanzarlo, y le aplican **siempre** el perfil de tu
+hardware (tope de VRAM y capas en GPU), porque sus límites no están medidos. El modelo tiene que estar en la misma
+unidad de disco que la carpeta `externos` (lo más sencillo: en `externos/modelos/`). Los nombres del proyecto
+(`qwen25`, `ministral3`, `gemma12`) tienen prioridad sobre los tuyos: usa un alias distinto.
 
 ## 6. Primera prueba real: revisión de código (~5–10 minutos)
 

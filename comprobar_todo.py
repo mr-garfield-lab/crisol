@@ -23,6 +23,7 @@ EXTERNOS = RAIZ.parent / "externos"
 # (nombre, script relativo a equipo_ia_v3, argumentos, qué necesita)
 COMPROBACIONES = [
     ("perfiles de hardware", "perfiles/comprobar_perfiles.py", [], None),
+    ("modelos elegidos por el usuario", "perfiles/comprobar_modelos_usuario.py", [], None),
     ("laboratorio de proyectos grandes", "lab_flujos/humo/comprobar_sin_gpu.py", [], None),
     ("revisión de código (Python y Java)", "lab_revision/comprobar_sin_gpu.py", [], "jdk"),
     ("Java del laboratorio de flujos", "lab_flujos/humo/comprobar_java_banco.py", [], "jdk"),

@@ -591,7 +591,7 @@ def ejecutar(externos: Path, evidencia: Path, modelos=MODELOS, reanudar=False, c
     from lab_vram import banco_capacidad as BC
     B = V.B
     LB = _banco_blender()                                # gemma12 (2026-11-15): mismo registro y capas que en Blender
-    reg_original = LB._con_cerebros_lab(BC, V, B)
+    reg_original = LB._con_cerebros_lab(BC, V, B, externos)
     evidencia = Path(evidencia)
     correr = correr or (lambda m, e, c, parar: correr_modelo(m, e, c, parar=parar, condiciones=condiciones_de(e)))
     pendientes_fn = pendientes_fn or pendientes
@@ -619,7 +619,9 @@ def ejecutar(externos: Path, evidencia: Path, modelos=MODELOS, reanudar=False, c
                     if not espera["ok"]:
                         raise EV.Abortada(f"no se puede seguir: {espera['motivos']}")
                     ok2, ver = BC.g2(externos, modelo)
-                    perfil = _perfil_auto(externos, BC.registro(modelo), V.CTX) if perfil_auto else None
+                    # los modelos que solo registró el usuario no tienen topes medidos: perfil por hardware SIEMPRE
+                    auto = perfil_auto or LB.es_solo_del_usuario(modelo, reg_original)
+                    perfil = _perfil_auto(externos, BC.registro(modelo), V.CTX) if auto else None
                     if perfil and not ok2["ok"] and not ok2.get("problemas") \
                             and (ok2.get("vram_otras_MiB") or 1e9) <= perfil["frenos"]["vram"]["otros_programas_max_mib"]:
                         # perfil por hardware: la VRAM ajena que se admite sale del modelo y de ESTA tarjeta (no de la 3050)

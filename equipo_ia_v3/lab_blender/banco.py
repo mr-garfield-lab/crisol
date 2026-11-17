@@ -43,14 +43,65 @@ def cerebro_lab(modelo: str) -> dict | None:
     return json.loads(CEREBROS_LAB.read_text(encoding="utf-8"))["modelos"].get(modelo)
 
 
-def _con_cerebros_lab(BC, V, B):
-    """Hace que BC.g2 conozca los cerebros de `cerebros_extra.json` sin tocar los registros protegidos de F1."""
+MODELOS_USUARIO = RAIZ / "perfiles" / "modelos_usuario.json"   # los que registra cada persona con añadir_modelo
+
+
+def modelo_usuario(alias: str) -> dict | None:
+    """Un modelo registrado por el usuario (perfiles/equipo_perfil.py añadir_modelo): ruta, SHA-256 y bytes."""
+    if not MODELOS_USUARIO.is_file():
+        return None
+    return json.loads(MODELOS_USUARIO.read_text(encoding="utf-8"))["modelos"].get(alias)
+
+
+def es_solo_del_usuario(modelo: str, original) -> bool:
+    """True si el modelo NO está en ningún registro del proyecto y sí en el del usuario (sus topes no están medidos)."""
+    if cerebro_lab(modelo) is not None or modelo_usuario(modelo) is None:
+        return False
+    try:
+        original(modelo)
+        return False
+    except KeyError:
+        return True
+
+
+def _ruta_desde(externos, ruta: str) -> str:
+    """La ruta del modelo relativa a la carpeta de externos (como la esperan los registros), con «/»."""
+    import os
+    if externos is None:
+        raise SystemExit("un modelo registrado por el usuario necesita la carpeta de externos")
+    try:
+        return os.path.relpath(ruta, externos).replace("\\", "/")
+    except ValueError:                                   # otra unidad en Windows
+        raise SystemExit(f"el modelo está en otra unidad que la carpeta de externos ({externos}): muévelo a "
+                         "externos/modelos/ y vuelve a registrarlo con añadir_modelo")
+
+
+def _perfil_usuario(externos, registro: dict, ctx: int) -> dict:
+    """Perfil por hardware (perfiles/) para un modelo del usuario: tope de VRAM y capas calculados para su equipo."""
+    sys.path.insert(0, str(RAIZ / "perfiles"))
+    import equipo_perfil as PERF
+    import gguf_meta as GM
+    ruta = Path(externos) / registro["modelo"]["archivo"]
+    return PERF.recomendar(PERF.detectar(), {"alias": ruta.stem, "bytes": ruta.stat().st_size, "meta": GM.leer(ruta)},
+                           ctx=ctx)
+
+
+def _con_cerebros_lab(BC, V, B, externos=None):
+    """Hace que BC.g2 conozca, además de los registros protegidos de F1 (que no se tocan): los cerebros de
+    `cerebros_extra.json` y, desde 2026-11-17, los que cada usuario registra con `añadir_modelo`. En todos se sigue
+    exigiendo la huella SHA-256 y el tamaño exactos; los nombres del proyecto tienen prioridad sobre los del usuario."""
     original = BC.registro
 
     def registro(modelo):
         m = cerebro_lab(modelo)
         if m is None:
-            return original(modelo)
+            try:
+                return original(modelo)
+            except KeyError:
+                u = modelo_usuario(modelo)
+                if u is None:
+                    raise
+                m = {"archivo": _ruta_desde(externos, u["ruta"]), "sha256": u["sha256"], "bytes": u["bytes"]}
         reg = json.loads(V.EXTERNOS_JSON.read_text(encoding="utf-8"))
         reg["modelo"] = {k: m[k] for k in ("archivo", "sha256", "bytes")}
         return reg
@@ -282,7 +333,7 @@ def ejecutar(externos: Path, evidencia: Path, salida_blender: Path, modelos=MODE
     from eq3 import servidor_pc
     from lab_vram import banco_capacidad as BC
     B = V.B
-    reg_original = _con_cerebros_lab(BC, V, B)
+    reg_original = _con_cerebros_lab(BC, V, B, externos)
     evidencia, salida_blender = Path(evidencia), Path(salida_blender)
     ids = list(ids or T.TAREAS)
     if evidencia.exists() and not reanudar:
@@ -328,6 +379,10 @@ def ejecutar(externos: Path, evidencia: Path, salida_blender: Path, modelos=MODE
                     m_lab = cerebro_lab(modelo) or {}
                     tope = m_lab.get("tope_MiB") or V.VRAM_TOPE   # gemma12: un poco más (usuario, 2026-11-15)
                     bloque_ngl = ngl_para(m_lab, ok2.get("vram_otras_MiB"), tope) if m_lab.get("ngl") else None
+                    if es_solo_del_usuario(modelo, reg_original):  # modelo del usuario: topes de SU equipo
+                        perfil = _perfil_usuario(externos, BC.registro(modelo), V.CTX)
+                        tope = perfil["tope_vram_mib"]
+                        bloque_ngl = None if perfil["entero"] else perfil["ngl"]
                     B.E2 = _e2_de(modelo, V, bloque_ngl)  # dentro de entorno_v5: se deshace al salir
                     vigia = B.VigiaTermica(act=act, tope=tope).iniciar()
                     be = B.proteger_backend_v44(B.fabrica_e2(ver)(), {}, registro, "S1", termica)
