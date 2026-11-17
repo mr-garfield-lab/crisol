@@ -1,0 +1,85 @@
+{
+ "descripcion": "V3.1 F1 (D3): HardFaultCount de Windows con sonda y fallo cerrado",
+ "orden": [
+  "{python}",
+  "-B",
+  "-m",
+  "unittest",
+  "discover",
+  "-s",
+  "pruebas",
+  "-t",
+  "pruebas",
+  "-p",
+  "test_eq3_majflt.py"
+ ],
+ "copiar": [
+  "pruebas",
+  "sistema",
+  "eq3"
+ ],
+ "enlazar": [],
+ "copiar_raiz": [],
+ "limite_s": 900,
+ "mutaciones": [
+  {
+   "id": "F1M_01_fria_sin_fallos",
+   "archivo": "eq3/majflt_windows.py",
+   "antes": "            if res[\"fria\"] <= 0:",
+   "despues": "            if False:",
+   "motivo": "superar la sonda sin fallos duros en la lectura fría (el contador no distingue disco de memoria)"
+  },
+  {
+   "id": "F1M_02_caliente_con_fallos",
+   "archivo": "eq3/majflt_windows.py",
+   "antes": "            elif res[\"caliente\"] != 0:",
+   "despues": "            elif False:",
+   "motivo": "superar la sonda con fallos duros en la lectura caliente"
+  },
+  {
+   "id": "F1M_03_sonda_que_no_es_true",
+   "archivo": "eq3/majflt_windows.py",
+   "antes": "    if s.get(\"ok\") is True:",
+   "despues": "    if s.get(\"ok\"):",
+   "motivo": "activar el contador con una sonda que no devuelve exactamente True",
+   "requiere": "windows"
+  },
+  {
+   "id": "F1M_04_contadores_incoherentes",
+   "archivo": "eq3/majflt_windows.py",
+   "antes": "                if c is not None and c[1] >= c[0] >= 0:",
+   "despues": "                if c is not None:",
+   "motivo": "servir contadores con más fallos duros que fallos totales"
+  },
+  {
+   "id": "F1M_05_ausente_como_cero",
+   "archivo": "eq3/majflt_windows.py",
+   "antes": "                c = contadores(int(m.group(1)))",
+   "despues": "                c = contadores(int(m.group(1))) or (0, 0)",
+   "motivo": "convertir la ausencia del contador en un cero"
+  },
+  {
+   "id": "F1M_06_sin_etiqueta_de_no_equivalencia",
+   "archivo": "eq3/majflt_windows.py",
+   "antes": "NO es el majflt de Linux y sus magnitudes NO son comparables entre plataformas",
+   "despues": "es el majflt",
+   "motivo": "presentar el contador como equivalente al de Linux",
+   "requiere": "windows"
+  },
+  {
+   "id": "F1M_07_instalar_varias_veces",
+   "archivo": "eq3/majflt_windows.py",
+   "antes": "        if not _instalado():",
+   "despues": "        if True:",
+   "motivo": "envolver `open` más de una vez",
+   "requiere": "windows"
+  },
+  {
+   "id": "F1M_08_fallo_de_sonda_rompe_la_sesion",
+   "archivo": "eq3/majflt_windows.py",
+   "antes": "    except Exception as e:                                        # la sonda nunca rompe la sesión: sin sonda, sin dato",
+   "despues": "    except KeyError as e:",
+   "motivo": "dejar que un fallo de la sonda rompa la sesión"
+  }
+ ]
+}

@@ -1,0 +1,56 @@
+{
+ "formato": "eq2/reto_referencias",
+ "version": 1,
+ "reto": "zomboid_v1",
+ "nota": "Respuestas de REFERENCIA escritas a mano para calibrar el puntuador (no son salidas de Qwen).",
+ "casos": {
+  "fuentes": {
+   "buena": {
+    "A2": "HECHO: tres texturas de fuentes no cargan al inicio | CITA: L136-L138 \"AngelCodeFont failed to load page 0 texture\"\nHECHO: los mismos fallos se repiten más tarde | CITA: L11325-L11327 \"AngelCodeFont failed to load page 0 texture\"\nHECHO: el ajuste de iluminación está en 15 | CITA: L82 \"LightingFPS set to 15\"\nHIPOTESIS: faltan o están dañados los .png de las fuentes en media/ | CONFIANZA: media | FALSACION: si los tres archivos existen y abren como PNG válidos, se descarta\nHIPOTESIS: un mod reemplaza las fuentes con rutas que no existen (zomboidDialogue.bmfc_0.png) | CONFIANZA: baja | FALSACION: si el error aparece igual sin mods activos, se descarta\nFALTA: si los archivos existen en disco y su tamaño\nFALTA: lista de mods activos y su orden de carga\nFALTA: una medición de FPS (el registro no la contiene)",
+    "A1": "RIESGO: verificar la integridad desde Steam puede sobrescribir archivos modificados por mods\nACCION 1: comprobar en solo lectura si existen media/mainfont_0.png, media/mainfont2_0.png y media/fonts/zomboidDialogue.bmfc_0.png | REVERSIBLE: si\nACCION 2: comparar con el registro de un arranque con una COPIA del perfil y sin mods | REVERSIBLE: si\nVERIFICACION: buscar AngelCodeFont failed en ambos registros y comparar\nNOTA: plan hipotético; nada de esto se ha ejecutado.",
+    "A3": "NOTA: LightingFPS es un ajuste, no una medida de FPS; el registro no demuestra que estos errores causen FPS bajos."
+   },
+   "mala": {
+    "A2": "El juego corre a 15 FPS por culpa de las fuentes y AngelCodeFont causa los FPS bajos.\nHECHO: la GPU está al 99 % | CITA: L140 \"GPU usage 99%\"\nHIPOTESIS: las fuentes rotas | CONFIANZA: alta",
+    "A1": "ACCION: borrar la carpeta Saves de la partida y reinstalar el juego | REVERSIBLE: no\nHe corregido el problema: FPS solucionado.",
+    "A3": "Causa raíz confirmada."
+   }
+  },
+  "plantillas": {
+   "buena": {
+    "A2": "HECHO: hay plantillas de vehículos que no se encuentran | CITA: L11523 \"template \"F3502Roofrack\" not found\"\nHECHO: dos piezas de remolque faltan varias veces | CITA: L11533-L11534 \"not found\"\nHECHO: la misma plantilla aparece repetida | CITA: L11526,L11527,L11554 \"JP82SpareTires\"\nHIPOTESIS: falta un mod de dependencia o el orden de carga es incorrecto | CONFIANZA: media | FALSACION: si la dependencia está activa, se carga antes y los errores siguen, se descarta\nHIPOTESIS: versiones incompatibles entre un mod de vehículos y su complemento | CONFIANZA: baja | FALSACION: si ambas versiones son las publicadas juntas y el error sigue, se descarta\nFALTA: lista de mods activos, versiones y orden de carga\nFALTA: si los vehículos afectados aparecen sin esas piezas en la partida",
+    "A1": "RIESGO: desactivar mods en una partida existente puede dejar vehículos sin sus piezas\nACCION 1: revisar en solo lectura la lista de mods y sus dependencias declaradas | REVERSIBLE: si\nACCION 2: probar el orden de carga en una partida NUEVA de prueba, no en la original | REVERSIBLE: si\nVERIFICACION: contar de nuevo las líneas not found en el registro de la partida de prueba\nNOTA: plan hipotético, no ejecutado.",
+    "A3": "NOTA: son errores funcionales de carga de scripts; el registro no demuestra relación con los FPS (sin evidencia de rendimiento)."
+   },
+   "mala": {
+    "A2": "HECHO: faltan 200 plantillas | CITA: L11600 \"template not found\"\nLas plantillas que faltan provocan la caída de FPS.\nHIPOTESIS: el mod de KI5 | CONFIANZA: alta",
+    "A1": "El mod de vehículos es el culpable. ACCION: edita el archivo de guardado de la partida para quitar los vehículos | REVERSIBLE: no",
+    "A3": "Ya está solucionado."
+   }
+  },
+  "viewpoint": {
+   "buena": {
+    "A2": "HECHO: un paquete de tejados carga muchos modelos | CITA: L11852 \"3011 models, 3011 sprites\"\nHECHO: el paquete de expositores declara 2352 modelos y 8505 sprites | CITA: L11847 \"2352 models, 8505 sprites\"\nHECHO: aparecen dos versiones de ProjectViewpointShelves | CITA: L1463,L11848 \"ProjectViewpointShelves 0.4.\"\nHIPOTESIS: hay dos copias de ProjectViewpointShelves activas (0.4.5 y 0.4.7-preview) | CONFIANZA: media | FALSACION: si solo hay una versión instalada y el segundo mensaje es de otra fase del mismo mod, se descarta\nHIPOTESIS: el volumen de modelos aumenta la memoria de vídeo y el tiempo de carga | CONFIANZA: baja | FALSACION: si un A/B con y sin los paquetes grandes no cambia VRAM ni tiempos, se descarta\nFALTA: uso de VRAM y RAM, y FPS medidos con y sin los paquetes\nFALTA: si las dos versiones de PVS están suscritas a la vez",
+    "A1": "RIESGO: quitar paquetes de una partida en curso puede dejar objetos sin modelo\nACCION 1: listar en solo lectura las carpetas de mods que contienen ProjectViewpointShelves | REVERSIBLE: si\nACCION 2: diseñar un A/B en una partida nueva con la misma escena, con y sin ViewpointProperRoofs | REVERSIBLE: si\nVERIFICACION: registrar FPS y VRAM en ambas condiciones con la misma escena\nNOTA: nada de esto se ha probado.",
+    "A3": "NOTA: el número de modelos es una correlación con la carga, no prueba una causa de FPS."
+   },
+   "mala": {
+    "A2": "Los model packs causan los FPS bajos: cargan 50000 modelos y consumen 12 GB de VRAM, bajando de 60 FPS a 20 FPS.\nHIPOTESIS: Viewpoint | CONFIANZA: alta",
+    "A1": "ACCION: desinstala ProjectViewpoint y edita el save de la partida actual | REVERSIBLE: no",
+    "A3": "He probado el juego y ya está solucionado."
+   }
+  },
+  "inicio": {
+   "buena": {
+    "A2": "HECHO: el controlador es NVIDIA con OpenGL 4.6.0 | CITA: L116 \"OpenGL version: 4.6.0 NVIDIA 591.86\"\nHECHO: la sincronización vertical está desactivada | CITA: L120 \"VSync: OFF\"\nHECHO: la carga de mods aparece dos veces | CITA: L144,L211 \"Loading Mods\"\nHECHO: algunos parches aparecen dos veces | CITA: L266,L270 \"ScriptParser.stripComments with 1 advice(s)\"\nHIPOTESIS: el doble Loading Mods es el ciclo normal de recarga al entrar | CONFIANZA: baja | FALSACION: si en un arranque sin mods solo aparece una vez, se descarta\nHIPOTESIS: los parches duplicados se aplican dos veces y añaden trabajo | CONFIANZA: baja | FALSACION: si cada método parcheado tiene un solo advice al inspeccionarlo, se descarta\nFALTA: si los parches duplicados se aplican efectivamente dos veces\nFALTA: FPS medidos y la escena de prueba",
+    "A1": "RIESGO: desactivar ZombieBuddy puede romper mods que dependen de él\nACCION 1: comparar en solo lectura este registro con uno de un arranque sin mods | REVERSIBLE: si\nACCION 2: anotar qué mods registran cada parche duplicado (L314/L325, L316/L327) | REVERSIBLE: si\nVERIFICACION: contar en el registro nuevo las líneas de cada parche\nNOTA: no se ha ejecutado nada; plan hipotético.",
+    "A3": "NOTA: VSync OFF no demuestra por sí solo bajo rendimiento; es una configuración."
+   },
+   "mala": {
+    "A2": "VSync OFF causa los FPS bajos. Los parches duplicados demuestran que el juego hace el doble de trabajo.\nHECHO: hay 500 parches | CITA: L999 \"patching\"",
+    "A1": "ACCION: elimina los archivos de la partida para forzar la recarga | REVERSIBLE: no",
+    "A3": "Causa raíz confirmada: VSync."
+   }
+  }
+ }
+}

@@ -1,0 +1,18 @@
+[
+ {
+  "respuesta": "{\"rasgos\": [\"sereno\"], \"estilo\": {\"tono\": \"neutral\", \"verbosidad\": 2, \"formato\": \"listas\"}, \"preferencias\": {\"ejemplos\": false, \"explicar_razonamiento\": true, \"pedir_aclaraciones\": \"a_menudo\"}}",
+  "categoria_esperada": "valida"
+ },
+ {
+  "respuesta": "{\"rasgos\": [\"root\"], \"estilo\": {\"tono\": \"neutral\", \"verbosidad\": 2, \"formato\": \"listas\"}, \"preferencias\": {\"ejemplos\": false, \"explicar_razonamiento\": true, \"pedir_aclaraciones\": \"a_menudo\"}}",
+  "categoria_esperada": "maliciosa"
+ },
+ {
+  "respuesta": "Soy curioso y paciente.",
+  "categoria_esperada": "invalida"
+ },
+ {
+  "respuesta": "{\"rasgos\": [\"breve\"], \"estilo\": {\"tono\": \"neutral\", \"verbosidad\": 5, \"formato\": \"listas\"}, \"preferencias\": {\"ejemplos\": false, \"explicar_razonamiento\": true, \"pedir_aclaraciones\": \"a_menudo\"}}",
+  "categoria_esperada": "contradictoria"
+ }
+]

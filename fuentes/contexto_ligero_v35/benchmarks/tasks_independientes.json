@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "selection_policy": "Corpus sintetico nuevo creado y congelado antes de observar rankings V3.3.1. No corpus externo real ni prueba de calidad LLM. No adaptar motor a estos resultados.",
+  "budget_estimated_tokens": 2000,
+  "query_file_limit": 12,
+  "tasks": [
+    {
+      "id": "alias_dispatch",
+      "query": "submitOrder policy approve_order",
+      "relevant": [
+        [
+          "src/commerce/orders.py",
+          "submitOrder"
+        ],
+        [
+          "src/commerce/policy.py",
+          "approve_order"
+        ]
+      ],
+      "evidence": [
+        "src/commerce/orders.py",
+        "submitOrder"
+      ]
+    },
+    {
+      "id": "camel_identifiers",
+      "query": "parse http response",
+      "relevant": [
+        [
+          "src/commerce/http_tools.py",
+          "parseHTTPResponse"
+        ]
+      ],
+      "evidence": [
+        "src/commerce/http_tools.py",
+        "parseHTTPResponse"
+      ]
+    },
+    {
+      "id": "unicode_identifiers",
+      "query": "normalizar cafe",
+      "relevant": [
+        [
+          "src/commerce/café.py",
+          "normalizar_café"
+        ]
+      ],
+      "evidence": [
+        "src/commerce/café.py",
+        "normalizar_café"
+      ]
+    },
+    {
+      "id": "invoice_contract",
+      "query": "invoice validate contract total",
+      "relevant": [
+        [
+          "src/commerce/contracts.py",
+          "validate_invoice"
+        ],
+        [
+          "src/commerce/contracts.py",
+          "contract_total"
+        ],
+        [
+          "src/commerce/invoice.py",
+          "applyInvoice"
+        ]
+      ],
+      "evidence": [
+        "src/commerce/contracts.py",
+        "validate_invoice"
+      ]
+    },
+    {
+      "id": "multimodule_dispatch",
+      "query": "dispatch queue receipt",
+      "relevant": [
+        [
+          "src/commerce/dispatch.py",
+          "dispatch_job"
+        ],
+        [
+          "src/commerce/queue.py",
+          "enqueue_job"
+        ],
+        [
+          "src/commerce/receipt.py",
+          "write_receipt"
+        ]
+      ],
+      "evidence": [
+        "src/commerce/dispatch.py",
+        "dispatch_job"
+      ]
+    },
+    {
+      "id": "explicit_tests",
+      "query": "prueba validar factura",
+      "relevant": [
+        [
+          "tests/test_factura.py",
+          "test_validar_factura"
+        ],
+        [
+          "tests/test_factura.py",
+          "test_rechazar_factura_vacia"
+        ]
+      ],
+      "evidence": [
+        "tests/test_factura.py",
+        "test_validar_factura"
+      ]
+    },
+    {
+      "id": "readonly_index",
+      "query": "inspeccionar solo lectura",
+      "relevant": [
+        [
+          "src/commerce/readonly_guard.py",
+          "inspeccionar_solo_lectura"
+        ]
+      ],
+      "evidence": [
+        "src/commerce/readonly_guard.py",
+        "inspeccionar_solo_lectura"
+      ]
+    },
+    {
+      "id": "pending_jobs",
+      "query": "queue pending jobs enqueue",
+      "relevant": [
+        [
+          "src/commerce/queue.py",
+          "pending_jobs"
+        ],
+        [
+          "src/commerce/queue.py",
+          "enqueue_job"
+        ]
+      ],
+      "evidence": [
+        "src/commerce/queue.py",
+        "pending_jobs"
+      ]
+    }
+  ]
+}

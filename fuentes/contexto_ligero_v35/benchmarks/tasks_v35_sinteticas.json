@@ -1,0 +1,205 @@
+{
+  "version": 1,
+  "declared_before_benchmark": true,
+  "selection_policy": "Tareas nuevas construidas por lectura de codigo y AST, congeladas antes de consultar salidas V3.5; no corpus externo real ni prueba LLM. relevant_operations_per_declared_query_not_runtime_exhaustive",
+  "budget_estimated_tokens": 2000,
+  "query_file_limit": 12,
+  "tasks": [
+    {
+      "id": "invoice_full",
+      "query": "invoices post_invoice normalize validate calculate tax store invoice",
+      "relevant": [
+        [
+          "invoices.py",
+          "post_invoice"
+        ],
+        [
+          "invoices.py",
+          "normalize_invoice"
+        ],
+        [
+          "invoices.py",
+          "validate_invoice"
+        ],
+        [
+          "invoices.py",
+          "calculate_tax"
+        ],
+        [
+          "invoices.py",
+          "store_invoice"
+        ]
+      ],
+      "evidence": [
+        "invoices.py",
+        "post_invoice"
+      ],
+      "oracle_scope": "relevant_operations_per_declared_query_not_runtime_exhaustive"
+    },
+    {
+      "id": "invoice_validation",
+      "query": "invoices validate invoice and calculate tax",
+      "relevant": [
+        [
+          "invoices.py",
+          "validate_invoice"
+        ],
+        [
+          "invoices.py",
+          "calculate_tax"
+        ]
+      ],
+      "evidence": [
+        "invoices.py",
+        "validate_invoice"
+      ],
+      "oracle_scope": "relevant_operations_per_declared_query_not_runtime_exhaustive"
+    },
+    {
+      "id": "shipment_cross",
+      "query": "shipments dispatch shipment customs check address calculate fee pack and record",
+      "relevant": [
+        [
+          "shipments.py",
+          "dispatch_shipment"
+        ],
+        [
+          "customs.py",
+          "check_address"
+        ],
+        [
+          "customs.py",
+          "calculate_fee"
+        ],
+        [
+          "shipments.py",
+          "pack_shipment"
+        ],
+        [
+          "shipments.py",
+          "record_shipment"
+        ]
+      ],
+      "evidence": [
+        "shipments.py",
+        "dispatch_shipment"
+      ],
+      "oracle_scope": "relevant_operations_per_declared_query_not_runtime_exhaustive"
+    },
+    {
+      "id": "cache_fetch",
+      "query": "cache fetch cache key and expired",
+      "relevant": [
+        [
+          "cache.py",
+          "cache_fetch"
+        ],
+        [
+          "cache.py",
+          "cache_key"
+        ],
+        [
+          "cache.py",
+          "cache_expired"
+        ]
+      ],
+      "evidence": [
+        "cache.py",
+        "cache_fetch"
+      ],
+      "oracle_scope": "relevant_operations_per_declared_query_not_runtime_exhaustive"
+    },
+    {
+      "id": "stock_methods",
+      "query": "warehouse StockLedger check_stock reserve_stock audit_reservation",
+      "relevant": [
+        [
+          "warehouse.py",
+          "StockLedger.check_stock"
+        ],
+        [
+          "warehouse.py",
+          "StockLedger.reserve_stock"
+        ],
+        [
+          "warehouse.py",
+          "audit_reservation"
+        ]
+      ],
+      "evidence": [
+        "warehouse.py",
+        "StockLedger.reserve_stock"
+      ],
+      "oracle_scope": "relevant_operations_per_declared_query_not_runtime_exhaustive"
+    },
+    {
+      "id": "path_policy",
+      "query": "paths safe_path normalize remove_controls reject_traversal",
+      "relevant": [
+        [
+          "paths.py",
+          "safe_path"
+        ],
+        [
+          "paths.py",
+          "normalize_path"
+        ],
+        [
+          "paths.py",
+          "remove_controls"
+        ],
+        [
+          "paths.py",
+          "reject_traversal"
+        ]
+      ],
+      "evidence": [
+        "paths.py",
+        "safe_path"
+      ],
+      "oracle_scope": "relevant_operations_per_declared_query_not_runtime_exhaustive"
+    },
+    {
+      "id": "two_validators",
+      "query": "auth validate token credits validate budget",
+      "relevant": [
+        [
+          "auth.py",
+          "validate"
+        ],
+        [
+          "credits.py",
+          "validate"
+        ]
+      ],
+      "evidence": [
+        "auth.py",
+        "validate"
+      ],
+      "oracle_scope": "relevant_operations_per_declared_query_not_runtime_exhaustive"
+    },
+    {
+      "id": "report_full",
+      "query": "reports render report parse and check report",
+      "relevant": [
+        [
+          "reports.py",
+          "render_report"
+        ],
+        [
+          "reports.py",
+          "parse_report"
+        ],
+        [
+          "reports.py",
+          "check_report"
+        ]
+      ],
+      "evidence": [
+        "reports.py",
+        "render_report"
+      ],
+      "oracle_scope": "relevant_operations_per_declared_query_not_runtime_exhaustive"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+ "descripcion": "V3.1 laboratorio: control reversible de Wallpaper Engine (solo él, sin forzar)",
+ "orden": [
+  "{python}",
+  "-B",
+  "-m",
+  "unittest",
+  "discover",
+  "-s",
+  "pruebas",
+  "-t",
+  "pruebas",
+  "-p",
+  "test_lab_wallpaper.py"
+ ],
+ "copiar": [
+  "pruebas",
+  "sistema",
+  "eq3",
+  "evaluacion_f1",
+  "lab_vram"
+ ],
+ "enlazar": [],
+ "copiar_raiz": [],
+ "limite_s": 600,
+ "mutaciones": [
+  {
+   "id": "F1W_01_cierre_forzado",
+   "archivo": "lab_vram/wallpaper.py",
+   "antes": "[\"taskkill\", \"/PID\", str(p[\"pid\"])]",
+   "despues": "[\"taskkill\", \"/F\", \"/PID\", str(p[\"pid\"])]",
+   "motivo": "cerrar Wallpaper Engine a la fuerza"
+  },
+  {
+   "id": "F1W_02_sin_play_al_restaurar",
+   "archivo": "lab_vram/wallpaper.py",
+   "antes": "        elif self.estado in (\"pausado\", \"detenido\"):\n            ok = self.control(\"play\")",
+   "despues": "        elif False:\n            ok = self.control(\"play\")",
+   "motivo": "dejarlo pausado o detenido"
+  },
+  {
+   "id": "F1W_03_reabre_otra_instancia",
+   "archivo": "lab_vram/wallpaper.py",
+   "antes": "        if not self.listar():                                       # se cerró",
+   "despues": "        if True:                                       # se cerró",
+   "motivo": "abrir una instancia duplicada"
+  },
+  {
+   "id": "F1W_04_duplicados_ocultos",
+   "archivo": "lab_vram/wallpaper.py",
+   "antes": "        if n > len(self.inicial[\"procesos\"]):",
+   "despues": "        if False:",
+   "motivo": "no avisar de instancias duplicadas"
+  },
+  {
+   "id": "F1W_05_abre_si_no_estaba",
+   "archivo": "lab_vram/wallpaper.py",
+   "antes": "        if not self.inicial or not self.inicial[\"abierto\"]:",
+   "despues": "        if not self.inicial:",
+   "motivo": "abrir Wallpaper Engine aunque no estuviera abierto"
+  },
+  {
+   "id": "F1W_06_fondo_cuenta_como_persona",
+   "archivo": "lab_vram/wallpaper.py",
+   "antes": "if m not in (\"aplicacion_ocupada\", \"notificacion_no_medible\")]\n    if a[\"inactividad_s\"] is None",
+   "despues": "if m not in (\"notificacion_no_medible\",)]\n    if a[\"inactividad_s\"] is None",
+   "motivo": "tratar el escritorio a pantalla completa como una persona (bloqueo permanente)"
+  }
+ ]
+}

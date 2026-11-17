@@ -1,0 +1,19 @@
+{
+  "acciones": [
+    {
+      "accion": "agregar",
+      "objeto": "Base.Hammer",
+      "cantidad": 1
+    },
+    {
+      "accion": "consumir",
+      "objeto": "Base.Hammer",
+      "cantidad": 2
+    },
+    {
+      "accion": "comprobar",
+      "objeto": "Base.Hammer",
+      "cantidad": 1
+    }
+  ]
+}

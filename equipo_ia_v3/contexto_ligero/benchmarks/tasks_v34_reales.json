@@ -1,0 +1,249 @@
+{
+  "version": 1,
+  "declared_before_benchmark": true,
+  "selection_policy": "12 tareas nuevas de modulos reales. Fijadas sin ejecutar ni consultar retrieval V3.4. Oraculos minimos, no exhaustivos.",
+  "budget_estimated_tokens": 2000,
+  "query_file_limit": 12,
+  "tasks": [
+    {
+      "id": "compression_essential",
+      "query": "compresion comprimir un bloque conservando sus lineas esenciales",
+      "relevant": [
+        [
+          "src/eq2/compresion.py",
+          "comprimir"
+        ],
+        [
+          "src/eq2/compresion.py",
+          "esenciales"
+        ]
+      ],
+      "evidence": [
+        "src/eq2/compresion.py",
+        "comprimir"
+      ],
+      "oracle_scope": "minimum_relevant_manual_not_exhaustive",
+      "rationale": "Seleccion manual por responsabilidades, nombres, docstrings y cuerpo AST; no rankings."
+    },
+    {
+      "id": "independent_votes",
+      "query": "independencia analizar copia entre argumentos y contencion de fragmentos",
+      "relevant": [
+        [
+          "src/eq2/independencia.py",
+          "analizar"
+        ],
+        [
+          "src/eq2/independencia.py",
+          "contencion"
+        ]
+      ],
+      "evidence": [
+        "src/eq2/independencia.py",
+        "analizar"
+      ],
+      "oracle_scope": "minimum_relevant_manual_not_exhaustive",
+      "rationale": "Seleccion manual por responsabilidades, nombres, docstrings y cuerpo AST; no rankings."
+    },
+    {
+      "id": "restricted_execution",
+      "query": "ejecutor_restringido validar lista blanca antes de ejecutar codigo permitido",
+      "relevant": [
+        [
+          "src/eq2/ejecutor_restringido.py",
+          "validar"
+        ],
+        [
+          "src/eq2/ejecutor_restringido.py",
+          "EjecutorRestringido._ejecutar"
+        ]
+      ],
+      "evidence": [
+        "src/eq2/ejecutor_restringido.py",
+        "validar"
+      ],
+      "oracle_scope": "minimum_relevant_manual_not_exhaustive",
+      "rationale": "Seleccion manual por responsabilidades, nombres, docstrings y cuerpo AST; no rankings."
+    },
+    {
+      "id": "watchdog_abort",
+      "query": "monitor supervisar una peticion y abortar cuando falla la vigilancia",
+      "relevant": [
+        [
+          "src/eq2/monitor.py",
+          "Monitor.supervisar"
+        ],
+        [
+          "src/eq2/monitor.py",
+          "Monitor._abortar_con"
+        ]
+      ],
+      "evidence": [
+        "src/eq2/monitor.py",
+        "Monitor.supervisar"
+      ],
+      "oracle_scope": "minimum_relevant_manual_not_exhaustive",
+      "rationale": "Seleccion manual por responsabilidades, nombres, docstrings y cuerpo AST; no rankings."
+    },
+    {
+      "id": "http_deadline",
+      "query": "cliente_http peticion con plazo total y parsear la respuesta",
+      "relevant": [
+        [
+          "src/eq2/cliente_http.py",
+          "peticion"
+        ],
+        [
+          "src/eq2/cliente_http.py",
+          "_parsear"
+        ]
+      ],
+      "evidence": [
+        "src/eq2/cliente_http.py",
+        "peticion"
+      ],
+      "oracle_scope": "minimum_relevant_manual_not_exhaustive",
+      "rationale": "Seleccion manual por responsabilidades, nombres, docstrings y cuerpo AST; no rankings."
+    },
+    {
+      "id": "version_deduplication",
+      "query": "proyecto guardar_version y detectar una solucion repetida por su huella",
+      "relevant": [
+        [
+          "src/eq2/proyecto.py",
+          "Proyecto.guardar_version"
+        ],
+        [
+          "src/eq2/proyecto.py",
+          "Proyecto.repetida"
+        ],
+        [
+          "src/eq2/proyecto.py",
+          "huella_conjunto"
+        ]
+      ],
+      "evidence": [
+        "src/eq2/proyecto.py",
+        "Proyecto.guardar_version"
+      ],
+      "oracle_scope": "minimum_relevant_manual_not_exhaustive",
+      "rationale": "Seleccion manual por responsabilidades, nombres, docstrings y cuerpo AST; no rankings."
+    },
+    {
+      "id": "reported_overflow",
+      "query": "desbordes analizar tokens reales y distinguir desbordamiento efectivo",
+      "relevant": [
+        [
+          "src/eq2/desbordes.py",
+          "analizar"
+        ]
+      ],
+      "evidence": [
+        "src/eq2/desbordes.py",
+        "analizar"
+      ],
+      "oracle_scope": "minimum_relevant_manual_not_exhaustive",
+      "rationale": "Seleccion manual por responsabilidades, nombres, docstrings y cuerpo AST; no rankings."
+    },
+    {
+      "id": "termux_platform",
+      "query": "plataforma seleccionar adaptador Termux y consultar wake_lock_disponible",
+      "relevant": [
+        [
+          "src/eq2/plataforma.py",
+          "adaptador"
+        ],
+        [
+          "src/eq2/plataforma.py",
+          "AdaptadorTermux.wake_lock_disponible"
+        ]
+      ],
+      "evidence": [
+        "src/eq2/plataforma.py",
+        "adaptador"
+      ],
+      "oracle_scope": "minimum_relevant_manual_not_exhaustive",
+      "rationale": "Seleccion manual por responsabilidades, nombres, docstrings y cuerpo AST; no rankings."
+    },
+    {
+      "id": "static_analysis_only",
+      "query": "analisis_estatico analizar modulos y pruebas sin ejecutar las propuestas",
+      "relevant": [
+        [
+          "src/eq2/analisis_estatico.py",
+          "analizar"
+        ],
+        [
+          "src/eq2/analisis_estatico.py",
+          "EjecutorEstatico._ejecutar"
+        ]
+      ],
+      "evidence": [
+        "src/eq2/analisis_estatico.py",
+        "analizar"
+      ],
+      "oracle_scope": "minimum_relevant_manual_not_exhaustive",
+      "rationale": "Seleccion manual por responsabilidades, nombres, docstrings y cuerpo AST; no rankings."
+    },
+    {
+      "id": "no_real_execution",
+      "query": "aislamiento autoverificar proveedor y bloquear EjecutorReal sin garantias",
+      "relevant": [
+        [
+          "src/eq2/aislamiento.py",
+          "SinAislamiento.autoverificar"
+        ],
+        [
+          "src/eq2/aislamiento.py",
+          "EjecutorReal._ejecutar"
+        ]
+      ],
+      "evidence": [
+        "src/eq2/aislamiento.py",
+        "EjecutorReal._ejecutar"
+      ],
+      "oracle_scope": "minimum_relevant_manual_not_exhaustive",
+      "rationale": "Seleccion manual por responsabilidades, nombres, docstrings y cuerpo AST; no rankings."
+    },
+    {
+      "id": "phase_generation_reserve",
+      "query": "config presupuesto_prompt y max_tokens_fase para reservar generacion",
+      "relevant": [
+        [
+          "src/eq2/config.py",
+          "presupuesto_prompt"
+        ],
+        [
+          "src/eq2/config.py",
+          "max_tokens_fase"
+        ]
+      ],
+      "evidence": [
+        "src/eq2/config.py",
+        "presupuesto_prompt"
+      ],
+      "oracle_scope": "minimum_relevant_manual_not_exhaustive",
+      "rationale": "Seleccion manual por responsabilidades, nombres, docstrings y cuerpo AST; no rankings."
+    },
+    {
+      "id": "task_import_audit",
+      "query": "tareas importar paquete y auditar una tarea sin sobrescribir originales",
+      "relevant": [
+        [
+          "src/eq2/tareas.py",
+          "Tareas.importar"
+        ],
+        [
+          "src/eq2/tareas.py",
+          "Tareas._auditar"
+        ]
+      ],
+      "evidence": [
+        "src/eq2/tareas.py",
+        "Tareas._auditar"
+      ],
+      "oracle_scope": "minimum_relevant_manual_not_exhaustive",
+      "rationale": "Seleccion manual por responsabilidades, nombres, docstrings y cuerpo AST; no rankings."
+    }
+  ]
+}

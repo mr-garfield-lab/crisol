@@ -1,0 +1,13 @@
+{
+ "nota": "Cerebros ADICIONALES del banco de capacidad (no de F1-V5): elegidos por Claude con la autorización del usuario del 2026-11-13 («libertad para decidir cuál es más apto»). Revisión de Hugging Face fijada; SHA-256 publicado por Hugging Face (LFS).",
+ "modelos": {
+  "gemma4": {"archivo": "modelos/gemma-4-E4B-it-Q4_K_M.gguf",
+             "sha256": "85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87", "bytes": 4977171584,
+             "familia": "gemma", "origen": "https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF (revisión bfc15c382204943c3a8fff0c750b94ae2364d7a3)",
+             "licencia": "Apache-2.0", "publicado": "2026-04"},
+  "ministral3": {"archivo": "modelos/Ministral-3-8B-Instruct-2512-Q4_K_M.gguf",
+                 "sha256": "33e7a72cf5e6e2cfc2f2847075acc013d68bba023e35310cef86b5cf8fdca761", "bytes": 5198911904,
+                 "familia": "mistral", "origen": "https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512-GGUF (revisión 0102285ad796bd99af90f58de616092e5630e970)",
+                 "licencia": "Apache-2.0", "publicado": "2025-12"}
+ }
+}

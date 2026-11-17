@@ -1,0 +1,87 @@
+{
+ "descripcion": "Etapa 8: empaquetado (exclusiones, datos privados, extracción segura, reproducibilidad)",
+ "orden": [
+  "{python}",
+  "-B",
+  "-m",
+  "unittest",
+  "discover",
+  "-s",
+  "v3/tests",
+  "-t",
+  "v3/tests",
+  "-p",
+  "test_empaquetar.py"
+ ],
+ "copiar": [
+  "v3",
+  "sistema",
+  "eq3",
+  "pruebas",
+  "contexto_ligero",
+  "complementos_codex",
+  "docs",
+  "evidencias",
+  "equipo3.py",
+  "verificar_v3.py",
+  "PROGRESO.md",
+  "LEEME_V3.md"
+ ],
+ "enlazar": [],
+ "limite_s": 600,
+ "mutaciones": [
+  {
+   "id": "M1_otro_proyecto_no_excluido",
+   "archivo": "v3/empaquetar.py",
+   "antes": "EXCLUIR_PARTES = {\"__pycache__\", \".git\", \"GameAgentEngine\"}",
+   "despues": "EXCLUIR_PARTES = {\"__pycache__\", \".git\"}",
+   "motivo": "empaquetar archivos de GameAgentEngine"
+  },
+  {
+   "id": "M2_bases_y_modelos_no_excluidos",
+   "archivo": "v3/empaquetar.py",
+   "antes": "EXCLUIR_SUFIJOS = (\".pyc\", \".sqlite3\", \".sqlite\", \".db\", \".gguf\", \".zip\")",
+   "despues": "EXCLUIR_SUFIJOS = (\".pyc\",)",
+   "motivo": "empaquetar bases de datos o modelos GGUF"
+  },
+  {
+   "id": "M3_credenciales_sin_revisar",
+   "archivo": "v3/empaquetar.py",
+   "antes": "if SECRETOS.search(texto) and FIXTURES_SINTETICAS.get(nombre) != hashlib.sha256(datos).hexdigest():",
+   "despues": "if False:",
+   "motivo": "empaquetar claves privadas o tokens"
+  },
+  {
+   "id": "M4_correos_sin_revisar",
+   "archivo": "v3/empaquetar.py",
+   "antes": "        if m:\n            problemas.append(f\"dirección de correo",
+   "despues": "        if False:\n            problemas.append(f\"dirección de correo",
+   "motivo": "empaquetar direcciones de correo (datos personales)"
+  },
+  {
+   "id": "M5_enlaces_admitidos",
+   "archivo": "v3/empaquetar.py",
+   "antes": "            if es_enlace(p):                       # en Windows también uniones de directorio\n                problemas.append",
+   "despues": "            if False:\n                problemas.append",
+   "motivo": "empaquetar enlaces simbólicos"
+  },
+  {
+   "id": "M6_excepcion_sin_hash",
+   "archivo": "v3/empaquetar.py",
+   "antes": "FIXTURES_SINTETICAS.get(nombre) != hashlib.sha256(datos).hexdigest()",
+   "despues": "nombre not in FIXTURES_SINTETICAS",
+   "motivo": "una excepción de fixture que sigue valiendo aunque cambie el contenido"
+  },
+  {
+   "id": "M7_extraccion_insegura",
+   "archivo": "v3/empaquetar.py",
+   "antes": "            if p.is_absolute() or \"..\" in p.parts or (i.external_attr >> 16) & 0o170000 == 0o120000:",
+   "despues": "            if False:",
+   "motivo": "extraer entradas con «..», rutas absolutas o enlaces"
+  }
+ ],
+ "copiar_raiz": [
+  "ORIGENES_SHA256.json",
+  "AGENTS.md"
+ ]
+}

@@ -1,0 +1,26 @@
+{
+ "origen": "fuentes/contexto_ligero_v35 (selección de CONTEXTO_LIGERO_V3_5_DESCARGA.zip, SHA-256 en ORIGENES_SHA256.json)",
+ "regla": "copia IDÉNTICA, sin modificaciones; cualquier cambio debe hacerse fuera de esta carpeta",
+ "archivos": {
+  "GUIA_V35.md": "d2fc669c2536fb5dcf016258df9dd2c6c798c20da2083eb656f1f5677e1b8932",
+  "LEEME.md": "bfe71d0756c0bbdafd2104280dba2a62fd2033bc806d19fb9654a435143c0a7f",
+  "benchmarks/METODOLOGIA_V35.md": "044656503118b3bef2525a03560991e3ad928349a870de02b8bb1386d1c1ca2b",
+  "benchmarks/tasks_independientes.json": "b4cecfb253905548c865f67b616d134d6dc1d9491b7b060d91e8509d222d0c17",
+  "benchmarks/tasks_v34_reales.json": "bfec2b6deb031e2cbd5b8a5b7c3cc7503b3fc71160646f679cef71c6c192bfdc",
+  "benchmarks/tasks_v35_reales.json": "8fdd5ac403860a1a01b1299aee08ccd8cd310bb09621fe93875e72fa74fec5a5",
+  "contexto_core/__init__.py": "61531455ea270c459efe1d0b6a86a6929dac47affba38a04d9b140c1993a1633",
+  "contexto_core/budget.py": "d5e1985525dbad0c0f42a71b4e8b4255058a06897d34f40b87665cace236c2f8",
+  "contexto_core/context.py": "89fcbbc6fa735a46938f0a3dcc2ecc86ab87a8bb7c70f93a063a9c66d9308b1e",
+  "contexto_core/data_support.py": "467c249513e2bf7c2518dd87f27b2d68227c155d4c058c885ce95b6fbe8adab5",
+  "contexto_core/delta.py": "7a33b498960a18165214edce7cc092746e18bbb450a7f054d8aac139159dad93",
+  "contexto_core/dependencies.py": "1129aa7ef9e9548bc36c12023916e5f8cc507d0be85280514b50bde94a5d1875",
+  "contexto_core/evidence.py": "2291675aa4a35d6eb9d73f1d3d1bd2d16451f49b7257641096cf331c0f1e15db",
+  "contexto_core/index.py": "ab60a8407a417c8cfab928c7e73416fca7a9f53da6ca25996daea98feaae3ff5",
+  "contexto_core/packets.py": "73cbe23cdd7bfdd3344f0c15c6afb1aa72212c14b2c2673ffadcdc5b230b79ed",
+  "contexto_core/retrieval.py": "da4a37b71e05df19ac17a1a0cb9282b7dd94bafc689ccfe7f16df334c0f57173",
+  "contexto_core/safety.py": "8effb5a740a3ac82cdf24c42cda0d9d15efa6bd236a457ca28d000be3fe95c4d",
+  "contexto_core/support.py": "53f006d3b2f3a2f7dc235299d1885793e74319a1ca0fc13efbc9225604d6eb24",
+  "contexto_core/tokens.py": "dc197c224f2e6a5570500af54b07ebda68873118b74f8b78802b6ca34cfcc777",
+  "contexto_v3.py": "3239a3b653432442dd7c0263b277d137c3b6cc736c9b8aa908c6536a287a77d8"
+ }
+}

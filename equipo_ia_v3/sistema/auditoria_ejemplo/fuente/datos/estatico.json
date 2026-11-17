@@ -1,0 +1,6 @@
+{
+ "archivos": {
+  "m.py": "def f(x)\n    return x\n",
+  "test_m.py": "from m import f\ndef test_f():\n    assert f(1) == 1\n"
+ }
+}

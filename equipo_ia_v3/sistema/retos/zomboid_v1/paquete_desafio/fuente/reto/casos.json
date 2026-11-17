@@ -1,0 +1,39 @@
+{
+ "formato": "eq2/reto_casos",
+ "version": 1,
+ "reto": "zomboid_v1",
+ "nota": "Lo que VEN los agentes. Los oráculos y los criterios están en oraculos.json y NO se muestran antes del reto.",
+ "casos": [
+  {
+   "id": "fuentes",
+   "titulo": "Fuentes y texturas",
+   "evidencia": "evidencias/01_fuentes.txt",
+   "enunciado": "Fallos de carga de texturas de fuentes (AngelCodeFont) y un ajuste LightingFPS en el registro."
+  },
+  {
+   "id": "plantillas",
+   "titulo": "Plantillas y piezas",
+   "evidencia": "evidencias/02_plantillas.txt",
+   "enunciado": "Plantillas de vehículos y piezas que no se encuentran durante la carga de scripts."
+  },
+  {
+   "id": "viewpoint",
+   "titulo": "Carga visual Viewpoint",
+   "evidencia": "evidencias/03_viewpoint.txt",
+   "enunciado": "Paquetes de modelos de Viewpoint/PVS cargados y sus recuentos de modelos y sprites."
+  },
+  {
+   "id": "inicio",
+   "titulo": "Inicio y configuración",
+   "evidencia": "evidencias/04_inicio.txt",
+   "enunciado": "Arranque: controlador gráfico, VSync, carga de mods y parches de ZombieBuddy."
+  }
+ ],
+ "modificadores": [
+  "Distinguir error funcional de problema de FPS",
+  "Priorizar 3 comprobaciones sin alterar el juego",
+  "Señalar hipótesis alternativas",
+  "Diseñar un experimento A/B controlado",
+  "Definir evidencia que refutaría tu hipótesis"
+ ]
+}

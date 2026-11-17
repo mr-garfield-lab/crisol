@@ -1,0 +1,127 @@
+{
+ "descripcion": "V3.1 mantenimiento: rechazo de rutas personales en el empaquetado y reanudación del verificador",
+ "orden": [
+  "{python}",
+  "-B",
+  "-m",
+  "unittest",
+  "discover",
+  "-s",
+  "v3/tests",
+  "-t",
+  "v3/tests"
+ ],
+ "copiar": [
+  "v3",
+  "sistema",
+  "eq3",
+  "pruebas",
+  "contexto_ligero",
+  "complementos_codex",
+  "docs",
+  "evidencias",
+  "equipo3.py",
+  "verificar_v3.py",
+  "PROGRESO.md",
+  "LEEME_V3.md"
+ ],
+ "enlazar": [],
+ "copiar_raiz": [
+  "ORIGENES_SHA256.json",
+  "AGENTS.md"
+ ],
+ "limite_s": 600,
+ "mutaciones": [
+  {
+   "id": "R1_rutas_personales_sin_revisar",
+   "archivo": "v3/empaquetar.py",
+   "antes": "            problemas.append(f\"ruta personal ({r}): {nombre}\")",
+   "despues": "            pass",
+   "motivo": "empaquetar código o registros con la carpeta personal o de trabajo del usuario"
+  },
+  {
+   "id": "R2_codigo_anonimizado_en_silencio",
+   "archivo": "v3/empaquetar.py",
+   "antes": "    if not nombre[len(PREFIJO) + 1:].startswith(ANONIMIZABLES):\n        return datos",
+   "despues": "    if False:\n        return datos",
+   "motivo": "reescribir código o pruebas al empaquetar (el ZIP dejaría de ser lo verificado)"
+  },
+  {
+   "id": "R3_perfiles_de_otros_no_detectados",
+   "archivo": "v3/empaquetar.py",
+   "antes": "            if m.group(1).strip().lower() not in USUARIOS_GENERICOS:",
+   "despues": "            if False:",
+   "motivo": "no detectar la carpeta personal de otro usuario (C:\\Users\\<nombre>, /home/<nombre>)"
+  },
+  {
+   "id": "R4_zip_con_los_bytes_del_disco",
+   "archivo": "v3/empaquetar.py",
+   "antes": "            _anadir(z, nombre, contenido[nombre])",
+   "despues": "            _anadir(z, nombre, dict(entradas)[nombre].read_bytes())",
+   "motivo": "meter en el ZIP los registros sin anonimizar (y un manifiesto que no corresponde)"
+  },
+  {
+   "id": "R5_ruta_sin_unidad_no_detectada",
+   "archivo": "v3/empaquetar.py",
+   "antes": "    return sorted(formas | {f for f in recortadas if len(f) > 4 and re.search(r\"[\\\\/]\", f)}, key=len, reverse=True)",
+   "despues": "    return sorted(formas, key=len, reverse=True)",
+   "motivo": "dejar pasar rutas recortadas por el principio («\\carpeta\\de\\trabajo\\...»), como las de las trazas"
+  },
+  {
+   "id": "R12_ruta_sin_barra_inicial_no_detectada",
+   "archivo": "v3/empaquetar.py",
+   "antes": "    recortadas = sin_unidad | {f.lstrip(\"\\\\/\") for f in formas | sin_unidad}",
+   "despues": "    recortadas = sin_unidad",
+   "motivo": "dejar pasar rutas de trazas JSON recortadas sin unidad NI barra inicial (fuga real encontrada en evidencias/v31_f05/f11_run2_subpruebas.json)"
+  },
+  {
+   "id": "R6_reanuda_con_codigo_distinto",
+   "archivo": "verificar_v3.py",
+   "antes": "    dif = diferencias_huella(previa[\"huella\"], actual)\n    if dif:",
+   "despues": "    dif = []\n    if dif:",
+   "motivo": "reutilizar resultados aunque el código o el entorno hayan cambiado (resultados obsoletos)"
+  },
+  {
+   "id": "R7_reutiliza_fases_fallidas",
+   "archivo": "verificar_v3.py",
+   "antes": "if d[\"resultado\"].get(\"estado\") == \"OK\" and d[\"resultado\"].get(\"rc\") == 0}",
+   "despues": "if True}",
+   "motivo": "dar por buena una fase que falló sin volver a ejecutarla"
+  },
+  {
+   "id": "R8_cambio_durante_la_ejecucion_ignorado",
+   "archivo": "verificar_v3.py",
+   "antes": "    if cambios:\n        detalle =",
+   "despues": "    if False:\n        detalle =",
+   "motivo": "aceptar una verificación aunque el código cambiara mientras corría"
+  },
+  {
+   "id": "R9_orden_de_fase_ignorada",
+   "archivo": "verificar_v3.py",
+   "antes": "if previo is not None and previo[\"orden\"] == orden:",
+   "despues": "if previo is not None:",
+   "motivo": "reutilizar una fase cuya orden (configuración) cambió"
+  },
+  {
+   "id": "R10_ejecucion_invalida_reanudable",
+   "archivo": "verificar_v3.py",
+   "antes": "    if previa.get(\"invalida\"):",
+   "despues": "    if False:",
+   "motivo": "reanudar desde una ejecución que quedó inválida"
+  },
+  {
+   "id": "R11_entorno_fuera_de_la_huella",
+   "archivo": "verificar_v3.py",
+   "antes": "\"entorno\": huella_entorno(base),",
+   "despues": "\"entorno\": {},",
+   "motivo": "reutilizar resultados obtenidos con otro Python, otro entorno o sin la misma capacidad de enlaces"
+  },
+  {
+   "id": "R13_codigo_4_en_cualquier_fase",
+   "archivo": "verificar_v3.py",
+   "antes": "CODIGOS_OK = {\"F11\": (0, CON_INESTABLES)}",
+   "despues": "CODIGOS_OK = {\"F11\": (0, CON_INESTABLES), \"FD\": (0, CON_INESTABLES)}",
+   "motivo": "X1: dar por correcta una fase distinta de F11 que sale con 4 (inestables)"
+  }
+ ]
+}

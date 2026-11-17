@@ -1,0 +1,308 @@
+{
+ "descripcion": "V3.1 F1-V5.1: el eco verificado de la continuación, los 6 cerebros, el descanso al empezar un bloque y las comprobaciones previas",
+ "orden": [
+  "{python}",
+  "-B",
+  "-m",
+  "unittest",
+  "discover",
+  "-s",
+  "pruebas",
+  "-t",
+  "pruebas",
+  "-p",
+  "test_eq3_evaluar_f1_v5_1.py"
+ ],
+ "copiar": [
+  "pruebas",
+  "sistema",
+  "eq3",
+  "evaluacion_f1",
+  "lab_vram"
+ ],
+ "enlazar": [],
+ "copiar_raiz": [],
+ "limite_s": 600,
+ "mutaciones": [
+  {
+   "id": "F1V51_01_variante_v5",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "VARIANTE = \"F1-V5.1\"",
+   "despues": "VARIANTE = \"F1-V5\"",
+   "motivo": "variante equivocada"
+  },
+  {
+   "id": "F1V51_02_orden_sin_ministral",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "\"gemma4\", \"ministral3\")\nPRERREGISTRO",
+   "despues": "\"gemma4\")\nPRERREGISTRO",
+   "motivo": "cribado sin Ministral"
+  },
+  {
+   "id": "F1V51_03_descanso_cero",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "DESCANSO_BLOQUE_S = 60 ",
+   "despues": "DESCANSO_BLOQUE_S = 0 ",
+   "motivo": "sin descanso mínimo"
+  },
+  {
+   "id": "F1V51_04_objetivo_alto",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "T_INICIO_BLOQUE = 55 ",
+   "despues": "T_INICIO_BLOQUE = 75 ",
+   "motivo": "objetivo de inicio de bloque demasiado alto"
+  },
+  {
+   "id": "F1V51_05_espera_corta",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "MAX_ESPERA_BLOQUE_S = 300 ",
+   "despues": "MAX_ESPERA_BLOQUE_S = 30 ",
+   "motivo": "espera máxima distinta de la prerregistrada"
+  },
+  {
+   "id": "F1V51_06_puertas_sin_g17",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "PUERTAS = V.PUERTAS + (\"G17\",)",
+   "despues": "PUERTAS = V.PUERTAS",
+   "motivo": "sin la puerta de regresión de T08"
+  },
+  {
+   "id": "F1V51_07_eco_todo_assistant",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "                if h in propias:",
+   "despues": "                if True:",
+   "motivo": "excluir cualquier mensaje assistant"
+  },
+  {
+   "id": "F1V51_08_eco_cualquier_rol",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "m.get(\"role\") == \"assistant\" and isinstance(m.get(\"content\"), str)",
+   "despues": "m.get(\"role\") in (\"assistant\", \"user\") and isinstance(m.get(\"content\"), str)",
+   "motivo": "eco de cualquier rol"
+  },
+  {
+   "id": "F1V51_09_eco_con_strip",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "h = hashlib.sha256(m[\"content\"].encode(\"utf-8\")).hexdigest()",
+   "despues": "h = hashlib.sha256(m[\"content\"].strip().encode(\"utf-8\")).hexdigest()",
+   "motivo": "eco aproximado, no exacto"
+  },
+  {
+   "id": "F1V51_10_eco_sin_propias",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "propias = {r[\"sha256\"] for r in respuestas}",
+   "despues": "propias = set()",
+   "motivo": "ningún eco vale"
+  },
+  {
+   "id": "F1V51_11_eco_no_excluye",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "for m in visibles if isinstance(m, dict))\n        fugas",
+   "despues": "for m in mensajes if isinstance(m, dict))\n        fugas",
+   "motivo": "el eco se comprueba como texto del evaluador"
+  },
+  {
+   "id": "F1V51_12_eco_sin_anotar",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "        if ecos:\n            entrada[\"ecos_verificados\"] = ecos",
+   "despues": "        if False:\n            entrada[\"ecos_verificados\"] = ecos",
+   "motivo": "eco no anotado"
+  },
+  {
+   "id": "F1V51_13_hash_del_texto_visible",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "hashlib.sha256(completo.encode(\"utf-8\")).hexdigest(), \"caracteres\"",
+   "despues": "hashlib.sha256(texto.encode(\"utf-8\")).hexdigest(), \"caracteres\"",
+   "motivo": "hash del prompt sin el eco"
+  },
+  {
+   "id": "F1V51_14_caracteres_visibles",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "\"caracteres\": len(completo)",
+   "despues": "\"caracteres\": len(texto)",
+   "motivo": "longitud sin el eco"
+  },
+  {
+   "id": "F1V51_15_fuga_sin_registro",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "            registro.append({\"fuga\": fugas})",
+   "despues": "            pass",
+   "motivo": "fuga no registrada"
+  },
+  {
+   "id": "F1V51_16_fuga_sin_exposicion",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "            estado[\"expuesto\"] = True\n",
+   "despues": "            pass\n",
+   "motivo": "una fuga no desactiva los relevos"
+  },
+  {
+   "id": "F1V51_17_respuestas_sin_guardar",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "        if isinstance(salida, str):\n            respuestas.append(",
+   "despues": "        if False:\n            respuestas.append(",
+   "motivo": "no recordar las respuestas del servidor"
+  },
+  {
+   "id": "F1V51_18_descanso_sin_dormir",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "    dormir(descanso_s)\n    while True:",
+   "despues": "    while True:",
+   "motivo": "sin esperar el descanso"
+  },
+  {
+   "id": "F1V51_19_descanso_temp_laxa",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "temp <= objetivo and not",
+   "despues": "temp <= objetivo + 20 and not",
+   "motivo": "objetivo más laxo"
+  },
+  {
+   "id": "F1V51_20_descanso_sin_freno",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": " and not lec.get(\"freno_sw_termico\")\n        parada",
+   "despues": "\n        parada",
+   "motivo": "ignorar el freno de software"
+  },
+  {
+   "id": "F1V51_21_descanso_sin_tope",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "reloj() - t0 >= max_s",
+   "despues": "reloj() - t0 >= max_s * 100",
+   "motivo": "sin tope de espera"
+  },
+  {
+   "id": "F1V51_22_descanso_sin_parada",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "parada = termica.motivo_parada()",
+   "despues": "parada = None",
+   "motivo": "ignorar una parada crítica"
+  },
+  {
+   "id": "F1V51_23_bucle_sin_descanso",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "                bloque[\"descanso\"] = descanso()",
+   "despues": "                pass",
+   "motivo": "sin descanso en el bucle"
+  },
+  {
+   "id": "F1V51_24_bucle_descanso_siempre",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "            if abortada is None:\n                bloque[\"descanso\"] = descanso()",
+   "despues": "            if True:\n                bloque[\"descanso\"] = descanso()",
+   "motivo": "descanso aunque el bloque esté abortado"
+  },
+  {
+   "id": "F1V51_25_entorno_sin_proteger",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "V.MODELOS_JSON, V.ORDEN_MODELOS, B.proteger_backend_v43 = MODELOS_JSON, ORDEN_MODELOS, proteger_backend_v51",
+   "despues": "V.MODELOS_JSON, V.ORDEN_MODELOS = MODELOS_JSON, ORDEN_MODELOS",
+   "motivo": "V5 sin el control con eco"
+  },
+  {
+   "id": "F1V51_26_entorno_sin_modelos",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "V.MODELOS_JSON, V.ORDEN_MODELOS, B.proteger_backend_v43 = MODELOS_JSON, ORDEN_MODELOS, proteger_backend_v51",
+   "despues": "B.proteger_backend_v43 = proteger_backend_v51",
+   "motivo": "V5 con solo 4 cerebros"
+  },
+  {
+   "id": "F1V51_27_entorno_no_restaura",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "    finally:\n        V.MODELOS_JSON, V.ORDEN_MODELOS, B.proteger_backend_v43 = antes",
+   "despues": "    finally:\n        pass",
+   "motivo": "dejar V5 y V4.5.1 parcheadas"
+  },
+  {
+   "id": "F1V51_28_entorno_sin_v5",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "        with V.entorno_v5():\n            yield",
+   "despues": "        if True:\n            yield",
+   "motivo": "sin el E2 de V5"
+  },
+  {
+   "id": "F1V51_29_prerreg_sin_cadena",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "    return dif + [f\"V5:{d}\" for d in V.comprobar_v5()]",
+   "despues": "    return dif",
+   "motivo": "no comprobar V1–V5"
+  },
+  {
+   "id": "F1V51_30_prerreg_sin_orden",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": " or pre.get(\"orden_cribado\") != list(ORDEN_MODELOS)",
+   "despues": "",
+   "motivo": "prerregistro con otro orden de cribado"
+  },
+  {
+   "id": "F1V51_31_prerreg_sin_ctx",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "pre.get(\"ctx\") != V.CTX",
+   "despues": "False",
+   "motivo": "prerregistro con otro contexto"
+  },
+  {
+   "id": "F1V51_32_eval_carpeta",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "    if \"v5_1\" not in str(salida).lower():\n        raise EV.Abortada(\"los resultados",
+   "despues": "    if False:\n        raise EV.Abortada(\"los resultados",
+   "motivo": "resultados fuera de una carpeta v5_1"
+  },
+  {
+   "id": "F1V51_33_eval_puertas_ok",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "if pu.get(\"variante\") != VARIANTE or not pu.get(\"ok\"):\n        raise EV.Abortada(\"las puertas de F1-V5.1 no pasaron\")",
+   "despues": "if pu.get(\"variante\") != VARIANTE:\n        raise EV.Abortada(\"las puertas de F1-V5.1 no pasaron\")",
+   "motivo": "empezar con puertas fallidas"
+  },
+  {
+   "id": "F1V51_34_eval_puertas_variante",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "if pu.get(\"variante\") != VARIANTE or not pu.get(\"ok\"):\n        raise EV.Abortada(\"las puertas de F1-V5.1 no pasaron\")",
+   "despues": "if not pu.get(\"ok\"):\n        raise EV.Abortada(\"las puertas de F1-V5.1 no pasaron\")",
+   "motivo": "empezar con las puertas de otra variante"
+  },
+  {
+   "id": "F1V51_35_eval_prerreg",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "    if comprobar_v5_1():",
+   "despues": "    if False:",
+   "motivo": "empezar con el prerregistro alterado"
+  },
+  {
+   "id": "F1V51_36_eval_huella",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "    if pu.get(\"codigo\") != huella_codigo():",
+   "despues": "    if False:",
+   "motivo": "puertas de otro código"
+  },
+  {
+   "id": "F1V51_37_eval_cribado_valida",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": " or not cr.get(\"valida\")",
+   "despues": "",
+   "motivo": "elegir equipo con un cribado no válido"
+  },
+  {
+   "id": "F1V51_38_eval_cribado_fase",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": " or cr.get(\"fase\") != \"cribado\"",
+   "despues": "",
+   "motivo": "elegir equipo con una fase que no es cribado"
+  },
+  {
+   "id": "F1V51_39_eval_cribado_variante",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "if cr.get(\"variante\") != VARIANTE or ",
+   "despues": "if ",
+   "motivo": "elegir equipo con un cribado de otra variante"
+  },
+  {
+   "id": "F1V51_40_eval_sin_equipo",
+   "archivo": "eq3/evaluar_f1_v5_1.py",
+   "antes": "            if not eleccion[\"ok\"]:",
+   "despues": "            if False:",
+   "motivo": "seguir sin equipo elegido"
+  }
+ ]
+}

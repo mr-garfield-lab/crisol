@@ -1,0 +1,54 @@
+{
+ "version": "4.1",
+ "variante": "F1-VRAM-EXP-V4.1",
+ "base": "prerregistro V4 (conservado) + correcciones de sus puertas",
+ "fecha_utc": "2026-11-12T07:59:42Z",
+ "estado": "PRERREGISTRADO, NO EJECUTADO (la evaluación F1 completa NO está autorizada)",
+ "cambios_sobre_v4": [
+  "guardián independiente (lab_vram/guardian_fondo.py, lanzado por WMI) que reanuda Wallpaper Engine si Equipo IA termina de golpe; sin guardián no se detiene el fondo",
+  "comparar exige un puertas.json con el MISMO código y prerregistro (huella_codigo)",
+  "una tarea que no corre con E2 aborta TODA la evaluación (antes solo se marcaba)",
+  "puertas G1–G10 propias de V4.1 (G8 tope de VRAM real, G9 fallo de arranque real, G10 equivalencia)"
+ ],
+ "llama_e2": [
+  "--fit",
+  "off",
+  "-ngl",
+  "all",
+  "-fa",
+  "on",
+  "-ub",
+  "128",
+  "-b",
+  "512",
+  "-lv",
+  "4"
+ ],
+ "limites": {
+  "vram_tope_MiB": 6912,
+  "vram_otras_max_MiB": 1992,
+  "pico_e2_medido_MiB": 4420,
+  "crecimiento_ajeno_max_MiB": 251,
+  "margen_MiB": 500,
+  "variacion_otras_max_MiB": 200,
+  "uso_gpu_max_pct": 40,
+  "inactividad_min_s": 600
+ },
+ "sin_cambios": "tareas, oráculos, prompts, configuraciones, orden, temperaturas, semillas, regla de decisión, STOP, monitor de memoria, propiedad de procesos y reintentos por terceros: los de V3",
+ "sha256": {
+  "evaluacion_f1/PRERREGISTRO_F1.json": "0f7001ec392b998f0db6d75cda919ee523faf79555d54472f37255e24a318858",
+  "evaluacion_f1/PRERREGISTRO_F1_v1.json": "3bb06f3d45ff5a7493577588f47971f7d258c19f59427f101d1cb088322cbd02",
+  "evaluacion_f1/PRERREGISTRO_F1_VRAM_EXP_v3.json": "3985efacec4891b77fe50e8c7f2b0de473dc385e17ead275b704cb0a605d2f86",
+  "evaluacion_f1/PRERREGISTRO_F1_VRAM_EXP_v4.json": "bdc2e41a44b81f554a8d5b7df7fef54ab5d323e27ced7d4112d4d85b700fb410",
+  "eq3/evaluar_f1_vram_exp_v4.py": "241bbca7a76691784d6940400aca32fbcc7fcdf4177a6322b99aeaa0054097cc",
+  "lab_vram/wallpaper.py": "fb27a699a8ca93061a2b8c1bd5074b18ebe6e2f4027c357ceaa9fbe0053b5a07",
+  "lab_vram/guardian_fondo.py": "e045bbffafad2e652be24b50a39c07dc7820faf952303dfcb52c65e3b1499ee0",
+  "pruebas/test_eq3_evaluar_f1_vram_exp_v4.py": "a8e8cfb0569847a88b1d3b57396be116f0ddbbce095c627b0614a87b7a67f145",
+  "pruebas/test_lab_wallpaper.py": "a9d0dd3c34b05de61d131165f69340de3dada6988c8d1b3eb9fe625ad27cf515",
+  "v3/mutaciones/v31_f1_vram_exp_v4.json": "35d9371ef2933df066d4d97c63f89232a4052a16380e25f94e4142499d258c61",
+  "v3/mutaciones/v31_lab_wallpaper.json": "b7cb2d0acd7aba5297745b5ce04dff1590d072e19f4dc6f60c052d7bf9ad0fbc",
+  "evaluacion_f1/prerregistrar_vram_exp_v4.py": "8bd6923c8173f1469bb7e64f14d9f17b74ada74597a77b6b2b8aa79d35966faa",
+  "evaluacion_f1/prerregistrar_vram_exp_v4_1.py": "8cf23842aabf1d0a66771f9a00913b2bcc1ab1a6d878e14f3c16feee86b9ad46",
+  "docs/V31_F1_VRAM_EXP_V4.md": "e34854ac51563db4ba3160c17349d35cf79f065ebc9c9e690d14635033d08144"
+ }
+}

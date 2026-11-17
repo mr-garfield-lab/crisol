@@ -1,0 +1,9 @@
+{
+ "titulo": "Redondeo de precios (demostración V2-F.1: falta información)",
+ "tipo": "funcion_supervisada",
+ "funcion": "redondear_precio",
+ "instrucciones": "Escribe una función redondear_precio(importe) que redondee un precio según la normativa de la tienda.",
+ "max_iteraciones": 1,
+ "politica_falta": "preguntar",
+ "notas": "La tarea no dice qué redondeo usar: A1 debe preguntar (FALTA) en lugar de suponerlo en silencio."
+}

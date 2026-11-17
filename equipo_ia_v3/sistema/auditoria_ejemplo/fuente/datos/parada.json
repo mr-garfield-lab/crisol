@@ -1,0 +1,22 @@
+[
+ {
+  "motivo": "stop_usuario",
+  "es_parada": true
+ },
+ {
+  "motivo": "abortado_durante_carga:senal",
+  "es_parada": true
+ },
+ {
+  "motivo": "servidor_muerto",
+  "es_parada": false
+ },
+ {
+  "motivo": "abortado_durante_carga:presion",
+  "es_parada": false
+ },
+ {
+  "motivo": "x:stop_usuario",
+  "es_parada": false
+ }
+]

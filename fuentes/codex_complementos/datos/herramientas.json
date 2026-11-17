@@ -1,0 +1,14 @@
+[
+ {"id":"H01","agente":"A2","flujo":"motor","autorizado":true,"necesidad":"comprobar_comportamiento","archivos":["sol.py","test_sol.py"],"casos":0,"lenguaje":"python","esperado":["pruebas_python",true]},
+ {"id":"H02","agente":"A1","flujo":"motor","autorizado":true,"necesidad":"comprobar_comportamiento","archivos":["sol.py"],"casos":2,"lenguaje":"python","esperado":["ejecutar_casos",true]},
+ {"id":"H03","agente":"A3","flujo":"debate","autorizado":true,"necesidad":"comprobar_comportamiento","archivos":["sol.py"],"casos":3,"lenguaje":"python","esperado":["ejecutar_casos",true]},
+ {"id":"H04","agente":"A2","flujo":"motor","autorizado":false,"necesidad":"comprobar_comportamiento","archivos":["sol.py","test_sol.py"],"casos":0,"lenguaje":"python","esperado":["analisis_estatico",false]},
+ {"id":"H05","agente":"A1","flujo":"motor","autorizado":false,"necesidad":"comprobar_sintaxis","archivos":["sol.py"],"casos":0,"lenguaje":"python","esperado":["analisis_estatico",true]},
+ {"id":"H06","agente":"A2","flujo":"motor","autorizado":true,"necesidad":"ejecutar_casos","archivos":["sol.py"],"casos":0,"lenguaje":"python","esperado":["analisis_estatico",false]},
+ {"id":"H07","agente":"A2","flujo":"modlab_pz","autorizado":true,"necesidad":"analizar_lua","archivos":["mod.lua"],"casos":0,"lenguaje":"lua","esperado":["analizar_lua_estatico",true]},
+ {"id":"H08","agente":"A1","flujo":"modlab_pz","autorizado":true,"necesidad":"analizar_lua","archivos":["mod.lua"],"casos":0,"lenguaje":"lua","esperado":[null,false]},
+ {"id":"H09","agente":"A2","flujo":"modlab_pz","autorizado":false,"necesidad":"inspeccionar_zip","archivos":["mod.zip"],"casos":0,"lenguaje":"zip","esperado":[null,false]},
+ {"id":"H10","agente":"A2","flujo":"modlab_pz","autorizado":true,"necesidad":"simular_escenario","archivos":["escenario.json"],"casos":0,"lenguaje":"json","esperado":["simular_escenario",true]},
+ {"id":"H11","agente":"A2","flujo":"motor","autorizado":true,"necesidad":"comprobar_sintaxis","archivos":["mod.lua"],"casos":0,"lenguaje":"lua","esperado":[null,false]},
+ {"id":"H12","agente":"A3","flujo":"motor","autorizado":true,"necesidad":"shell_libre","archivos":[],"casos":0,"lenguaje":"python","esperado":[null,false]}
+]

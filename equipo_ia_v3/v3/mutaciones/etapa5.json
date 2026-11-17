@@ -1,0 +1,93 @@
+{
+ "descripcion": "Etapa 5: memoria individual, episódica y de proyecto; evaluación prerregistrada",
+ "orden": [
+  "{python}",
+  "-B",
+  "-m",
+  "unittest",
+  "discover",
+  "-s",
+  "pruebas",
+  "-t",
+  "pruebas",
+  "-p",
+  "test_eq3_memoria.py"
+ ],
+ "copiar": [
+  "eq3",
+  "pruebas",
+  "equipo3.py",
+  "contexto_ligero",
+  "complementos_codex",
+  "v3"
+ ],
+ "enlazar": [
+  "sistema"
+ ],
+ "limite_s": 600,
+ "mutaciones": [
+  {
+   "id": "M1_filtro_de_contenido_desactivado",
+   "archivo": "eq3/memoria.py",
+   "antes": "if q & contenido(f\"{x.texto} {x.ambito}\"):",
+   "despues": "if True:",
+   "motivo": "recuerdos irrelevantes por palabras funcionales (el defecto medido en los conjuntos 1 y 2)"
+  },
+  {
+   "id": "M2_sin_palabras_vacias",
+   "archivo": "eq3/memoria.py",
+   "antes": "return M.palabras(texto) - VACIAS",
+   "despues": "return M.palabras(texto)",
+   "motivo": "volver a la normalización de Codex, que deja pasar «de», «la», «un»…"
+  },
+  {
+   "id": "M3_base_de_aprendizaje_escribible",
+   "archivo": "eq3/memoria.py",
+   "antes": "self.con = sqlite3.connect(f\"file:{ruta.as_posix()}?mode=ro\", uri=True)",
+   "despues": "self.con = sqlite3.connect(str(ruta))",
+   "motivo": "abrir la memoria de un agente con permiso de escritura"
+  },
+  {
+   "id": "M4_hipotesis_por_defecto",
+   "archivo": "eq3/memoria.py",
+   "antes": "n: int = 4, permitir_hipotesis: bool = False) -> dict:",
+   "despues": "n: int = 4, permitir_hipotesis: bool = True) -> dict:",
+   "motivo": "entregar hipótesis como si fueran memoria utilizable"
+  },
+  {
+   "id": "M5_episodios_sin_umbral",
+   "archivo": "eq3/memoria.py",
+   "antes": "        if p >= umbral:",
+   "despues": "        if True:",
+   "motivo": "devolver episodios que no tienen relación con la tarea"
+  },
+  {
+   "id": "M6_proyecto_sin_umbral",
+   "archivo": "eq3/memoria.py",
+   "antes": "if s >= umbral or contenido(consulta) & identificadores:",
+   "despues": "if True:",
+   "motivo": "devolver cambios de proyecto que no tienen relación con la tarea"
+  },
+  {
+   "id": "M7_rechazo_al_escribir_oculto",
+   "archivo": "eq3/memoria.py",
+   "antes": "rechazados.append({\"etiqueta\": r[\"etiqueta\"], \"motivo\": str(e)[:200]})",
+   "despues": "pass",
+   "motivo": "ocultar que V2-F.1 rechazó un recuerdo instructivo"
+  },
+  {
+   "id": "M8_juicio_prerregistrado_alterado",
+   "archivo": "v3/escenarios_memoria_2.json",
+   "antes": "\"relevantes\": [\"S1\"], \"tolerados\": []},",
+   "despues": "\"relevantes\": [\"S1\", \"S3\"], \"tolerados\": []},",
+   "motivo": "cambiar un juicio de relevancia después del registro"
+  },
+  {
+   "id": "M9_bloque_sin_marca_de_datos",
+   "archivo": "eq3/memoria.py",
+   "antes": "    lineas = [CABECERA]",
+   "despues": "    lineas = []",
+   "motivo": "entregar la memoria al prompt sin marcarla como DATOS"
+  }
+ ]
+}

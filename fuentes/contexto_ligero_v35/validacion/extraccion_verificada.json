@@ -1,0 +1,8 @@
+{
+  "source_archive": "/workspace/CONTEXTO_LIGERO_V33.zip",
+  "sha256": "0d37471e0f1d6a1645fc85c17f54b0661316a323c86618ba4641a901edd00c35",
+  "zip_crc": "PASS",
+  "file_hashes_verified": 541,
+  "result": "PASS",
+  "extracted_root": "/workspace/validacion_v33/contexto_ligero_v33"
+}

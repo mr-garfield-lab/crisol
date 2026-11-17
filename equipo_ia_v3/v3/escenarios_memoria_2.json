@@ -1,0 +1,38 @@
+{
+ "version": 1,
+ "registrado": "2026-11-10, DESPUÉS de medir el conjunto 1 y ANTES de escribir y medir el filtro de palabras de contenido. Conjunto de CONTRASTE: nada de él se usó para diseñar el filtro. Su SHA-256 queda en v3/escenarios_memoria_2.sha256",
+ "regla": "No se cambian recuerdos, consultas ni juicios de relevancia para mejorar un resultado.",
+ "limitacion": "Escenarios PROPIOS (mismo autor que el sistema), aunque de contraste respecto al diagnóstico. Miden el MECANISMO de recuperación, no el aprendizaje de un modelo.",
+ "agente": "A2",
+ "creado": "2026-11-10T12:00:00+00:00",
+ "ahora": "2026-11-13T12:00:00+00:00",
+ "n": 3,
+ "recuerdos": [
+  {"etiqueta": "S1", "tipo": "hecho", "estado": "sin_verificar", "fuente": "observado",
+   "texto": "open() sin encoding usa la codificación del sistema; para archivos UTF-8 hay que indicarla explícitamente"},
+  {"etiqueta": "S2", "tipo": "leccion", "estado": "sin_verificar", "fuente": "observado",
+   "texto": "los reintentos de red deben usar espera exponencial y un número máximo de intentos"},
+  {"etiqueta": "S3", "tipo": "hecho", "estado": "sin_verificar", "fuente": "observado",
+   "texto": "el módulo csv maneja comillas y separadores dentro de los campos; no se debe partir la línea con split"},
+  {"etiqueta": "S4", "tipo": "criterio", "estado": "sin_verificar", "fuente": "observado",
+   "texto": "una transacción de SQLite debe confirmarse o deshacerse entera, nunca dejar escrituras a medias"},
+  {"etiqueta": "S5", "tipo": "hecho", "estado": "sin_verificar", "fuente": "observado",
+   "texto": "la división entera de números negativos en Python redondea hacia menos infinito"},
+  {"etiqueta": "S6", "tipo": "hipotesis", "estado": "hipotesis", "fuente": "opinion",
+   "texto": "tal vez convenga leer todos los archivos CSV completos en memoria"},
+  {"etiqueta": "S7", "tipo": "hecho", "estado": "sin_verificar", "fuente": "observado", "dias": 1,
+   "texto": "el servidor de pruebas acepta como máximo tres reintentos de red por minuto"}
+ ],
+ "prohibidos": {"S6": "hipótesis sin permiso", "S7": "caducado (validez 1 día; consulta 3 días después)"},
+ "consultas": [
+  {"id": "P1", "texto": "leer un archivo de texto con acentos y caracteres UTF-8", "relevantes": ["S1"], "tolerados": []},
+  {"id": "P2", "texto": "repetir una petición de red que falla de forma intermitente", "relevantes": ["S2"], "tolerados": []},
+  {"id": "P3", "texto": "procesar un CSV cuyos campos contienen comas entre comillas", "relevantes": ["S3"], "tolerados": []},
+  {"id": "P4", "texto": "guardar varias filas en SQLite sin dejar datos a medias si algo falla", "relevantes": ["S4"], "tolerados": []},
+  {"id": "P5", "texto": "calcular el cociente de una división con números negativos", "relevantes": ["S5"], "tolerados": []},
+  {"id": "P6", "texto": "elegir una paleta de colores para una interfaz", "relevantes": [], "tolerados": []},
+  {"id": "P7", "texto": "traducir la documentación del proyecto al inglés", "relevantes": [], "tolerados": []}
+ ],
+ "metodos": {"memoria_v3": "eq3.memoria.individual()", "sin_memoria": "ningún recuerdo", "recencia": "los n recuerdos más recientes"},
+ "metricas": "Las mismas que en el conjunto 1. P6 y P7 son controles negativos: cualquier recuperado es un falso."
+}

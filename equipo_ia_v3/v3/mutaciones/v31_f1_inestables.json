@@ -1,0 +1,139 @@
+{
+ "descripcion": "V3.1 F1 (X1): la tolerancia a pruebas inestables no acepta ninguna regresión",
+ "orden": [
+  "{python}",
+  "-B",
+  "-m",
+  "unittest",
+  "discover",
+  "-s",
+  "v3/tests",
+  "-t",
+  "v3/tests",
+  "-p",
+  "test_inestables.py"
+ ],
+ "copiar": [
+  "v3",
+  "sistema",
+  "eq3",
+  "verificar_v3.py"
+ ],
+ "enlazar": [],
+ "copiar_raiz": [],
+ "limite_s": 600,
+ "mutaciones": [
+  {
+   "id": "X1_01_sin_tolerancia",
+   "archivo": "v3/linea_base.py",
+   "antes": "    return dif if a > 0 and b > 0 and 0 < dif <= decl[\"max_diferencia_kB\"] else None",
+   "despues": "    return dif if a > 0 and b > 0 and 0 < dif else None",
+   "motivo": "aceptar cualquier diferencia de memoria (un error de unidades, ×1024, pasaría por inestable)"
+  },
+  {
+   "id": "X1_02_lecturas_a_cero",
+   "archivo": "v3/linea_base.py",
+   "antes": "    return dif if a > 0 and b > 0 and 0 < dif <= decl[\"max_diferencia_kB\"] else None",
+   "despues": "    return dif if 0 < dif <= decl[\"max_diferencia_kB\"] else None",
+   "motivo": "aceptar una lectura de memoria a cero (lectura rota) como inestabilidad"
+  },
+  {
+   "id": "X1_03_error_como_fallo",
+   "archivo": "v3/linea_base.py",
+   "antes": "    if len(lineas) != 5 or not lineas[0].startswith(\"CABECERA: FAIL\") or \\",
+   "despues": "    if len(lineas) != 5 or not lineas[0].startswith(\"CABECERA: \") or \\",
+   "motivo": "aceptar un ERROR (excepción) como si fuera el FAIL declarado"
+  },
+  {
+   "id": "X1_04_traza_de_mas",
+   "archivo": "v3/linea_base.py",
+   "antes": "    if len(lineas) != 5 or not lineas[0].startswith(\"CABECERA: FAIL\") or \\",
+   "despues": "    if len(lineas) < 5 or not lineas[0].startswith(\"CABECERA: FAIL\") or \\",
+   "motivo": "aceptar un fallo con texto de más (otra traza o una excepción encadenada)"
+  },
+  {
+   "id": "X1_05_sin_comprobar_la_linea",
+   "archivo": "v3/linea_base.py",
+   "antes": "    if not (marco.startswith('File \"') and re.search(r'[\\\\/]' + re.escape(decl[\"ubicacion\"]) + \"$\", marco)):",
+   "despues": "    if not marco.startswith('File \"'):",
+   "motivo": "aceptar el fallo en cualquier archivo o línea"
+  },
+  {
+   "id": "X1_06_sin_comprobar_el_codigo",
+   "archivo": "v3/linea_base.py",
+   "antes": "    if codigo != decl[\"codigo\"]:\n        return None\n",
+   "despues": "",
+   "motivo": "aceptar otro código en la línea declarada"
+  },
+  {
+   "id": "X1_07_sin_comprobar_la_subprueba",
+   "archivo": "v3/linea_base.py",
+   "antes": "    if pid != decl[\"subprueba\"]:\n        return None\n    crudas",
+   "despues": "    crudas",
+   "motivo": "aceptar la misma firma en otra subprueba"
+  },
+  {
+   "id": "X1_08_fallo_conocido_desaparecido",
+   "archivo": "v3/linea_base.py",
+   "antes": "    if pendientes or not fallos:",
+   "despues": "    if not fallos:",
+   "motivo": "aceptar que un fallo conocido desaparezca mientras aparece la inestabilidad"
+  },
+  {
+   "id": "X1_09_fallo_desconocido_ignorado",
+   "archivo": "v3/linea_base.py",
+   "antes": "                break\n        else:\n            return None\n    if pendientes",
+   "despues": "                break\n        else:\n            continue\n    if pendientes",
+   "motivo": "ignorar un fallo que no es ni conocido ni el declarado (la regresión real)"
+  },
+  {
+   "id": "X1_10_sin_comprobar_numero_de_pruebas",
+   "archivo": "v3/linea_base.py",
+   "antes": "    if ran != [m.group(1)] or fin != [m.group(3)]:",
+   "despues": "    if fin != [m.group(3)]:",
+   "motivo": "aceptar una traza con un número de pruebas distinto del de la firma"
+  },
+  {
+   "id": "X1_11_sin_mayoria",
+   "archivo": "v3/linea_base.py",
+   "antes": "    if motivo is None and ok < decl[\"minimo_ok\"]:",
+   "despues": "    if motivo is None and ok < 1:",
+   "motivo": "confirmar con una sola repetición correcta (una regresión intermitente pasaría)"
+  },
+  {
+   "id": "X1_12_fallo_distinto_en_la_repeticion",
+   "archivo": "v3/linea_base.py",
+   "antes": "            motivo = f\"repetición {i}: rc={r.returncode}, fallo distinto del declarado (ver repeticion_{i}.txt)\"\n            break",
+   "despues": "            continue",
+   "motivo": "ignorar en las repeticiones un fallo distinto del declarado"
+  },
+  {
+   "id": "X1_13_repeticion_con_otras_pruebas",
+   "archivo": "v3/linea_base.py",
+   "antes": "        if r.returncode == 0 and ran == [\"1\"] and re.search(r\"^OK$\", r.stderr, re.M):",
+   "despues": "        if r.returncode == 0 and re.search(r\"^OK$\", r.stderr, re.M):",
+   "motivo": "contar como correcta una repetición que no ejecutó exactamente la subprueba"
+  },
+  {
+   "id": "X1_14_sin_confirmacion",
+   "archivo": "v3/linea_base.py",
+   "antes": "        if all(c[\"confirmada\"] for c in confs.values()):",
+   "despues": "        if True:",
+   "motivo": "aceptar la inestabilidad sin repetir la subprueba"
+  },
+  {
+   "id": "X1_15_inestable_como_igual",
+   "archivo": "v3/linea_base.py",
+   "antes": "    if totales.get(INESTABLE):\n        return 4\n",
+   "despues": "",
+   "motivo": "ocultar las inestables (código 0 = «igual», en vez de 4 visible)"
+  },
+  {
+   "id": "X1_16_mayoria_no_estricta",
+   "archivo": "v3/linea_base.py",
+   "antes": "not n // 2 < m <= n:",
+   "despues": "not 0 < m <= n:",
+   "motivo": "admitir declaraciones con mínimo de correctas que no es mayoría"
+  }
+ ]
+}

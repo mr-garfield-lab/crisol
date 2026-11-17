@@ -1,0 +1,588 @@
+{
+ "descripcion": "V3.1 F1-VRAM-EXP-V4.5: lo de V4.4 + PC compartido (origen térmico, esperas de 4 h, STOP global)",
+ "orden": [
+  "{python}",
+  "-B",
+  "-m",
+  "unittest",
+  "discover",
+  "-s",
+  "pruebas",
+  "-t",
+  "pruebas",
+  "-p",
+  "test_eq3_*_v4_5.py"
+ ],
+ "copiar": [
+  "pruebas",
+  "sistema",
+  "eq3",
+  "evaluacion_f1",
+  "lab_vram"
+ ],
+ "enlazar": [],
+ "copiar_raiz": [],
+ "limite_s": 600,
+ "mutaciones": [
+  {
+   "id": "F1V45_01_fit_por_defecto",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "E2 = [\"--fit\", \"off\", ",
+   "despues": "E2 = [",
+   "motivo": "volver a --fit on (descarga silenciosa)"
+  },
+  {
+   "id": "F1V45_02_margen_menor",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "MARGEN = 500 ",
+   "despues": "MARGEN = 200 ",
+   "motivo": "un margen menor que el verificado"
+  },
+  {
+   "id": "F1V45_03_pico_estimado",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "PICO_E2_MEDIDO = 4420 ",
+   "despues": "PICO_E2_MEDIDO = 4000 ",
+   "motivo": "usar un pico sin verificar"
+  },
+  {
+   "id": "F1V45_04_escritorio_cualquiera",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "        elif p[\"clase\"] not in ESCRITORIO:",
+   "despues": "        elif False:",
+   "motivo": "tratar una ventana a pantalla completa (vídeo) como escritorio"
+  },
+  {
+   "id": "F1V45_05_primer_plano_falla_abierto",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "            motivos.append(\"primer_plano_no_medible\")",
+   "despues": "            pass",
+   "motivo": "si no se puede ver el primer plano, suponer que no hay nadie"
+  },
+  {
+   "id": "F1V45_06_inactividad_falla_abierto",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "        motivos.append(\"inactividad_no_medible\")",
+   "despues": "        pass",
+   "motivo": "si no se puede medir la inactividad, suponer que no hay nadie"
+  },
+  {
+   "id": "F1V45_07_vram_ajena_sin_limite",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "    elif max(vram) > VRAM_OTRAS_MAX:",
+   "despues": "    elif max(vram) > 10**6:",
+   "motivo": "empezar con cualquier VRAM ajena"
+  },
+  {
+   "id": "F1V45_08_persona_ignorada",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "    return {\"ok\": not p[\"hay\"] and not recursos,",
+   "despues": "    return {\"ok\": not recursos,",
+   "motivo": "empezar aunque haya una persona"
+  },
+  {
+   "id": "F1V45_09_capas_cpu_aceptadas",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "    out[\"ok\"] = (bool(capas) and capas[-1][0] == capas[-1][1] and",
+   "despues": "    out[\"ok\"] = (bool(capas) and",
+   "motivo": "aceptar capas en la CPU (descarga silenciosa)"
+  },
+  {
+   "id": "F1V45_10_fit_aceptado",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "and not out[\"fit_ajusto\"])",
+   "despues": "and True)",
+   "motivo": "aceptar que --fit cambie la colocación"
+  },
+  {
+   "id": "F1V45_11_config_no_marca",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "        fila[\"infraestructura\"] = \"configuracion_llama_no_e2\"",
+   "despues": "        pass",
+   "motivo": "puntuar una tarea que no corrió con E2"
+  },
+  {
+   "id": "F1V45_12_sin_restaurar_al_salir",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "        if fondo is not None:\n            fondo.restaurar()",
+   "despues": "        if False:\n            fondo.restaurar()",
+   "motivo": "no devolver el fondo animado al terminar o ante un error"
+  },
+  {
+   "id": "F1V45_13_persona_sin_fondo",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "            if fondo is not None and fondo.c.estado != \"normal\":",
+   "despues": "            if False:",
+   "motivo": "no devolver el fondo animado cuando aparece una persona"
+  },
+  {
+   "id": "F1V45_14_fondo_no_detenido_aceptado",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "            if fondo is not None and not fondo.liberar():",
+   "despues": "            if fondo is not None and not (fondo.liberar() or True):",
+   "motivo": "empezar aunque el fondo animado no se haya detenido"
+  },
+  {
+   "id": "F1V45_15_e2_cambiado_sin_detectar",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": " or pre.get(\"llama_e2\") != E2:",
+   "despues": ":",
+   "motivo": "cambiar E2 sin que el prerregistro lo detecte"
+  },
+  {
+   "id": "F1V45_16_sin_guardian",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "        if self.guardian is None:\n            self.marca.parent",
+   "despues": "        if False:\n            self.marca.parent",
+   "motivo": "detener el fondo sin guardián independiente"
+  },
+  {
+   "id": "F1V45_17_guardian_fallido_aceptado",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "            if not self.guardian or self.guardian.get(\"rc\") != 0 or not self.guardian.get(\"pid\"):",
+   "despues": "            if False:",
+   "motivo": "detener el fondo aunque el guardián no arrancara"
+  },
+  {
+   "id": "F1V45_18_sin_marca_aceptado",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "        if self.marca is None:\n            self.anotar(",
+   "despues": "        if False:\n            self.anotar(",
+   "motivo": "detener el fondo sin marca (sin guardián posible)"
+  },
+  {
+   "id": "F1V45_19_marca_no_retirada",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "            self.marca.unlink(missing_ok=True)            # el guardián",
+   "despues": "            pass            # el guardián",
+   "motivo": "dejar la marca: el guardián reanudaría el fondo tarde o dos veces"
+  },
+  {
+   "id": "F1V45_20_sin_e2_no_aborta",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "    if sin_e2:",
+   "despues": "    if False:",
+   "motivo": "seguir evaluando aunque la tarea no corriera con E2"
+  },
+  {
+   "id": "F1V45_21_puertas_sueltas",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "    if pu.get(\"codigo\") != huella_codigo():",
+   "despues": "    if False:",
+   "motivo": "aceptar puertas pasadas con otro código o prerregistro"
+  },
+  {
+   "id": "F1V45_22_g10_sin_e2",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "            and estatico[\"comparar_usa_e2_para_todas\"] and real",
+   "despues": "            and real",
+   "motivo": "dar por equivalentes configuraciones que no usan E2"
+  },
+  {
+   "id": "F1V45_P01_exime_en_s1",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "if not base or configuracion != \"E3\" or not respuestas:",
+   "despues": "if not base or not respuestas:",
+   "motivo": "eximir relevos también en S1 y S1×3"
+  },
+  {
+   "id": "F1V45_P02_fuentes_del_evaluador",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "\"problemas\", \"intentos\", \"casos\", \"sugerencias\"})",
+   "despues": "\"problemas\", \"intentos\", \"casos\", \"sugerencias\", \"tarea\", \"orden_trabajo\", \"experiencias\"})",
+   "motivo": "aceptar como relevo los bloques del evaluador"
+  },
+  {
+   "id": "F1V45_P03_sin_comprobar_bloque",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "    if fuente not in FUENTES_RELEVO:\n        return None\n",
+   "despues": "",
+   "motivo": "aceptar cualquier posición del prompt (cabeceras incluidas)"
+  },
+  {
+   "id": "F1V45_P04_sin_contexto",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "b - a >= len(v) + CONTEXTO_MIN",
+   "despues": "b - a >= len(v)",
+   "motivo": "basta con que el literal aparezca en una respuesta"
+  },
+  {
+   "id": "F1V45_P05_una_verificada_basta",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "fugas = [e for e in base if e in sin_verificar or e not in vistas]",
+   "despues": "fugas = [e for e in base if e not in vistas]",
+   "motivo": "una aparición verificada exime a las demás"
+  },
+  {
+   "id": "F1V45_P06_forma_repr_olvidada",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "{json.dumps(o[\"esperado\"], ensure_ascii=False),\n                                                            repr(o[\"esperado\"])}",
+   "despues": "{json.dumps(o[\"esperado\"], ensure_ascii=False)}",
+   "motivo": "no buscar la forma repr del esperado"
+  },
+  {
+   "id": "F1V45_P07_exposicion_ignorada",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "[] if estado[\"expuesto\"] else respuestas",
+   "despues": "respuestas",
+   "motivo": "seguir eximiendo relevos tras una exposición"
+  },
+  {
+   "id": "F1V45_P08_sin_quitar_numero_de_linea",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "linea = _norm(_NUMERO_LINEA.sub(\"\", prompt[ini:len(prompt) if fin < 0 else fin], count=1))",
+   "despues": "linea = _norm(prompt[ini:len(prompt) if fin < 0 else fin])",
+   "motivo": "no quitar el número de línea del controlador"
+  },
+  {
+   "id": "F1V45_P09_protector_no_restaurado",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "        EV.proteger_backend = original\n\n\ndef tiempos_termicos",
+   "despues": "        pass\n\n\ndef tiempos_termicos",
+   "motivo": "dejar el protector de V4.3 puesto en la estable"
+  },
+  {
+   "id": "F1V45_P10_tarea_sin_protector",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "        with _protector_v44(configuracion):\n            fila = EV.ejecutar_tarea(",
+   "despues": "        if True:\n            fila = EV.ejecutar_tarea(",
+   "motivo": "ejecutar_tarea_e2 con el protector de la estable"
+  },
+  {
+   "id": "F1V45_P11_fuga_no_anotada",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "            res[\"abortada\"], res[\"valida\"] = f\"{type(e).__name__}: {e}\", False\n",
+   "despues": "",
+   "motivo": "no anotar la fuga en comparacion.json"
+  },
+  {
+   "id": "F1V45_P12_fuga_no_aborta",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "            raise EV.FugaDeOraculo(f\"texto del oráculo en un prompt: {fugas}\")",
+   "despues": "            pass",
+   "motivo": "una fuga no verificada no aborta"
+  },
+  {
+   "id": "F1V45_P13_el_prompt_como_procedencia",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "[] if estado[\"expuesto\"] else respuestas,",
+   "despues": "([] if estado[\"expuesto\"] else respuestas) + [{\"norm\": _norm(texto), \"sha256\": \"\"}],",
+   "motivo": "contar el propio prompt (no una respuesta del modelo) como procedencia"
+  },
+  {
+   "id": "F1V45_P14_g10_sin_procedencia",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "and real[\"rc\"] == 0 and procedencia[\"rc\"] == 0\n",
+   "despues": "and real[\"rc\"] == 0\n",
+   "motivo": "G10 sin las pruebas de procedencia"
+  },
+  {
+   "id": "F1V45_T01_freno_hw_termico_ignorado",
+   "archivo": "eq3/termica_v4_5.py",
+   "antes": "if lec.get(\"freno_hw_termico\"):",
+   "despues": "if False:",
+   "motivo": "ignorar el freno térmico de hardware"
+  },
+  {
+   "id": "F1V45_T02_freno_hw_ignorado",
+   "archivo": "eq3/termica_v4_5.py",
+   "antes": "elif lec.get(\"freno_hw\") or lec.get(\"freno_hw_potencia\"):",
+   "despues": "elif False:",
+   "motivo": "ignorar los frenos de hardware (incluido el de potencia)"
+  },
+  {
+   "id": "F1V45_T03_critica_alta",
+   "archivo": "eq3/termica_v4_5.py",
+   "antes": "T_CRITICA = 88 ",
+   "despues": "T_CRITICA = 95 ",
+   "motivo": "subir la temperatura crítica por encima del máximo"
+  },
+  {
+   "id": "F1V45_T04_freno_sw_sostenido_ignorado",
+   "archivo": "eq3/termica_v4_5.py",
+   "antes": "if t - self.freno_sw_desde >= MAX_FRENO_SW_S:",
+   "despues": "if False:",
+   "motivo": "permitir el freno de software indefinidamente"
+  },
+  {
+   "id": "F1V45_T05_sensor_ciego_ignorado",
+   "archivo": "eq3/termica_v4_5.py",
+   "antes": "if self.fallos >= MAX_FALLOS_LECTURA:",
+   "despues": "if False:",
+   "motivo": "seguir sin temperatura (supervisión ciega)"
+  },
+  {
+   "id": "F1V45_T06_hilo_muerto_ignorado",
+   "archivo": "eq3/termica_v4_5.py",
+   "antes": "if self._hilo is not None and not self._hilo.is_alive() and not self._fin.is_set():",
+   "despues": "if False:",
+   "motivo": "no detectar el hilo térmico muerto"
+  },
+  {
+   "id": "F1V45_T07_excepcion_silenciosa",
+   "archivo": "eq3/termica_v4_5.py",
+   "antes": "self.marcar_critico(f\"fallo_supervision_{type(e).__name__}\")",
+   "despues": "pass",
+   "motivo": "tragarse un fallo de lectura en el hilo"
+  },
+  {
+   "id": "F1V45_T08_reanuda_en_caliente",
+   "archivo": "eq3/termica_v4_5.py",
+   "antes": "if temp is not None and temp <= T_REANUDAR and not lec.get(\"freno_sw_termico\"):",
+   "despues": "if temp is not None:",
+   "motivo": "reanudar sin enfriar"
+  },
+  {
+   "id": "F1V45_T09_reanuda_con_freno_sw",
+   "archivo": "eq3/termica_v4_5.py",
+   "antes": "if temp is not None and temp <= T_REANUDAR and not lec.get(\"freno_sw_termico\"):",
+   "despues": "if temp is not None and temp <= T_REANUDAR:",
+   "motivo": "reanudar con el freno de software activo"
+  },
+  {
+   "id": "F1V45_T10_espera_maxima_ignorada",
+   "archivo": "eq3/termica_v4_5.py",
+   "antes": "                self.marcar_critico(f\"enfriamiento_no_alcanzado_{temp}C_en_{MAX_ENFRIAR_S}s\")\n                continue",
+   "despues": "                return {\"ok\": True, \"enfriamiento_s\": 0, \"temp_inicio_C\": inicio, \"temp_fin_C\": temp}",
+   "motivo": "seguir aunque no se enfríe en el tiempo máximo"
+  },
+  {
+   "id": "F1V45_T11_parar_sin_termica",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "        return self.excedida or self._termica()",
+   "despues": "        return self.excedida",
+   "motivo": "parar() no consulta la térmica (una generación larga la eludiría)"
+  },
+  {
+   "id": "F1V45_T12_sin_stop_e3",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "            for accion in list(self.acciones):                     # p. ej. el archivo STOP de una tarea E3\n                try:\n                    accion()",
+   "despues": "            for accion in list(self.acciones):                     # p. ej. el archivo STOP de una tarea E3\n                try:\n                    pass",
+   "motivo": "no crear el STOP de E3 ante la térmica"
+  },
+  {
+   "id": "F1V45_T13_sin_termica_no_falla_cerrado",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "m = _TERMICA.motivo_parada() if _TERMICA is not None else \"fallo_supervision_sin_vigilancia_termica\"",
+   "despues": "m = _TERMICA.motivo_parada() if _TERMICA is not None else None",
+   "motivo": "sin térmica, el vigía no corta"
+  },
+  {
+   "id": "F1V45_T14_no_enfria",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "        enf = termica.enfriar()\n",
+   "despues": "        enf = {\"ok\": True, \"enfriamiento_s\": 0.0, \"temp_fin_C\": None}\n",
+   "motivo": "no enfriar antes de la petición"
+  },
+  {
+   "id": "F1V45_T15_envia_sin_enfriar",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "        if not enf[\"ok\"]:\n",
+   "despues": "        if False:\n",
+   "motivo": "enviar la petición aunque no se haya enfriado"
+  },
+  {
+   "id": "F1V45_T16_protector_sin_termica",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "        if termica is None:\n            raise inferencia.ErrorInferencia(",
+   "despues": "        if False:\n            raise inferencia.ErrorInferencia(",
+   "motivo": "enviar sin vigilancia térmica"
+  },
+  {
+   "id": "F1V45_T17_corte_termico_no_aborta",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "    if motivo:\n        carpeta.mkdir(parents=True, exist_ok=True)",
+   "despues": "    if False:\n        carpeta.mkdir(parents=True, exist_ok=True)",
+   "motivo": "seguir evaluando tras un corte térmico"
+  },
+  {
+   "id": "F1V45_T18_tarea_sin_termica",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "    if _TERMICA is None:\n        raise EV.Abortada(",
+   "despues": "    if False:\n        raise EV.Abortada(",
+   "motivo": "ejecutar una tarea sin térmica activa"
+  },
+  {
+   "id": "F1V45_T19_pausas_ocultas",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "\"trabajo_s\": round(total - enf, 2)",
+   "despues": "\"trabajo_s\": round(total, 2)",
+   "motivo": "contar el enfriamiento como trabajo"
+  },
+  {
+   "id": "F1V45_T20_comparar_sin_vigia_termico",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "                             vigia_fn=lambda: VigiaTermica(act=actividad_vigia), guardar",
+   "despues": "                             vigia_fn=lambda: X.VigiaExp(act=actividad_vigia), guardar",
+   "motivo": "comparar sin el vigía térmico"
+  },
+  {
+   "id": "F1V45_T21_aborto_termico_no_anotado",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "        except (EV.FugaDeOraculo, EV.Abortada, KeyboardInterrupt) as e:",
+   "despues": "        except EV.FugaDeOraculo as e:",
+   "motivo": "no anotar un aborto térmico en comparacion.json"
+  },
+  {
+   "id": "F1V45_T22_termica_no_iniciada",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "    with termica_activa(termica.iniciar()), fondo_gestionado(",
+   "despues": "    with termica_activa(termica), fondo_gestionado(",
+   "motivo": "no poner en marcha el hilo térmico"
+  },
+  {
+   "id": "F1V45_T23_g10_sin_termica",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "\n            and termica[\"rc\"] == 0 and compartido",
+   "despues": "\n            and compartido",
+   "motivo": "G10 sin las pruebas térmicas"
+  },
+  {
+   "id": "F1V45_N01_externo_sin_tope",
+   "archivo": "eq3/termica_v4_5.py",
+   "antes": "        elif temp is not None and temp >= T_EXTERNA_MAX:",
+   "despues": "        elif False:",
+   "motivo": "un evento externo ≥ 92 °C no detiene"
+  },
+  {
+   "id": "F1V45_N02_incierto_como_externo",
+   "archivo": "eq3/termica_v4_5.py",
+   "antes": "        if o != \"externo\":",
+   "despues": "        if o == \"propio\":",
+   "motivo": "atribuir a terceros lo que no se puede saber"
+  },
+  {
+   "id": "F1V45_N03_excepcion_como_externo",
+   "archivo": "eq3/termica_v4_5.py",
+   "antes": "        except Exception:\n            p = None\n",
+   "despues": "        except Exception:\n            p = False\n",
+   "motivo": "si falla la comprobación, suponer reposo"
+  },
+  {
+   "id": "F1V45_N04_sin_reposo_externo",
+   "archivo": "eq3/termica_v4_5.py",
+   "antes": "        return self.ultimo_externo is None or self.reloj() - self.ultimo_externo >= REPOSO_EXTERNO_S",
+   "despues": "        return True",
+   "motivo": "reanudar justo después de una interferencia externa"
+  },
+  {
+   "id": "F1V45_N05_tarea_no_es_propia",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "    if _EN_TAREA:\n        return True\n",
+   "despues": "    if False:\n        return True\n",
+   "motivo": "no contar la tarea en curso como actividad propia"
+  },
+  {
+   "id": "F1V45_N06_sin_listar_es_reposo",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "    return None if llamas is None else bool(llamas)",
+   "despues": "    return False if llamas is None else bool(llamas)",
+   "motivo": "sin poder listar procesos, suponer reposo"
+  },
+  {
+   "id": "F1V45_N07_contador_no_sube",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "    _EN_TAREA += 1 ",
+   "despues": "    _EN_TAREA += 0 ",
+   "motivo": "la tarea no marca actividad propia"
+  },
+  {
+   "id": "F1V45_N08_contador_no_baja",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "        _EN_TAREA -= 1\n",
+   "despues": "        pass\n",
+   "motivo": "la actividad propia no se libera"
+  },
+  {
+   "id": "F1V45_N09_espera_de_1h",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "MAX_ESPERA_PERSONA_S = 4 * 3600 ",
+   "despues": "MAX_ESPERA_PERSONA_S = 1 * 3600 ",
+   "motivo": "volver a la espera máxima de 1 h"
+  },
+  {
+   "id": "F1V45_N10_stop_ignorado_en_espera",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "        if stop_global():\n            m = \"stop_global\"\n",
+   "despues": "        if False:\n            m = \"stop_global\"\n",
+   "motivo": "el STOP no corta una espera"
+  },
+  {
+   "id": "F1V45_N11_critico_ignorado_en_espera",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "        elif _TERMICA is not None and _TERMICA.motivo_parada():",
+   "despues": "        elif False:",
+   "motivo": "seguir esperando con la térmica crítica"
+  },
+  {
+   "id": "F1V45_N12_reposo_no_exigido",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "        if c[\"ok\"] and _TERMICA is not None and not _TERMICA.reposo_externo_ok():",
+   "despues": "        if False:",
+   "motivo": "reanudar sin reposo tras una interferencia externa"
+  },
+  {
+   "id": "F1V45_N13_pausas_no_registradas",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "    if pausas is not None and (esperado > 0 or not c[\"ok\"]):",
+   "despues": "    if False:",
+   "motivo": "no registrar las pausas"
+  },
+  {
+   "id": "F1V45_N14_vigia_sin_stop",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "        stop = stop_global()\n",
+   "despues": "        stop = False\n",
+   "motivo": "el STOP no corta la generación"
+  },
+  {
+   "id": "F1V45_N15_stop_no_aborta",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "    if es_stop_global(exc) or stop_global():",
+   "despues": "    if False:",
+   "motivo": "seguir evaluando tras el STOP"
+  },
+  {
+   "id": "F1V45_N16_espera_humana_oculta",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "\"espera_humana_s\": (fila.get(\"espera_previa\") or {}).get(\"esperado_s\"),",
+   "despues": "\"espera_humana_s\": None,",
+   "motivo": "no separar el tiempo de espera humana"
+  },
+  {
+   "id": "F1V45_N17_comparar_sin_v45",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "esperar=lambda: esperar_v45(fondo, pausas=res[\"pausas\"]),",
+   "despues": "esperar=lambda: esperar_v4(fondo),",
+   "motivo": "comparar con la espera de V4.4"
+  },
+  {
+   "id": "F1V45_N18_stop_no_limpiado",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "            _STOP_GLOBAL = None\n        res[\"fondo_animado\"]",
+   "despues": "            pass\n        res[\"fondo_animado\"]",
+   "motivo": "dejar el STOP global puesto tras comparar"
+  },
+  {
+   "id": "F1V45_N19_termica_sin_origen",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "    return TM.Termica(registro=registro, propio_activo=propio_activo)",
+   "despues": "    return TM.Termica(registro=registro)",
+   "motivo": "térmica sin atribución de origen"
+  },
+  {
+   "id": "F1V45_N21_fondo_detenido",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "ORDEN_FONDO = \"pause\" ",
+   "despues": "ORDEN_FONDO = \"stop\" ",
+   "motivo": "detener Wallpaper Engine en vez de pausarlo (decisión del usuario)"
+  },
+  {
+   "id": "F1V45_N20_g10_sin_compartido",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_5.py",
+   "antes": "and termica[\"rc\"] == 0 and compartido[\"rc\"] == 0}",
+   "despues": "and termica[\"rc\"] == 0}",
+   "motivo": "G10 sin las pruebas de PC compartido"
+  }
+ ]
+}

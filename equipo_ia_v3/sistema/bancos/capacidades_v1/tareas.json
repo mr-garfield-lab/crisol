@@ -1,0 +1,46 @@
+{
+ "banco": "capacidades_v1",
+ "version": 1,
+ "tareas": [
+  {
+   "id": "mediana",
+   "funcion": "mediana",
+   "instrucciones": "Implementa mediana(xs) en solucion.py: devuelve la mediana de una lista de números. Con longitud par, la media de los dos centrales. Con la lista vacía lanza ValueError. No modifiques la lista recibida. Ejemplo: mediana([3, 1, 2]) == 2"
+  },
+  {
+   "id": "dedup",
+   "funcion": "dedup",
+   "instrucciones": "Implementa dedup(xs) en solucion.py: devuelve una lista nueva sin duplicados que conserva el orden de la PRIMERA aparición de cada elemento. No modifiques la lista recibida. Ejemplo: dedup([1, 2, 1]) == [1, 2]"
+  },
+  {
+   "id": "balanceados",
+   "funcion": "balanceados",
+   "instrucciones": "Implementa balanceados(s) en solucion.py: True si los paréntesis (), corchetes [] y llaves {} de la cadena están balanceados y bien anidados; otros caracteres se ignoran. Ejemplo: balanceados('a(b)[c]') == True"
+  },
+  {
+   "id": "fusionar",
+   "funcion": "fusionar",
+   "instrucciones": "Implementa fusionar(intervalos) en solucion.py: recibe una lista de pares [inicio, fin] (no necesariamente ordenados) y devuelve la lista ordenada de intervalos fusionados; dos intervalos que se tocan ([1, 2] y [2, 3]) también se fusionan. Ejemplo: fusionar([[1, 3], [2, 6]]) == [[1, 6]]"
+  },
+  {
+   "id": "busqueda",
+   "funcion": "busqueda",
+   "instrucciones": "Implementa busqueda(xs, x) en solucion.py con búsqueda binaria: xs está ordenada de menor a mayor y sin repetidos; devuelve el índice de x o -1 si no está. Ejemplo: busqueda([1, 3, 5], 3) == 1"
+  },
+  {
+   "id": "rotar",
+   "funcion": "rotar",
+   "instrucciones": "Implementa rotar(xs, k) en solucion.py: devuelve una lista nueva con los elementos rotados k posiciones a la derecha; k puede ser mayor que la longitud o negativo (rota a la izquierda); con la lista vacía devuelve []. Ejemplo: rotar([1, 2, 3], 1) == [3, 1, 2]"
+  },
+  {
+   "id": "romano",
+   "funcion": "romano",
+   "instrucciones": "Implementa romano(s) en solucion.py: convierte un número romano válido en mayúsculas (I, V, X, L, C, D, M; con la notación sustractiva IV, IX, XL, XC, CD, CM) a entero. Ejemplo: romano('XIII') == 13"
+  },
+  {
+   "id": "contar",
+   "funcion": "contar",
+   "instrucciones": "Implementa contar(texto) en solucion.py: devuelve un diccionario {palabra: veces} sin distinguir mayúsculas (claves en minúsculas) e ignorando los signos . , ; : ! ? que rodean a las palabras. Ejemplo: contar('a b a') == {'a': 2, 'b': 1}"
+  }
+ ]
+}

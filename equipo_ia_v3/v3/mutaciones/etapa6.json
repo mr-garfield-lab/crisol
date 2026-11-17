@@ -1,0 +1,93 @@
+{
+ "descripcion": "Etapa 6: planificación de recursos del PC (estimaciones; nada se lanza)",
+ "orden": [
+  "{python}",
+  "-B",
+  "-m",
+  "unittest",
+  "discover",
+  "-s",
+  "pruebas",
+  "-t",
+  "pruebas",
+  "-p",
+  "test_eq3_perfiles.py"
+ ],
+ "copiar": [
+  "eq3",
+  "pruebas",
+  "contexto_ligero",
+  "complementos_codex",
+  "equipo3.py"
+ ],
+ "enlazar": [
+  "sistema"
+ ],
+ "limite_s": 300,
+ "mutaciones": [
+  {
+   "id": "M1_tope_del_coordinador_ignorado",
+   "archivo": "eq3/perfiles_pc.py",
+   "antes": "tope_vram = min(equipo.vram_mib - equipo.reserva_vram_mib, equipo.limite_coordinador_mib)",
+   "despues": "tope_vram = equipo.vram_mib - equipo.reserva_vram_mib",
+   "motivo": "superar el presupuesto de 6144 MiB del AI Lab Coordinator"
+  },
+  {
+   "id": "M2_reserva_de_vram_ignorada",
+   "archivo": "eq3/perfiles_pc.py",
+   "antes": "tope_vram = min(equipo.vram_mib - equipo.reserva_vram_mib,",
+   "despues": "tope_vram = min(equipo.vram_mib,",
+   "motivo": "no dejar VRAM al escritorio de Windows"
+  },
+  {
+   "id": "M3_servidor_expuesto_a_la_red",
+   "archivo": "eq3/perfiles_pc.py",
+   "antes": "\"--host\", \"127.0.0.1\"",
+   "despues": "\"--host\", \"0.0.0.0\"",
+   "motivo": "exponer llama-server fuera de la máquina"
+  },
+  {
+   "id": "M4_tres_turnos_simultaneos",
+   "archivo": "eq3/perfiles_pc.py",
+   "antes": "\"--parallel\", \"1\"]",
+   "despues": "\"--parallel\", \"3\"]",
+   "motivo": "suponer tres modelos o tres turnos a la vez"
+  },
+  {
+   "id": "M5_cache_kv_sin_contar",
+   "archivo": "eq3/perfiles_pc.py",
+   "antes": "pesos, kv = modelo.archivo_mib, kv_mib(modelo, ctx)",
+   "despues": "pesos, kv = modelo.archivo_mib, 0",
+   "motivo": "estimar la VRAM sin la caché KV"
+  },
+  {
+   "id": "M6_contexto_sin_validar",
+   "archivo": "eq3/perfiles_pc.py",
+   "antes": "    if ctx not in CTX_PC:",
+   "despues": "    if False:",
+   "motivo": "aceptar contextos no previstos"
+  },
+  {
+   "id": "M7_ruta_con_caracteres_de_control",
+   "archivo": "eq3/perfiles_pc.py",
+   "antes": "if any(c in str(ruta_modelo) for c in \"\\n\\r\\0\"):",
+   "despues": "if False:",
+   "motivo": "aceptar una ruta de modelo con saltos de línea"
+  },
+  {
+   "id": "M8_enlace_simbolico_como_modelo",
+   "archivo": "eq3/perfiles_pc.py",
+   "antes": "if p.suffix.lower() != \".gguf\" or not p.is_file() or es_enlace(p):",
+   "despues": "if p.suffix.lower() != \".gguf\" or not p.is_file():",
+   "motivo": "tomar un enlace simbólico por el archivo del modelo",
+   "requiere": "enlaces_a_archivos"
+  },
+  {
+   "id": "M9_equipo_mutable",
+   "archivo": "eq3/perfiles_pc.py",
+   "antes": "@dataclass(frozen=True)\nclass Equipo:",
+   "despues": "@dataclass\nclass Equipo:",
+   "motivo": "permitir modificar en ejecución el límite declarado"
+  }
+ ]
+}

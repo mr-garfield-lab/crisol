@@ -1,0 +1,20 @@
+{
+  "model_vocabulary": "GPT-2",
+  "library": "tokenizers==0.22.2",
+  "files": {
+    "tokenizer.json": {
+      "url": "https://huggingface.co/openai-community/gpt2/resolve/main/tokenizer.json",
+      "resolved_url": "https://huggingface.co/api/resolve-cache/models/openai-community/gpt2/607a30d783dfa663caf39e06633721c8d4cfcd7e/tokenizer.json?%2Fopenai-community%2Fgpt2%2Fresolve%2Fmain%2Ftokenizer.json=&etag=%224b988bccc9dc5adacd403c00b4704976196548f8%22",
+      "sha256": "8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6",
+      "bytes": 1355256
+    },
+    "LICENSE_GPT2.txt": {
+      "url": "https://raw.githubusercontent.com/openai/gpt-2/master/LICENSE",
+      "resolved_url": "https://raw.githubusercontent.com/openai/gpt-2/master/LICENSE",
+      "sha256": "0dbeda4bc78823b1d67ec0ee414d8690ee4cad826bc9c147b215adc3af202436",
+      "bytes": 1403
+    }
+  },
+  "scope": "conteo local exacto para este vocabulario; no consumo de Claude/Codex",
+  "project_data_uploaded": false
+}

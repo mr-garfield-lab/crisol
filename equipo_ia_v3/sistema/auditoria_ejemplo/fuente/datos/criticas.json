@@ -1,0 +1,88 @@
+[
+ {
+  "id": "EJ-C03",
+  "categoria": "falsa_con_cita_real",
+  "descripcion": "crítica falsa con una cita que SÍ existe",
+  "enunciado": "Escribe ordenar(xs) en Python; no debe modificar la lista de entrada.",
+  "propuesta": "Propuesta:\n```python\ndef ordenar(xs):\n    return sorted(xs)\n```\nFIN",
+  "revision": "OBJECION: muta la lista de entrada | EVIDENCIA: `sorted(xs)`",
+  "replica": "REBATIDA: sorted devuelve una lista nueva\n```python\ndef ordenar(xs):\n    return sorted(xs)\n```\nFIN",
+  "votos": {
+   "A1": "aprobar",
+   "A2": "aprobar",
+   "A3": "aprobar_con_cambios"
+  },
+  "verdad": {
+   "objeciones": [
+    false
+   ],
+   "objeciones_implicitas": 0,
+   "solucion_final_correcta": true,
+   "contradiccion_real": false
+  }
+ },
+ {
+  "id": "EJ-C05",
+  "categoria": "evidencia_inexistente",
+  "descripcion": "crítica falsa que cita un bucle que no existe",
+  "enunciado": "Escribe ordenar(xs) en Python; no debe modificar la lista de entrada.",
+  "propuesta": "Propuesta:\n```python\ndef ordenar(xs):\n    return sorted(xs)\n```\nFIN",
+  "revision": "OBJECION: usa el método burbuja | EVIDENCIA: `for i in range(len(xs))`",
+  "replica": "REBATIDA: no hay ningún bucle\n```python\ndef ordenar(xs):\n    return sorted(xs)\n```\nFIN",
+  "votos": {
+   "A1": "aprobar",
+   "A2": "aprobar",
+   "A3": "aprobar"
+  },
+  "verdad": {
+   "objeciones": [
+    false
+   ],
+   "objeciones_implicitas": 0,
+   "solucion_final_correcta": true,
+   "contradiccion_real": false
+  }
+ },
+ {
+  "id": "EJ-C10",
+  "categoria": "objecion_no_resuelta",
+  "descripcion": "A1 dice ACEPTADA pero deja el mismo código",
+  "enunciado": "Escribe ordenar(xs) en Python; no debe modificar la lista de entrada.",
+  "propuesta": "Propuesta:\n```python\ndef ordenar(xs):\n    xs.sort()\n    return xs\n```\nFIN",
+  "revision": "OBJECION: muta la lista | EVIDENCIA: `xs.sort()`",
+  "replica": "ACEPTADA: lo cambio\n```python\ndef ordenar(xs):\n    xs.sort()\n    return xs\n```\nFIN",
+  "votos": {
+   "A1": "aprobar",
+   "A2": "aprobar",
+   "A3": "aprobar"
+  },
+  "verdad": {
+   "objeciones": [
+    true
+   ],
+   "objeciones_implicitas": 0,
+   "solucion_final_correcta": false,
+   "contradiccion_real": true
+  }
+ },
+ {
+  "id": "EJ-C12",
+  "categoria": "consenso_incorrecto",
+  "descripcion": "código erróneo (invierte en vez de ordenar), nadie objeta",
+  "enunciado": "Escribe ordenar(xs) en Python; no debe modificar la lista de entrada.",
+  "propuesta": "Propuesta:\n```python\ndef ordenar(xs):\n    return xs[::-1]\n```\nFIN",
+  "revision": "SIN OBJECIONES: correcto",
+  "replica": "```python\ndef ordenar(xs):\n    return xs[::-1]\n```\nFIN",
+  "votos": {
+   "A1": "aprobar",
+   "A2": "aprobar",
+   "A3": "aprobar"
+  },
+  "verdad": {
+   "objeciones": [],
+   "objeciones_implicitas": 0,
+   "solucion_final_correcta": false,
+   "contradiccion_real": false
+  }
+ }
+]

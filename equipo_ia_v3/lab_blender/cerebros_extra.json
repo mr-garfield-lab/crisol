@@ -1,0 +1,12 @@
+{
+ "nota": "Cerebros SOLO del banco de Blender (no de F1 ni del banco de capacidad, cuyos registros están protegidos por la huella de sus preregistros). gemma12: autorizado por el usuario el 2026-11-15 («Tienes mi autorización»), elegido por ser más potente que 8B, de otra familia (Google) y caber casi entero en la tarjeta. Revisión de Hugging Face fijada; SHA-256 publicado por Hugging Face (LFS) y comprobado en local. «ngl»: capas en la GPU (el resto en la RAM), medido antes de usarlo.",
+ "modelos": {
+  "gemma12": {"archivo": "modelos/gemma-4-12B-it-qat-UD-Q4_K_XL.gguf",
+              "sha256": "90fd44e29e0d7cffeb0fd00dc73cfdab9ed0b0e95306ecf7821ea634c940c370", "bytes": 6716356800,
+              "familia": "gemma", "origen": "https://huggingface.co/unsloth/gemma-4-12B-it-qat-GGUF (revisión 980b060c40a8539ac159e0501a3e0f66a6365af3)",
+              "licencia": "Apache-2.0", "publicado": "2026-06", "ngl": 30,
+              "ngl_auto": {"capas": 48, "por_capa_MiB": 151, "fijo_MiB": 70, "margen_MiB": 350},
+              "tope_MiB": 7168, "tope_nota": "tope de VRAM durante la tarea subido un poco SOLO para gemma12 (6912 → 7168, +256 MiB) a petición del usuario el 2026-11-15; quedan ~1 GB de la tarjeta para Windows",
+              "medido": "2026-11-15, prueba de carga corta: 48 capas; con -ngl 30 ocupa 4570 MiB de GPU (pesos 4076 + KV q8_0 429 + cálculo 64); 1992 MiB ajenos + 4570 = 6562 < tope 6912. 4,1 tok/s con un juego abierto (sin medir con el PC libre). Con el PC libre (990 MiB ajenos, Wallpaper Engine cerrado) y -ngl 38: 5783 MiB de gemma (pesos 5057 + KV 540 + cálculo), total 6773 < tope 7168; 13,4 tok/s."}
+ }
+}

@@ -1,0 +1,213 @@
+{
+ "descripcion": "V3.1 F0.5: adaptadores de plataforma (entorno de procesos hijo, enlaces y uniones, lectura acotada, lanzador de V2-F.1)",
+ "orden": [
+  "{python}",
+  "-B",
+  "-m",
+  "unittest",
+  "discover",
+  "-s",
+  "pruebas",
+  "-t",
+  "pruebas",
+  "-p",
+  "test_eq3_plataforma.py"
+ ],
+ "copiar": [
+  "eq3",
+  "pruebas",
+  "equipo3.py",
+  "contexto_ligero"
+ ],
+ "enlazar": [
+  "sistema"
+ ],
+ "limite_s": 300,
+ "mutaciones": [
+  {
+   "id": "M1_union_no_es_enlace",
+   "archivo": "eq3/plataforma.py",
+   "antes": "    return stat.S_ISLNK(st.st_mode) or bool(getattr(st, \"st_file_attributes\", 0) & _REANALISIS)",
+   "despues": "    return stat.S_ISLNK(st.st_mode)",
+   "motivo": "tratar una unión de directorio de Windows como carpeta normal (escape del laboratorio)",
+   "requiere": "windows"
+  },
+  {
+   "id": "M2_carpeta_personal_real_en_windows",
+   "archivo": "eq3/plataforma.py",
+   "antes": "        e.update({\"USERPROFILE\": tmp, \"TEMP\": tmp, \"TMP\": tmp, \"APPDATA\": tmp, \"LOCALAPPDATA\": tmp})",
+   "despues": "        e.update({\"TEMP\": tmp, \"TMP\": tmp})",
+   "motivo": "dejar que `~` de un proceso hijo sea la carpeta real del usuario en Windows",
+   "requiere": "windows"
+  },
+  {
+   "id": "M3_sin_utf8_en_el_hijo",
+   "archivo": "eq3/plataforma.py",
+   "antes": "        e.update({\"PYTHONUTF8\": \"1\", \"PYTHONIOENCODING\": \"utf-8\"})",
+   "despues": "        pass",
+   "motivo": "volver a la codificación local del hijo (cp1252 en Windows): el defecto original de F0.5",
+   "requiere": "windows"
+  },
+  {
+   "id": "M4_flujos_alternativos_y_alias",
+   "archivo": "eq3/plataforma.py",
+   "antes": "    return parte not in (\"\", \".\") and \":\" not in parte and not parte.endswith((\".\", \" \"))",
+   "despues": "    return parte not in (\"\", \".\")",
+   "motivo": "aceptar «a.py:flujo» o «a.py.» (alias de otro archivo en Windows)"
+  },
+  {
+   "id": "M5_componente_enlazado_aceptado",
+   "archivo": "eq3/plataforma.py",
+   "antes": "    for parte in rel.parts:\n        actual = actual / parte\n        if es_enlace(actual):\n            raise ValueError(\"Ruta no permitida\")",
+   "despues": "    for parte in rel.parts:\n        actual = actual / parte",
+   "motivo": "leer a través de una carpeta enlazada hacia fuera del proyecto"
+  },
+  {
+   "id": "M6_archivo_sustituido_tras_comprobarlo",
+   "archivo": "eq3/plataforma.py",
+   "antes": "        if (info.st_ino, info.st_dev) != (previo.st_ino, previo.st_dev) or not stat.S_ISREG(info.st_mode):",
+   "despues": "        if not stat.S_ISREG(info.st_mode):",
+   "motivo": "no comprobar que se abre el mismo archivo que se validó (TOCTOU)"
+  },
+  {
+   "id": "M7_lanzador_sin_lf",
+   "archivo": "eq3/lanzador_eq2.py",
+   "antes": "        builtins.open = io.open = con_lf(io.open)        # `os.fdopen` y `Path.open` pasan por `io.open`",
+   "despues": "        pass",
+   "motivo": "V2-F.1 vuelve a escribir «\\r\\n» en Windows y sus SHA-256 declarados no coinciden",
+   "requiere": "windows"
+  },
+  {
+   "id": "M8_lanzador_con_la_ruta_de_eq3",
+   "archivo": "eq3/lanzador_eq2.py",
+   "antes": "        sys.path[0] = valor",
+   "despues": "        pass",
+   "motivo": "que eq3/plataforma.py o eq3/memoria.py tapen los módulos homónimos de eq2"
+  },
+  {
+   "id": "M12_hijos_sin_adaptar",
+   "archivo": "eq3/lanzador_eq2.py",
+   "antes": "        subprocess.Popen = PopenAdaptado",
+   "despues": "        pass",
+   "motivo": "los procesos hijo de V2-F.1 vuelven a cp1252 y «\\r\\n» (la causa de ~36 diferencias de F11)"
+  },
+  {
+   "id": "M13_lanzador_en_el_ejecutor_restringido",
+   "archivo": "eq3/lanzador_eq2.py",
+   "antes": "BANDERAS_SIMPLES = frozenset(\"bBdEIOPqRsuv\")",
+   "despues": "BANDERAS_SIMPLES = frozenset(\"bBdEIOPqRsSuv\")",
+   "motivo": "interponer el lanzador en el proceso `-I -S` del ejecutor restringido de V2-F.1 (SEG-01)"
+  },
+  {
+   "id": "M15_home_ignorada_en_windows",
+   "archivo": "eq3/lanzador_eq2.py",
+   "antes": "        os.path.expanduser = con_home(os.path.expanduser)",
+   "despues": "        pass",
+   "motivo": "`~` vuelve a ser USERPROFILE: V2-F.1 no encuentra su modelo de prueba y sus comprobaciones fallan",
+   "requiere": "windows"
+  },
+  {
+   "id": "M16_memoria_de_windows_sin_conectar",
+   "archivo": "eq3/lanzador_eq2.py",
+   "antes": "            builtins.open = io.open = con_proc(io.open)  # memoria REAL de Windows donde V2-F.1 lee /proc",
+   "despues": "            pass",
+   "motivo": "el monitor de V2-F.1 vuelve a quedarse ciego en Windows y aborta toda sesión",
+   "requiere": "windows"
+  },
+  {
+   "id": "M17_memoria_inventada_si_falla_la_medicion",
+   "archivo": "eq3/lanzador_eq2.py",
+   "antes": "                if kb is not None:",
+   "despues": "                if True:",
+   "motivo": "fabricar un /proc/meminfo aunque Windows no haya dado el dato (en vez de fallar cerrado)"
+  },
+  {
+   "id": "M18_contador_inventado",
+   "archivo": "eq3/lanzador_eq2.py",
+   "antes": "                        return io.StringIO(f\"VmHWM:\\t{v[1]} kB\\nVmRSS:\\t{v[0]} kB\\n\")",
+   "despues": "                        return io.StringIO(f\"VmHWM:\\t{v[1]} kB\\nVmRSS:\\t{v[0]} kB\\nRssAnon:\\t{v[0]} kB\\n\")",
+   "motivo": "inventar una medición que Windows no ofrece (RssAnon)"
+  },
+  {
+   "id": "M19_servidor_muerto_sin_conectar",
+   "archivo": "eq3/lanzador_eq2.py",
+   "antes": "        sys.meta_path.insert(0, BuscadorBackend())       # «servidor_muerto» cuando Windows corta la conexión",
+   "despues": "        pass",
+   "motivo": "V2-F.1 vuelve a informar «conexion_perdida» cuando el servidor muere a mitad de petición (V-SRV-12, V-UNI-23)",
+   "requiere": "windows"
+  },
+  {
+   "id": "M20_servidor_muerto_sin_evidencia",
+   "archivo": "eq3/lanzador_eq2.py",
+   "antes": "motivo.startswith(MOTIVO_CORTE) and terminado(self)):",
+   "despues": "motivo.startswith(MOTIVO_CORTE)):",
+   "motivo": "afirmar «servidor_muerto» sin comprobar que el proceso terminó (servidor vivo o estado desconocido)"
+  },
+  {
+   "id": "M21_servidor_vivo_dado_por_muerto",
+   "archivo": "eq3/lanzador_eq2.py",
+   "antes": "        except subprocess.TimeoutExpired:\n            return False\n        return proc.poll() is not None",
+   "despues": "        except subprocess.TimeoutExpired:\n            return True\n        return True",
+   "motivo": "dar por terminado un servidor que sigue vivo o sin código de salida"
+  },
+  {
+   "id": "M22_cualquier_motivo_es_servidor_muerto",
+   "archivo": "eq3/lanzador_eq2.py",
+   "antes": "isinstance(motivo, str) and motivo.startswith(MOTIVO_CORTE) and terminado(self)):",
+   "despues": "isinstance(motivo, str) and terminado(self)):",
+   "motivo": "convertir una parada pedida (STOP), un plazo agotado u otro fallo en «servidor_muerto»"
+  },
+  {
+   "id": "M23_servidor_muerto_no_fatal",
+   "archivo": "eq3/lanzador_eq2.py",
+   "antes": "            raise error(\"servidor_muerto\", fatal=True) from e",
+   "despues": "            raise error(\"servidor_muerto\", fatal=False) from e",
+   "motivo": "que la sesión siga usando un servidor muerto (el error deja de ser fatal)"
+  },
+  {
+   "id": "M14_ordenes_ajenas_adaptadas",
+   "archivo": "eq3/lanzador_eq2.py",
+   "antes": "or not _misma_ruta(orden[0], sys.executable):",
+   "despues": "or False:",
+   "motivo": "reescribir órdenes que no lanzan este intérprete (p. ej. llama-server)"
+  },
+  {
+   "id": "M9_firmas_con_barras_de_windows",
+   "archivo": "eq3/plataforma.py",
+   "antes": "    return re.sub(patron, lambda m: m.group(1)",
+   "despues": "    return texto or re.sub(patron, lambda m: m.group(1)",
+   "motivo": "firmas distintas en Windows y en Linux para el mismo fallo",
+   "requiere": "windows"
+  },
+  {
+   "id": "M10_contexto_ligero_sin_adaptar",
+   "archivo": "eq3/plataforma.py",
+   "antes": "    safety.read_bounded = leer_acotado",
+   "despues": "    pass",
+   "motivo": "Contexto Ligero no indexa nada en Windows (falla cerrado sin O_NOFOLLOW)",
+   "requiere": "windows"
+  },
+  {
+   "id": "M11_v2f1_sin_lanzador",
+   "archivo": "eq3/plataforma.py",
+   "antes": "    if WINDOWS:\n        return [sys.executable, \"-B\", \"-X\", \"utf8\", str(Path(__file__).with_name(\"lanzador_eq2.py\")), programa, *args]",
+   "despues": "    if False:\n        return []",
+   "motivo": "ejecutar V2-F.1 en Windows sin el lanzador",
+   "requiere": "windows"
+  },
+  {
+   "id": "F1L_01_dos_lanzadores_en_recursion",
+   "archivo": "eq3/lanzador_eq2.py",
+   "antes": "            if buscador is self or type(buscador).__name__ == \"BuscadorBackend\" or buscar is None:",
+   "despues": "            if buscador is self or isinstance(buscador, BuscadorBackend) or buscar is None:",
+   "motivo": "F1: dos copias del lanzador (original y espejo) se llaman entre sí al importar eq2.backend_llama"
+  },
+  {
+   "id": "F1L_02_envuelve_otra_copia_del_lanzador",
+   "archivo": "eq3/lanzador_eq2.py",
+   "antes": " or \\\n                    os.path.basename(a).lower() == os.path.basename(LANZADOR).lower():",
+   "despues": ":",
+   "motivo": "F1: envolver una orden que ya ejecuta otra copia del lanzador"
+  }
+ ]
+}

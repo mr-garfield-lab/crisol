@@ -1,0 +1,98 @@
+{
+ "descripcion": "Etapa 4: verificador de citas y calidad de la deliberación",
+ "orden": [
+  "{python}",
+  "-B",
+  "-m",
+  "unittest",
+  "discover",
+  "-s",
+  "pruebas",
+  "-t",
+  "pruebas",
+  "-p",
+  "test_eq3_citas.py"
+ ],
+ "copiar": [
+  "eq3",
+  "pruebas",
+  "equipo3.py",
+  "contexto_ligero"
+ ],
+ "enlazar": [
+  "sistema"
+ ],
+ "limite_s": 600,
+ "mutaciones": [
+  {
+   "id": "M1_lineas_fuera_de_rango_aceptadas",
+   "archivo": "eq3/citas.py",
+   "antes": "if not (1 <= ini <= fin <= len(lineas)):",
+   "despues": "if False:",
+   "motivo": "aceptar líneas que no existen (lo que los roles prohíben a A2)"
+  },
+  {
+   "id": "M2_texto_citado_sin_comprobar",
+   "archivo": "eq3/citas.py",
+   "antes": "if texto.strip() and texto.strip() not in tramo:",
+   "despues": "if False:",
+   "motivo": "aceptar código citado que no está en esas líneas"
+  },
+  {
+   "id": "M3_casos_sin_comprobar",
+   "archivo": "eq3/citas.py",
+   "antes": "ok = m.group(1) in casos",
+   "despues": "ok = True",
+   "motivo": "aceptar casos inventados"
+  },
+  {
+   "id": "M4_hechos_sin_comprobar",
+   "archivo": "eq3/citas.py",
+   "antes": "ok = f\"EV{m.group(1)}\" in HECHOS",
+   "despues": "ok = True",
+   "motivo": "aceptar hechos del controlador inexistentes"
+  },
+  {
+   "id": "M5_simbolos_sin_comprobar",
+   "archivo": "eq3/citas.py",
+   "antes": "ok = simbolo in simbolos(codigo)",
+   "despues": "ok = True",
+   "motivo": "aceptar símbolos que el archivo no define"
+  },
+  {
+   "id": "M6_version_visible_desplazada",
+   "archivo": "eq3/citas.py",
+   "antes": "visible = versiones.get(creadas)",
+   "despues": "visible = versiones.get(creadas + 1)",
+   "motivo": "contrastar cada paso con una versión que el agente no tenía delante"
+  },
+  {
+   "id": "M7_texto_alterado_analizado",
+   "archivo": "eq3/citas.py",
+   "antes": "if I.sha256_bytes(bruto) != a[\"sha256\"]:",
+   "despues": "if False:",
+   "motivo": "analizar como auténtico un texto de agente modificado"
+  },
+  {
+   "id": "M8_sin_base_como_verificada",
+   "archivo": "eq3/citas.py",
+   "antes": "estado, detalle = \"sin_base\", \"no hay versión de la solución a la que referirse\"",
+   "despues": "estado, detalle = \"verificada\", \"\"",
+   "motivo": "contar como verificada una cita sin nada con que contrastarla"
+  },
+  {
+   "id": "M9_cita_de_escape_ignorada",
+   "archivo": "eq3/citas.py",
+   "antes": "([./A-Za-z0-9_][A-Za-z0-9_./-]{0,200}\\.py)",
+   "despues": "([A-Za-z0-9_][A-Za-z0-9_./-]{0,200}\\.py)",
+   "motivo": "ignorar en silencio una cita con «../» o ruta absoluta"
+  },
+  {
+   "id": "M10_frases_cortadas_en_cada_punto",
+   "archivo": "eq3/citas.py",
+   "antes": "for frase in re.split(r\"[;\\n|]|\\.\\s+\", texto):",
+   "despues": "for frase in re.split(r\"(?<=[.;\\n|])\", texto):",
+   "motivo": "romper «x.py» al cortar frases y perder las citas de código"
+  }
+ ]
+}

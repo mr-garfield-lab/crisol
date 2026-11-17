@@ -1,0 +1,20 @@
+{
+  "created_utc": "2026-10-29T18:31:17.940006+00:00",
+  "ranking_outputs_consulted": false,
+  "files_sha256": {
+    "tasks.json": "2adc09e32ebd957a49faea7ce215b32873184971f14c8da404d5d1947c22fe72",
+    "tasks_independientes.json": "b4cecfb253905548c865f67b616d134d6dc1d9491b7b060d91e8509d222d0c17",
+    "tasks_v34_reales.json": "bfec2b6deb031e2cbd5b8a5b7c3cc7503b3fc71160646f679cef71c6c192bfdc",
+    "tasks_v34_flujos.json": "7cae97c6b75e5e7d6e75733999df2cca410b60f4b2c65e9e041e3ecfb55e67fb"
+  },
+  "synthetic_corpus_sha256": {
+    "NO_IMPORTAR.py": "70e73b2b2b36ea2efb5e62949870fe0310000d05c240e1ba906a848886c4ee22",
+    "envios.py": "1848380b9fe01cf90ad526fd7dc0a737b42341f6de58d3b26e86af9e6171999a",
+    "inventario.py": "21a4fb0c4432a52cb579b47275f45e29ef5c1c5b3d9380d9cbcccdfbd3a035fc",
+    "pedidos.py": "9f1fd116b7868ce0e88f64da9d778b414359916675fd4e8af693139eb80675eb",
+    "reembolsos.py": "3a46301d4fad57c86ed531d2a9b3b9a763b44dd19f28eb556f1742b3ffcb4d22",
+    "reservas.py": "9f4e03d3d9500974ec4dc539d15a548e0d2fbd9d6c85d4ed7c96807025a41ed4",
+    "sesiones.py": "cf11dd577b456e04866690f4bac583a24c7d6ec5a138d9f01e28a7ccbc9df51a"
+  },
+  "note": "No ajustar respuestas esperadas tras observar resultados; informar todos los casos y regresiones."
+}

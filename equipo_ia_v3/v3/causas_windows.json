@@ -1,0 +1,48 @@
+{
+ "plataforma": "windows",
+ "nota": "Causas de plataforma de Windows 11 (V3.1 F0.5, investigación final). Cada regla exige una firma concreta en la evidencia de CADA fallo de cada prueba: la traza del verificador de V2-F.1 o una evidencia MEDIDA por prueba (líneas *_MEDIDO, generadas por _experimentos/diag/evidencia_medida.py sin alterar nada). Lo que no tenga regla queda SIN_CLASIFICAR y bloquea; las reglas con «bloquea» documentan la causa de un fallo FUNCIONAL que no se acepta.",
+ "causas": {
+  "WIN_ENLACE_SIN_PRIVILEGIO": "INEVITABLE. La prueba crea un symlink con os.symlink; Windows sin modo de desarrollador ni administrador lo impide (WinError 1314). La prueba no llega a comprobar la defensa. Evidencia: WinError 1314 en el propio fallo.",
+  "WIN_ARCHIVO_ABIERTO": "INEVITABLE. La prueba (o su tearDown) borra un archivo que sigue abierto: el server.log del servidor falso o una base SQLite usada con «with sqlite3.connect(...)», que no cierra la conexión. Linux permite borrar archivos abiertos; Windows no (WinError 32). Evidencia: WinError 32 en el propio fallo.",
+  "WIN_TEMPORALES_ABIERTOS": "INEVITABLE, consecuencia de WIN_ARCHIVO_ABIERTO. V-PROC-02 cuenta carpetas temporales sin borrar; se MIDIÓ que todas contienen solo server.log, el archivo que Windows no dejó borrar.",
+  "WIN_SIN_MAJFLT": "INEVITABLE. V2-F.1 exige «majflt» (fallos de página mayores, /proc/<pid>/stat) como medición crítica de cada petición. Windows no ofrece un equivalente y el adaptador no lo inventa: V2-F.1 marca la respuesta «no concluyente» (resultado «completo_no_concluyente»), que es lo honesto. Evidencia: el desenlace literal más la medición por prueba de que majflt falta.",
+  "WIN_EJECUTOR_SIN_RESOURCE": "INEVITABLE y FALLO CERRADO CORRECTO. El ejecutor restringido de V2-F.1 (corredor_pruebas.py, `python -I -S`) importa el módulo POSIX `resource` para fijar límites de CPU y memoria; en Windows no existe y termina antes de ejecutar nada. MEDIDO por prueba: cada invocación devuelve rc=1 con ModuleNotFoundError: No module named 'resource'. El lanzador nunca se interpone (mutación M13). La ejecución real llegará con aislamiento real (F3).",
+  "WIN_SIGINT_PROPIO": "INEVITABLE. La prueba simula Ctrl+C o una orden de terminar con os.kill(os.getpid(), SIGINT|SIGTERM). En Windows os.kill con esas señales termina el proceso (TerminateProcess con código 2 o 15): la suite muere entera y se informa «0/N ejecutadas; rc=2|15». Medido aislando las pruebas test_ctrl_c_real_sigint (rc=2) y test_sigterm_real (rc=15).",
+  "WIN_SIN_SIGKILL": "INEVITABLE. Windows no tiene signal.SIGKILL ni un SIGTERM que el proceso pueda atender: Popen.terminate y Popen.kill son el mismo TerminateProcess, así que una parada «suave» nunca necesita la forzada, y el manejador de SIGTERM del servidor falso (cierre lento de 1,5 s) nunca llega a ejecutarse (el cierre tarda ~0,01 s). Evidencia: AttributeError SIGKILL, «SIGTERM_ok != SIGKILL_usado» o «… not greater than 1.0» en test_cierre_lento_dentro_de_la_gracia.",
+  "WIN_PLATAFORMA_DETECTADA": "INEVITABLE (aserción de Linux). La prueba afirma que corre en Linux o Termux, pero V2-F.1 detecta correctamente Windows (AdaptadorWindows/ProveedorWindows), o informa de que en Windows no puede listar procesos sin dependencias nuevas.",
+  "WIN_CANDADO_SIN_PID_VIVO": "INEVITABLE y FALLO CERRADO CORRECTO. En Windows V2-F.1 usa AdaptadorWindows, cuyo pid_vivo lanza NoSoportado: no puede saber si el proceso de un candado vive y, por diseño, nunca lo da por obsoleto (no sugiere borrarlo). Las pruebas esperan el comportamiento de Linux (/proc). MEDIDO con un experimento directo.",
+  "WIN_ZIP_BARRA": "INEVITABLE, sin pérdida de seguridad. En Windows (os.sep='\\') zipfile convierte «\\» en «/» al LEER los nombres, antes de que V2-F.1 los valide: «datos\\x.json» llega como «datos/x.json», que es un nombre válido. MEDIDO: los nombres peligrosos con «\\» («..\\», «\\etc», «C:\\», «..\\..\\Windows») SIGUEN rechazados.",
+  "WIN_RUTA_LARGA": "INEVITABLE. Windows no puede crear un proceso cuyo directorio de trabajo supera ~258 caracteres (WinError 267); las carpetas temporales anidadas del verificador de V2-F.1 lo superan.",
+  "WIN_CL_LECTURA_POSIX": "INEVITABLE en el módulo original. Contexto Ligero ORIGINAL exige dir_fd/O_NOFOLLOW y en Windows falla cerrado (no indexa nada). Demostrado prueba a prueba: repitiendo la suite con eq3.plataforma.leer_acotado (y escritura LF) la prueba vuelve al estado de Linux. En eq3 se usa el adaptador.",
+  "WIN_FUNCIONAL_CONEXION_RESET": "FALLO FUNCIONAL de V2-F.1 en Windows (NUNCA SE ACEPTA: si aparece, bloquea). Si el servidor muere a mitad de petición, Windows entrega ConnectionResetError (en Linux, fin de datos): V2-F.1 lo clasifica como «backend_conexion_perdida» en vez de «backend_servidor_muerto». CORREGIDO desde la ejecución 5 de F11 por el adaptador eq3.lanzador_eq2.con_servidor_muerto (solo Windows, solo con evidencia de que el proceso del servidor terminó; mutaciones M19–M23): esta causa ya no debe aparecer en ninguna prueba. La regla se conserva como centinela: si el adaptador dejara de funcionar, la diferencia volvería a bloquear en vez de pasar inadvertida.",
+  "WIN_AGREGADO_CUMPLIMIENTO": "AGREGADO. V-CUM-03 resume el estado de las demás comprobaciones (función pura de ellas, verificar.py). Solo se acepta si en su suite no queda NADA sin explicar ni bloqueante.",
+  "WIN_MEMORIA_REAL_CAMBIANTE": "INESTABILIDAD DECLARADA (X1, no es una causa de fallo aceptado). La prueba compara DOS lecturas sucesivas de la memoria disponible; en Windows el lanzador sirve la memoria REAL (GlobalMemoryStatusEx), que cambia entre dos lecturas. Medido (evidencias/v31_f1/x1): en reposo difieren el 1,7 % de los pares (máx. 4272 kB) y la prueba falla 3 de 40 veces; con carga de memoria, 37 de 40 (máx. 5256 kB en la prueba, 25920 kB en la API). Solo se aplica mediante la sección «inestables» (v3/linea_base.py: firma exacta, tolerancia y confirmación por repetición); nunca por las reglas."
+ },
+ "reglas": [
+  {"causa": "WIN_ENLACE_SIN_PRIVILEGIO", "patron": "WinError 1314"},
+  {"causa": "WIN_ARCHIVO_ABIERTO", "patron": "WinError 32\\]"},
+  {"causa": "WIN_TEMPORALES_ABIERTOS", "patron": "^TEMPORALES_MEDIDO:", "suites": ["verificador"]},
+  {"causa": "WIN_RUTA_LARGA", "patron": "WinError 267"},
+  {"causa": "WIN_EJECUTOR_SIN_RESOURCE", "patron": "^EJECUTOR_RESTRINGIDO_MEDIDO:", "suites": ["verificador"]},
+  {"causa": "WIN_CANDADO_SIN_PID_VIVO", "patron": "^CANDADO_MEDIDO:", "suites": ["verificador"]},
+  {"causa": "WIN_ZIP_BARRA", "patron": "(?s)CABECERA: FAIL \\(nombre='barra'\\).*^ZIP_BARRA_MEDIDO:", "suites": ["verificador"]},
+  {"causa": "OMITIDO_V2F1", "patron": "^eq2\\.paquetes_auditoria\\.PaqueteInvalido: no se puede leer el paquete: FileNotFoundError$", "suites": ["verificador"]},
+  {"causa": "WIN_FUNCIONAL_CONEXION_RESET", "patron": "backend_conexion_perdida:ConnectionResetError", "bloquea": true},
+  {"causa": "WIN_SIN_SIGKILL", "patron": "has no attribute 'SIGKILL'|'SIGTERM_ok' != 'SIGKILL_usado'"},
+  {"causa": "WIN_SIN_SIGKILL", "patron": "(?s)\\Atest_v2_servidor\\.TestCicloDeVida\\.test_cierre_lento_dentro_de_la_gracia\\n.*not greater than 1\\.0", "suites": ["verificador"]},
+  {"causa": "WIN_SIN_MAJFLT", "patron": "(?s)completo_no_concluyente.*^MAJFLT_AUSENTE_MEDIDO:", "suites": ["verificador"]},
+  {"causa": "WIN_SIGINT_PROPIO", "patron": "^0/\\d+ ejecutadas; rc=(2|15)$", "suites": ["verificador"]},
+  {"causa": "WIN_PLATAFORMA_DETECTADA", "patron": "is not an instance of <class 'eq2\\.plataforma\\.(AdaptadorTermux|ProveedorLinux)'>|'windows' != 'android_termux'|esta plataforma no permite listar procesos"},
+  {"causa": "WIN_CL_LECTURA_POSIX", "patron": "^CONTRAFACTUAL: EXPLICADA_POR_LECTURA_POSIX$", "suites": ["contexto"]},
+  {"causa": "WIN_AGREGADO_CUMPLIMIENTO", "patron": "^\\d+ FALLO, \\d+ OK.*\\(cumplimiento_resultado\\.md\\)$", "suites": ["verificador"], "solo_si_todo_explicado": true}
+ ],
+ "inestables": [
+  {"id": "INEST_WIN_MEM_DOS_LECTURAS", "suite": "verificador", "prueba": "V-CON-11",
+   "subprueba": "test_v2e5.TestAdaptadores.test_termux_y_linux_dan_lo_mismo_que_el_codigo_anterior",
+   "ubicacion": "test_v2e5.py\", line 375, in test_termux_y_linux_dan_lo_mismo_que_el_codigo_anterior",
+   "codigo": "self.assertEqual(a.mem_disponible_kb(), vigilancia.leer_mem_available())",
+   "patron": "AssertionError: (\\d+) != (\\d+)", "max_diferencia_kB": 32768, "repeticiones": 5, "minimo_ok": 3,
+   "causa": "WIN_MEMORIA_REAL_CAMBIANTE",
+   "evidencia": "X1: evidencias/v31_f1/x1/x1_caracterizacion_reposo.json y x1_caracterizacion_con_carga.json. Tolerancia 32 MiB: por encima del máximo medido con carga (25920 kB en la API) y muy por debajo de los errores reales plausibles (unidades ×1024, otro campo de memoria: GB)."}
+ ]
+}

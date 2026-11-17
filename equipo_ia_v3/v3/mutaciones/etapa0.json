@@ -1,0 +1,99 @@
+{
+ "descripcion": "Etapa 0: herramienta de línea base y puerta de regresión",
+ "orden": [
+  "{python}",
+  "-B",
+  "-m",
+  "unittest",
+  "discover",
+  "-s",
+  "v3/tests",
+  "-t",
+  "v3/tests"
+ ],
+ "copiar": [
+  "v3",
+  "sistema",
+  "eq3",
+  "pruebas",
+  "contexto_ligero",
+  "complementos_codex",
+  "docs",
+  "evidencias",
+  "equipo3.py",
+  "verificar_v3.py",
+  "PROGRESO.md",
+  "LEEME_V3.md"
+ ],
+ "enlazar": [],
+ "limite_s": 600,
+ "mutaciones": [
+  {
+   "id": "M1_firma_ignorada",
+   "archivo": "v3/linea_base.py",
+   "antes": " and real.get(\"firma\", \"\") == esperado.get(\"firma\", \"\")",
+   "despues": "",
+   "motivo": "un fallo conocido que falla por otra causa pasaría por IGUAL"
+  },
+  {
+   "id": "M2_error_como_ok",
+   "archivo": "v3/corredor_unittest.py",
+   "antes": "anotar(t, \"ERROR\", firma(e))\n\n        def addSkip",
+   "despues": "anotar(t, \"OK\")\n\n        def addSkip",
+   "motivo": "un ERROR se contaría como prueba aprobada"
+  },
+  {
+   "id": "M3_omitida_como_ok",
+   "archivo": "v3/linea_base.py",
+   "antes": "return \"IGUAL\" if real[\"estado\"] == \"OK\" else \"REGRESION\"",
+   "despues": "return \"IGUAL\" if real[\"estado\"] in (\"OK\", \"OMITIDA\") else \"REGRESION\"",
+   "motivo": "una prueba que pasa a OMITIDA ocultaría una regresión"
+  },
+  {
+   "id": "M4_ausente_ignorada",
+   "archivo": "v3/linea_base.py",
+   "antes": "totales[\"CAMBIO\"] or totales[\"AUSENTE\"]",
+   "despues": "totales[\"CAMBIO\"]",
+   "motivo": "una prueba que desaparece no haría fallar la puerta"
+  },
+  {
+   "id": "M5_sin_clasificar_aceptada",
+   "archivo": "v3/linea_base.py",
+   "antes": "if not causa or causa == SIN_CLASIFICAR:",
+   "despues": "if not causa:",
+   "motivo": "una línea base con fallos sin clasificar sería aceptada"
+  },
+  {
+   "id": "M6_firma_recortada_antes_de_normalizar",
+   "archivo": "v3/corredor_unittest.py",
+   "antes": "MAX_LINEA_CRUDA = 8000",
+   "despues": "MAX_LINEA_CRUDA = 240",
+   "motivo": "la firma dependería de la longitud de la carpeta de salida (falso CAMBIO o, peor, firmas que coinciden por recorte)"
+  },
+  {
+   "id": "M7_orden_arbitraria_admitida",
+   "archivo": "v3/mutacion.py",
+   "antes": "    if not isinstance(orden, list) or orden[:len(PREFIJO)] != PREFIJO:",
+   "despues": "    if not isinstance(orden, list):",
+   "motivo": "AUD-01: una especificación podría ejecutar cualquier orden"
+  },
+  {
+   "id": "M8_mutar_lo_enlazado",
+   "archivo": "v3/mutacion.py",
+   "antes": "        if destino.parts[0] not in copiar or destino.parts[0] in enlazar:",
+   "despues": "        if False:",
+   "motivo": "AUD-02: escribir a través del enlace en el sistema/ real"
+  },
+  {
+   "id": "M9_rutas_con_retroceso",
+   "archivo": "v3/mutacion.py",
+   "antes": "or \"..\" in Path(rel).parts:",
+   "despues": ":",
+   "motivo": "AUD-02: aceptar «..» en copiar, enlazar o el destino"
+  }
+ ],
+ "copiar_raiz": [
+  "ORIGENES_SHA256.json",
+  "AGENTS.md"
+ ]
+}

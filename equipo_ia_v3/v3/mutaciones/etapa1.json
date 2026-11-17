@@ -1,0 +1,111 @@
+{
+ "descripcion": "Etapa 1: traza unificada, ingesta segura y reconstrucción verificable",
+ "orden": [
+  "{python}",
+  "-B",
+  "-m",
+  "unittest",
+  "discover",
+  "-s",
+  "pruebas",
+  "-t",
+  "pruebas",
+  "-p",
+  "test_eq3_traza.py"
+ ],
+ "copiar": [
+  "eq3",
+  "pruebas",
+  "equipo3.py"
+ ],
+ "enlazar": [
+  "sistema"
+ ],
+ "limite_s": 600,
+ "mutaciones": [
+  {
+   "id": "M1_hash_declarado_no_verificado",
+   "archivo": "eq3/ingesta.py",
+   "antes": "    if sha256_bytes(b) != esperado:\n        raise ErrorIntegridad",
+   "despues": "    if False:\n        raise ErrorIntegridad",
+   "motivo": "aceptar archivos cuyo SHA-256 no coincide con el declarado"
+  },
+  {
+   "id": "M2_ruta_sin_confinar",
+   "archivo": "eq3/ingesta.py",
+   "antes": "if not p.parts or p.is_absolute() or \"..\" in p.parts or \"\\\\\" in rel:",
+   "despues": "if not p.parts:",
+   "motivo": "leer rutas absolutas o con «..» fuera del laboratorio"
+  },
+  {
+   "id": "M3_enlace_simbolico_aceptado",
+   "archivo": "eq3/ingesta.py",
+   "antes": "        if es_enlace(actual):\n            raise ErrorValidacion",
+   "despues": "        if False:\n            raise ErrorValidacion",
+   "motivo": "seguir enlaces simbólicos hacia fuera del laboratorio"
+  },
+  {
+   "id": "M4_transaccion_sin_rollback",
+   "archivo": "eq3/almacen.py",
+   "antes": "            self.con.execute(\"ROLLBACK\")\n            raise",
+   "despues": "            self.con.execute(\"COMMIT\")\n            raise",
+   "motivo": "un error o un STOP dejan filas parciales"
+  },
+  {
+   "id": "M5_verificar_sin_rehash",
+   "archivo": "eq3/reconstruccion.py",
+   "antes": "        if I.sha256_bytes(I.leer(lab, rel)) != esperado:",
+   "despues": "        if False:",
+   "motivo": "no detectar archivos de agentes o versiones modificados después"
+  },
+  {
+   "id": "M6_cadena_sin_comparar_contenido",
+   "archivo": "eq3/almacen.py",
+   "antes": "elif reales[k] != esperadas[k]:",
+   "despues": "elif False:",
+   "motivo": "no detectar filas alteradas quitando los disparadores"
+  },
+  {
+   "id": "M7_simulada_presentada_como_real",
+   "archivo": "eq3/ingesta.py",
+   "antes": "naturaleza = \"SIMULADA\" if inicio[\"backend\"].get(\"simulado\") is not False else \"REAL\"",
+   "despues": "naturaleza = \"REAL\"",
+   "motivo": "presentar una ejecución simulada como real"
+  },
+  {
+   "id": "M8_sin_disparadores_solo_anadir",
+   "archivo": "eq3/almacen.py",
+   "antes": "for op in (\"UPDATE\", \"DELETE\"):",
+   "despues": "for op in ():",
+   "motivo": "permitir modificar o borrar la traza"
+  },
+  {
+   "id": "M9_stop_ignorado",
+   "archivo": "eq3/ingesta.py",
+   "antes": "            raise Detenido(f\"STOP encontrado en {rel}\")",
+   "despues": "            pass",
+   "motivo": "ignorar el archivo STOP"
+  },
+  {
+   "id": "M10_verificado_sin_autorizacion",
+   "archivo": "eq3/reconstruccion.py",
+   "antes": "        problemas.append(\"R6: resultado «verificado» sin ninguna ejecución autorizada\")",
+   "despues": "        pass",
+   "motivo": "aceptar un resultado «verificado» sin ejecución autorizada"
+  },
+  {
+   "id": "M11_anidamiento_extremo_sin_control",
+   "archivo": "eq3/ingesta.py",
+   "antes": "except (ValueError, RecursionError) as e:",
+   "despues": "except ValueError as e:",
+   "motivo": "un JSON con anidamiento extremo rompería la ingesta con una traza en vez de rechazarse"
+  },
+  {
+   "id": "M12_base_danada_sin_control",
+   "archivo": "equipo3.py",
+   "antes": "except (I.ErrorIngesta, T.ErrorTraza, C.ErrorCambio, sqlite3.Error, ValueError) as e:",
+   "despues": "except (I.ErrorIngesta, T.ErrorTraza, C.ErrorCambio, ValueError) as e:",
+   "motivo": "una base de trazas dañada terminaría con una excepción sin controlar"
+  }
+ ]
+}

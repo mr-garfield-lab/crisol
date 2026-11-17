@@ -1,0 +1,22 @@
+{
+  "created_utc": "2026-10-29T22:09:23.841840+00:00",
+  "ranking_outputs_consulted_for_new_tasks": false,
+  "tasks_sha256": {
+    "tasks_v35_reales.json": "8fdd5ac403860a1a01b1299aee08ccd8cd310bb09621fe93875e72fa74fec5a5",
+    "tasks_v35_sinteticas.json": "b96f9ede388edf3a80ac6dd49aed43bc016a02d80e3df858e9e3cbf13b8da310"
+  },
+  "corpus_sha256": {
+    "NO_EXECUTE.py": "ac415ce0b22a06f85e58fc7d4562536a7305c864c7d427a77e65bc42b60bebdf",
+    "auth.py": "71e5d81719229c1db38be380aadfb999262d1038cd380503a00b4f5359fe0eb1",
+    "cache.py": "124c6a520c9c2a9d2e44add58062f4c63237a5b13a40ad61d54b39a2f72ee806",
+    "credits.py": "cdcbf20bf48b5cb7c303c57d5853889628a30526cbff4f702bfee9d2d1f3953a",
+    "customs.py": "68e7d87050247f56f5de6ebf05ba38a743d6fad6e8711e8ec0929de7b9331932",
+    "invoices.py": "16eb01ea38231cd0a78b72965cf74cdf437cf3a945f6dd752edce86b217c9248",
+    "paths.py": "3136a0b8fcd64fa18debcb840a806cb283f87fc414abb1ca6e7d0843168916dd",
+    "policy_config.py": "f3412479bd304d9e37ca817d73aa8983e0b9d08220751af0eba032e42e32a911",
+    "reports.py": "f421f6ba7d669ea88a2f2854a2eec1f376e8e14951a24392d2a4307705f960de",
+    "shipments.py": "df8d6a8ae734432d51c8408c06c2bc3e69e2a935b7b0a733c2daeac093acae55",
+    "warehouse.py": "0f5eb96d106348001c0446557cd37667cf1752261ddfebb1d7532e2efe44e0b5"
+  },
+  "note": "Oráculos fijos, resultados desfavorables permanecen visibles; si se ajusta tras observar, no llamar ciego a la reevaluación."
+}

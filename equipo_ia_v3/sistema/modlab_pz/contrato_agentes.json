@@ -1,0 +1,23 @@
+{
+  "version": "PZ-MODLAB-0.2",
+  "integracion": "adaptador_externo_sin_modificar_equipo_py",
+  "operaciones_permitidas": [
+    "inspeccionar_zip",
+    "simular_escenario",
+    "analizar_lua_estatico"
+  ],
+  "operaciones_no_permitidas": [
+    "ejecutar_lua_de_terceros",
+    "ejecutar_java",
+    "instalar_mod",
+    "modificar_nucleo",
+    "acceso_red"
+  ],
+  "agentes": {
+    "A1": "preparar escenario o caso de prueba",
+    "A2": "solicitar pruebas de lista blanca y registrar salida",
+    "A3": "auditar evidencias en solo lectura"
+  },
+  "salida": "directorio nuevo con resultado.json y MANIFIESTO_SHA256.txt",
+  "advertencia": "No certificar compatibilidad con juego real"
+}

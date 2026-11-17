@@ -1,0 +1,16 @@
+{
+  "origen": "registro PZ aportado anteriormente por el usuario",
+  "tipo": "desafio_diagnostico_estatico",
+  "real": "extractos de log",
+  "ejecucion_juego": false,
+  "contenido": "sin archivos del juego ni mods",
+  "archivos": {
+    "evidencias/01_fuentes.txt": "1f2d992bbb529811b3336d6d310e7a0a3cecc47fe249c83fe2cf7ab6863ddc38",
+    "evidencias/02_plantillas.txt": "4c6cf674b9a476cd9deae8a706cfdde239b67ee396f7c8e0c08716ac6b0318cd",
+    "evidencias/03_viewpoint.txt": "d9f1a57cd32171765ace4b556426267eb713e95661f22250baf86a0b9bfcf101",
+    "evidencias/04_inicio.txt": "44ee5e08cf417f0aff196ecd054b82efe95b4d0e41f4888a09863b5ec34f4511",
+    "README.md": "590de5efa1da0e1c008000633355f4f0b1aadc58ba6f4e41ce172366611d1b50",
+    "generar_reto.py": "56037258b3ba014f1e57d1cf48813a50f0c9e11d70096bf07a37c1311cae5940",
+    "CRITERIOS_EVALUACION.md": "979f423818221bbcb4bd2e11efe35809e1d8a7008181b43222d34048aff888f4"
+  }
+}

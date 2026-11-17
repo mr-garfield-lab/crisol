@@ -1,0 +1,19 @@
+{
+  "tasks_sha256": "b4cecfb253905548c865f67b616d134d6dc1d9491b7b060d91e8509d222d0c17",
+  "corpus_sha256": {
+    "src/commerce/café.py": "249d387b7fa53c86a8f0ac31c3d7f6fe5a806eac9580dd9094639683bfd40fc3",
+    "src/commerce/contracts.py": "629173b6aa76d492177a0a46d3532df7feef3f1f73cfd4eb887e63f773ad709b",
+    "src/commerce/dispatch.py": "f37efd24e586b26b6e41ec872bc82f18098ff84f025963b5dcc5e1caf1c12238",
+    "src/commerce/http_tools.py": "c8f1028ede6135627add19d0470f26eb52c481e5f728171f7d94ca080e5be0bf",
+    "src/commerce/invoice.py": "4f6f7c1b11952c5ebf6e5dc441b043a575f95545853b66ec3663c361989afb27",
+    "src/commerce/noise.py": "003351130e6e122016b0e2b81e80e84c120596b4f64609d97765bfee71d9e6e4",
+    "src/commerce/orders.py": "9eb9f008cef581c74de9b60ed510a3d23702869415961c9bf64063393027dc66",
+    "src/commerce/policy.py": "058d22428bc0aa6b997e7452d3fcad26691052c4ff9922c2db7b35ae0647e787",
+    "src/commerce/queue.py": "ab58132c8425c8e63c1b5d28b8c7bb16efdcd42434ef0d45be79a2c7520100db",
+    "src/commerce/readonly_guard.py": "70e12cecb538bfaa3336284bc63a99719a97f3d7ac730cc5c668faff6cd53dfb",
+    "src/commerce/receipt.py": "4a8c8ddc2a1c69e0b4ae10b633ddc16af1a234f28d8b8220473cb42b443b734f",
+    "tests/test_factura.py": "9cb8e785559d3f422aada00a1dcd9c066f09628d62d761ef2b507b6433a70df6"
+  },
+  "declared_before_rankings": true,
+  "purpose": "Conjunto sintetico complementario; no usado para ajustar ranking."
+}

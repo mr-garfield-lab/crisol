@@ -1,0 +1,15 @@
+{
+ "titulo": "Función mediana (demostración V2-F.1: A1 escribe, A2 revisa, A3 propone casos)",
+ "tipo": "funcion_supervisada",
+ "funcion": "mediana",
+ "instrucciones": "Escribe una función mediana(valores) que devuelva la mediana de una lista de números sin modificar la lista. Si la lista tiene un número par de elementos, devuelve la media de los dos centrales. Con una lista vacía debe lanzar ValueError. Ejemplo: mediana([3, 1, 2]) == 2",
+ "casos": [
+  "mediana([4, 1, 3, 2]) == 2.5",
+  "mediana([]) lanza ValueError"
+ ],
+ "propiedades": [
+  "no_muta_argumentos"
+ ],
+ "max_iteraciones": 2,
+ "notas": "Sin «id»: se puede importar varias veces (cada importación es una tarea LAB-NNN nueva)."
+}

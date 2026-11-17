@@ -1,0 +1,182 @@
+{
+ "descripcion": "V3.1 F1-VRAM-EXP-V4: E2, presupuesto verificado, persona ≠ GPU, fondo reversible",
+ "orden": [
+  "{python}",
+  "-B",
+  "-m",
+  "unittest",
+  "discover",
+  "-s",
+  "pruebas",
+  "-t",
+  "pruebas",
+  "-p",
+  "test_eq3_evaluar_f1_vram_exp_v4.py"
+ ],
+ "copiar": [
+  "pruebas",
+  "sistema",
+  "eq3",
+  "evaluacion_f1",
+  "lab_vram"
+ ],
+ "enlazar": [],
+ "copiar_raiz": [],
+ "limite_s": 600,
+ "mutaciones": [
+  {
+   "id": "F1V4_01_fit_por_defecto",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "E2 = [\"--fit\", \"off\", ",
+   "despues": "E2 = [",
+   "motivo": "volver a --fit on (descarga silenciosa)"
+  },
+  {
+   "id": "F1V4_02_margen_menor",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "MARGEN = 500 ",
+   "despues": "MARGEN = 200 ",
+   "motivo": "un margen menor que el verificado"
+  },
+  {
+   "id": "F1V4_03_pico_estimado",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "PICO_E2_MEDIDO = 4420 ",
+   "despues": "PICO_E2_MEDIDO = 4000 ",
+   "motivo": "usar un pico sin verificar"
+  },
+  {
+   "id": "F1V4_04_escritorio_cualquiera",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "        elif p[\"clase\"] not in ESCRITORIO:",
+   "despues": "        elif False:",
+   "motivo": "tratar una ventana a pantalla completa (vídeo) como escritorio"
+  },
+  {
+   "id": "F1V4_05_primer_plano_falla_abierto",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "            motivos.append(\"primer_plano_no_medible\")",
+   "despues": "            pass",
+   "motivo": "si no se puede ver el primer plano, suponer que no hay nadie"
+  },
+  {
+   "id": "F1V4_06_inactividad_falla_abierto",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "        motivos.append(\"inactividad_no_medible\")",
+   "despues": "        pass",
+   "motivo": "si no se puede medir la inactividad, suponer que no hay nadie"
+  },
+  {
+   "id": "F1V4_07_vram_ajena_sin_limite",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "    elif max(vram) > VRAM_OTRAS_MAX:",
+   "despues": "    elif max(vram) > 10**6:",
+   "motivo": "empezar con cualquier VRAM ajena"
+  },
+  {
+   "id": "F1V4_08_persona_ignorada",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "    return {\"ok\": not p[\"hay\"] and not recursos,",
+   "despues": "    return {\"ok\": not recursos,",
+   "motivo": "empezar aunque haya una persona"
+  },
+  {
+   "id": "F1V4_09_capas_cpu_aceptadas",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "    out[\"ok\"] = (bool(capas) and capas[-1][0] == capas[-1][1] and",
+   "despues": "    out[\"ok\"] = (bool(capas) and",
+   "motivo": "aceptar capas en la CPU (descarga silenciosa)"
+  },
+  {
+   "id": "F1V4_10_fit_aceptado",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "and not out[\"fit_ajusto\"])",
+   "despues": "and True)",
+   "motivo": "aceptar que --fit cambie la colocación"
+  },
+  {
+   "id": "F1V4_11_config_no_marca",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "        fila[\"infraestructura\"] = \"configuracion_llama_no_e2\"",
+   "despues": "        pass",
+   "motivo": "puntuar una tarea que no corrió con E2"
+  },
+  {
+   "id": "F1V4_12_sin_restaurar_al_salir",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "        if fondo is not None:\n            fondo.restaurar()",
+   "despues": "        if False:\n            fondo.restaurar()",
+   "motivo": "no devolver el fondo animado al terminar o ante un error"
+  },
+  {
+   "id": "F1V4_13_persona_sin_fondo",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "            if fondo is not None and fondo.c.estado != \"normal\":",
+   "despues": "            if False:",
+   "motivo": "no devolver el fondo animado cuando aparece una persona"
+  },
+  {
+   "id": "F1V4_14_fondo_no_detenido_aceptado",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "            if fondo is not None and not fondo.liberar():",
+   "despues": "            if fondo is not None and not (fondo.liberar() or True):",
+   "motivo": "empezar aunque el fondo animado no se haya detenido"
+  },
+  {
+   "id": "F1V4_15_e2_cambiado_sin_detectar",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": " or pre.get(\"llama_e2\") != E2:",
+   "despues": ":",
+   "motivo": "cambiar E2 sin que el prerregistro lo detecte"
+  },
+  {
+   "id": "F1V4_16_sin_guardian",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "        if self.guardian is None:\n            self.marca.parent",
+   "despues": "        if False:\n            self.marca.parent",
+   "motivo": "detener el fondo sin guardián independiente"
+  },
+  {
+   "id": "F1V4_17_guardian_fallido_aceptado",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "            if not self.guardian or self.guardian.get(\"rc\") != 0 or not self.guardian.get(\"pid\"):",
+   "despues": "            if False:",
+   "motivo": "detener el fondo aunque el guardián no arrancara"
+  },
+  {
+   "id": "F1V4_18_sin_marca_aceptado",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "        if self.marca is None:\n            self.anotar(",
+   "despues": "        if False:\n            self.anotar(",
+   "motivo": "detener el fondo sin marca (sin guardián posible)"
+  },
+  {
+   "id": "F1V4_19_marca_no_retirada",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "            self.marca.unlink(missing_ok=True)            # el guardián",
+   "despues": "            pass            # el guardián",
+   "motivo": "dejar la marca: el guardián reanudaría el fondo tarde o dos veces"
+  },
+  {
+   "id": "F1V4_20_sin_e2_no_aborta",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "    if sin_e2:",
+   "despues": "    if False:",
+   "motivo": "seguir evaluando aunque la tarea no corriera con E2"
+  },
+  {
+   "id": "F1V4_21_puertas_sueltas",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "    if pu.get(\"codigo\") != huella_codigo():",
+   "despues": "    if False:",
+   "motivo": "aceptar puertas pasadas con otro código o prerregistro"
+  },
+  {
+   "id": "F1V4_22_g10_sin_e2",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4.py",
+   "antes": "            and estatico[\"comparar_usa_e2_para_todas\"] and real",
+   "despues": "            and real",
+   "motivo": "dar por equivalentes configuraciones que no usan E2"
+  }
+ ]
+}

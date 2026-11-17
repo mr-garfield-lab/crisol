@@ -1,0 +1,14 @@
+# Lo mismo que excluye v3/empaquetar.py: nunca bases de datos, modelos ni paquetes en el historial.
+__pycache__/
+*.pyc
+*.db
+*.sqlite
+*.sqlite3
+*.gguf
+*.zip
+dist/
+
+# carpeta temporal de comprobar_todo.py
+.comprobar_tmp/
+# registro de modelos de cada usuario (rutas locales)
+equipo_ia_v3/perfiles/modelos_usuario.json

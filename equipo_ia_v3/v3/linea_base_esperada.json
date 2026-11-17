@@ -1,0 +1,1659 @@
+{
+ "version": 1,
+ "generada": "20261110T030609_274640Z",
+ "nota": "Línea base de la Etapa 0 (V2-F.1 sin cambios). Cada prueba no OK tiene causa explícita y revisada.",
+ "causas": {
+  "OMITIDO_V2F1": "Material de equipo_f2_v2f1.zip omitido al importar a GitHub (README_IMPORTACION.md, ORIGENES_SHA256.json): 61 archivos de evidencias_claude/, 8 evidencias del reto retos/zomboid_v1 y 2 ZIP (auditoria_ejemplo.zip, desafio_zomboid_v1.zip). Solo verificable con el ZIP original (SHA-256 11fc0837…).",
+  "OMITIDO_CODEX": "evaluador_anterior/ de EquipoIA.zip omitido al importar (31 archivos): falta el módulo evalua.",
+  "OMITIDO_CONTEXTO": "comparacion/ y referencia_original/ de CONTEXTO_LIGERO_V3_5_DESCARGA.zip omitidos al importar.",
+  "DEPENDENCIA_OPCIONAL_AUSENTE": "Biblioteca opcional `tokenizers` no instalada (instalar software no está autorizado); la prueba se omite por diseño.",
+  "REQUIERE_QWEN_REAL": "Requiere --qwen-real --iniciar-servidor-real con GGUF y llama-server en el dispositivo; no existen en este entorno.",
+  "SIN_ENTRADA_EXTERNA": "No hay paquetes de auditoría externos en auditoria/entrada (laboratorio limpio); se omite por diseño."
+ },
+ "suites": {
+  "verificador": {
+   "pruebas": {
+    "V-INT-01": {
+     "estado": "FALLO",
+     "firma": "71 archivos distintos o ausentes, 0 no declarados",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "faltan los 71 archivos declarados en MANIFIESTO_SHA256.txt"
+    },
+    "V-INT-02": {
+     "estado": "OK"
+    },
+    "V-INT-03": {
+     "estado": "FALLO",
+     "firma": "faltan: auditoria_ejemplo/auditoria_ejemplo.zip, retos/zomboid_v1/paquete_desafio/desafio_zomboid_v1.zip",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "faltan auditoria_ejemplo.zip y desafio_zomboid_v1.zip"
+    },
+    "V-INT-04": {
+     "estado": "OK"
+    },
+    "V-EST-01": {
+     "estado": "OK"
+    },
+    "V-EST-02": {
+     "estado": "OK"
+    },
+    "V-EST-03": {
+     "estado": "OK"
+    },
+    "V-EST-11": {
+     "estado": "OK"
+    },
+    "V-EST-12": {
+     "estado": "OK"
+    },
+    "V-EST-13": {
+     "estado": "OK"
+    },
+    "V-UNI-11": {
+     "estado": "OK"
+    },
+    "V-UNI-12": {
+     "estado": "OK"
+    },
+    "V-UNI-13": {
+     "estado": "OK"
+    },
+    "V-UNI-14": {
+     "estado": "OK"
+    },
+    "V-UNI-15": {
+     "estado": "OK"
+    },
+    "V-UNI-16": {
+     "estado": "OK"
+    },
+    "V-UNI-17": {
+     "estado": "OK"
+    },
+    "V-UNI-18": {
+     "estado": "OK"
+    },
+    "V-UNI-19": {
+     "estado": "OK"
+    },
+    "V-UNI-20": {
+     "estado": "OK"
+    },
+    "V-UNI-21": {
+     "estado": "OK"
+    },
+    "V-UNI-22": {
+     "estado": "OK"
+    },
+    "V-UNI-23": {
+     "estado": "OK"
+    },
+    "V-UNI-24": {
+     "estado": "OK"
+    },
+    "V-UNI-25": {
+     "estado": "OK"
+    },
+    "V-UNI-26": {
+     "estado": "OK"
+    },
+    "V-UNI-27": {
+     "estado": "OK"
+    },
+    "V-UNI-28": {
+     "estado": "OK"
+    },
+    "V-UNI-29": {
+     "estado": "OK"
+    },
+    "V-UNI-30": {
+     "estado": "OK"
+    },
+    "V-UNI-31": {
+     "estado": "OK"
+    },
+    "V-UNI-32": {
+     "estado": "OK"
+    },
+    "V-UNI-33": {
+     "estado": "OK"
+    },
+    "V-UNI-34": {
+     "estado": "OK"
+    },
+    "V-UNI-35": {
+     "estado": "OK"
+    },
+    "V-UNI-36": {
+     "estado": "OK"
+    },
+    "V-UNI-37": {
+     "estado": "OK"
+    },
+    "V-UNI-38": {
+     "estado": "OK"
+    },
+    "V-UNI-39": {
+     "estado": "OK"
+    },
+    "V-UNI-40": {
+     "estado": "OK"
+    },
+    "V-UNI-41": {
+     "estado": "OK"
+    },
+    "V-UNI-42": {
+     "estado": "OK"
+    },
+    "V-UNI-43": {
+     "estado": "OK"
+    },
+    "V-UNI-44": {
+     "estado": "OK"
+    },
+    "V-UNI-45": {
+     "estado": "OK"
+    },
+    "V-UNI-46": {
+     "estado": "OK"
+    },
+    "V-UNI-47": {
+     "estado": "OK"
+    },
+    "V-UNI-48": {
+     "estado": "OK"
+    },
+    "V-UNI-49": {
+     "estado": "OK"
+    },
+    "V-UNI-50": {
+     "estado": "OK"
+    },
+    "V-UNI-51": {
+     "estado": "OK"
+    },
+    "V-CTX-01": {
+     "estado": "OK"
+    },
+    "V-CTX-11": {
+     "estado": "OK"
+    },
+    "V-CTX-12": {
+     "estado": "OK"
+    },
+    "V-CTX-13": {
+     "estado": "OK"
+    },
+    "V-CTX-14": {
+     "estado": "OK"
+    },
+    "V-MOT-11": {
+     "estado": "OK"
+    },
+    "V-MOT-12": {
+     "estado": "OK"
+    },
+    "V-MOT-13": {
+     "estado": "OK"
+    },
+    "V-MOT-14": {
+     "estado": "OK"
+    },
+    "V-MOT-15": {
+     "estado": "OK"
+    },
+    "V-MOT-16": {
+     "estado": "OK"
+    },
+    "V-MOT-17": {
+     "estado": "OK"
+    },
+    "V-MOT-18": {
+     "estado": "OK"
+    },
+    "V-MOT-19": {
+     "estado": "OK"
+    },
+    "V-MOT-20": {
+     "estado": "OK"
+    },
+    "V-MOT-21": {
+     "estado": "OK"
+    },
+    "V-STOP-11": {
+     "estado": "OK"
+    },
+    "V-STOP-12": {
+     "estado": "OK"
+    },
+    "V-STOP-13": {
+     "estado": "OK"
+    },
+    "V-STOP-14": {
+     "estado": "OK"
+    },
+    "V-STOP-15": {
+     "estado": "OK"
+    },
+    "V-SRV-11": {
+     "estado": "OK"
+    },
+    "V-SRV-12": {
+     "estado": "OK"
+    },
+    "V-SRV-13": {
+     "estado": "OK"
+    },
+    "V-SRV-14": {
+     "estado": "OK"
+    },
+    "V-SRV-15": {
+     "estado": "OK"
+    },
+    "V-SRV-16": {
+     "estado": "OK"
+    },
+    "V-SRV-17": {
+     "estado": "OK"
+    },
+    "V-SRV-18": {
+     "estado": "OK"
+    },
+    "V-SRV-19": {
+     "estado": "OK"
+    },
+    "V-SRV-20": {
+     "estado": "OK"
+    },
+    "V-SRV-21": {
+     "estado": "OK"
+    },
+    "V-PROC-11": {
+     "estado": "OK"
+    },
+    "V-PROC-12": {
+     "estado": "OK"
+    },
+    "V-AGT-11": {
+     "estado": "OK"
+    },
+    "V-AGT-12": {
+     "estado": "OK"
+    },
+    "V-AGT-13": {
+     "estado": "OK"
+    },
+    "V-AGT-14": {
+     "estado": "OK"
+    },
+    "V-AGT-15": {
+     "estado": "OK"
+    },
+    "V-AGT-16": {
+     "estado": "OK"
+    },
+    "V-AGT-17": {
+     "estado": "OK"
+    },
+    "V-AGT-18": {
+     "estado": "OK"
+    },
+    "V-AGT-19": {
+     "estado": "OK"
+    },
+    "V-AGT-20": {
+     "estado": "OK"
+    },
+    "V-AGT-21": {
+     "estado": "OK"
+    },
+    "V-AGT-22": {
+     "estado": "OK"
+    },
+    "V-AGT-23": {
+     "estado": "OK"
+    },
+    "V-AGT-24": {
+     "estado": "OK"
+    },
+    "V-AGT-25": {
+     "estado": "OK"
+    },
+    "V-AGT-26": {
+     "estado": "OK"
+    },
+    "V-AGT-27": {
+     "estado": "OK"
+    },
+    "V-AGT-28": {
+     "estado": "OK"
+    },
+    "V-AGT-29": {
+     "estado": "OK"
+    },
+    "V-AGT-30": {
+     "estado": "OK"
+    },
+    "V-MEM-11": {
+     "estado": "OK"
+    },
+    "V-MEM-12": {
+     "estado": "OK"
+    },
+    "V-MEM-13": {
+     "estado": "OK"
+    },
+    "V-MEM-14": {
+     "estado": "OK"
+    },
+    "V-MEM-15": {
+     "estado": "OK"
+    },
+    "V-MEM-16": {
+     "estado": "OK"
+    },
+    "V-MEM-17": {
+     "estado": "OK"
+    },
+    "V-MEM-18": {
+     "estado": "OK"
+    },
+    "V-MEM-19": {
+     "estado": "OK"
+    },
+    "V-MEM-20": {
+     "estado": "OK"
+    },
+    "V-MEM-21": {
+     "estado": "OK"
+    },
+    "V-MEM-22": {
+     "estado": "OK"
+    },
+    "V-MEM-23": {
+     "estado": "OK"
+    },
+    "V-MEM-24": {
+     "estado": "OK"
+    },
+    "V-MEM-25": {
+     "estado": "OK"
+    },
+    "V-MEM-26": {
+     "estado": "OK"
+    },
+    "V-MEM-27": {
+     "estado": "OK"
+    },
+    "V-MEM-28": {
+     "estado": "OK"
+    },
+    "V-MEM-29": {
+     "estado": "OK"
+    },
+    "V-MEM-30": {
+     "estado": "OK"
+    },
+    "V-MEM-31": {
+     "estado": "OK"
+    },
+    "V-MEM-32": {
+     "estado": "OK"
+    },
+    "V-MEM-33": {
+     "estado": "OK"
+    },
+    "V-MEM-34": {
+     "estado": "OK"
+    },
+    "V-MEM-35": {
+     "estado": "OK"
+    },
+    "V-MEM-36": {
+     "estado": "OK"
+    },
+    "V-MEM-37": {
+     "estado": "OK"
+    },
+    "V-MEM-38": {
+     "estado": "OK"
+    },
+    "V-MEM-39": {
+     "estado": "OK"
+    },
+    "V-MEM-40": {
+     "estado": "OK"
+    },
+    "V-MEM-41": {
+     "estado": "OK"
+    },
+    "V-MEM-42": {
+     "estado": "OK"
+    },
+    "V-MEM-43": {
+     "estado": "OK"
+    },
+    "V-MEM-44": {
+     "estado": "OK"
+    },
+    "V-MEM-45": {
+     "estado": "OK"
+    },
+    "V-MEM-46": {
+     "estado": "OK"
+    },
+    "V-MEM-47": {
+     "estado": "OK"
+    },
+    "V-MEM-48": {
+     "estado": "OK"
+    },
+    "V-MEM-49": {
+     "estado": "OK"
+    },
+    "V-MEM-50": {
+     "estado": "OK"
+    },
+    "V-MEM-51": {
+     "estado": "OK"
+    },
+    "V-MEM-52": {
+     "estado": "OK"
+    },
+    "V-LAB-11": {
+     "estado": "OK"
+    },
+    "V-LAB-12": {
+     "estado": "OK"
+    },
+    "V-LAB-13": {
+     "estado": "OK"
+    },
+    "V-LAB-14": {
+     "estado": "OK"
+    },
+    "V-LAB-15": {
+     "estado": "OK"
+    },
+    "V-LAB-16": {
+     "estado": "OK"
+    },
+    "V-LAB-17": {
+     "estado": "OK"
+    },
+    "V-LAB-18": {
+     "estado": "OK"
+    },
+    "V-CRI-11": {
+     "estado": "OK"
+    },
+    "V-CRI-12": {
+     "estado": "OK"
+    },
+    "V-CRI-13": {
+     "estado": "OK"
+    },
+    "V-CRI-14": {
+     "estado": "OK"
+    },
+    "V-CRI-15": {
+     "estado": "OK"
+    },
+    "V-CRI-16": {
+     "estado": "OK"
+    },
+    "V-CRI-17": {
+     "estado": "OK"
+    },
+    "V-CON-11": {
+     "estado": "OK"
+    },
+    "V-CON-12": {
+     "estado": "OK"
+    },
+    "V-CON-13": {
+     "estado": "OK"
+    },
+    "V-CON-14": {
+     "estado": "OK"
+    },
+    "V-CON-15": {
+     "estado": "OK"
+    },
+    "V-CON-16": {
+     "estado": "OK"
+    },
+    "V-CON-17": {
+     "estado": "FALLO",
+     "firma": "7/7 ejecutadas; errors=1",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "test_v2e5r3: el paquete de ejemplo incluido es auditoria_ejemplo.zip"
+    },
+    "V-CON-18": {
+     "estado": "FALLO",
+     "firma": "4/4 ejecutadas; failures=1",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "test_verificador ejecuta V-CON-01 (auditoria_ejemplo.zip)"
+    },
+    "V-CON-19": {
+     "estado": "FALLO",
+     "firma": "6/6 ejecutadas; failures=2",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "test_verificador ejecuta V-INT-03 (ZIP omitidos)"
+    },
+    "V-CON-20": {
+     "estado": "FALLO",
+     "firma": "5/5 ejecutadas; failures=2",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "test_verificador ejecuta V-ZOM-01 y el cumplimiento (material omitido)"
+    },
+    "V-CON-01": {
+     "estado": "FALLO",
+     "firma": "error del verificador: PaqueteInvalido: no se puede leer el paquete: FileNotFoundError",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "falta auditoria_ejemplo/auditoria_ejemplo.zip"
+    },
+    "V-CON-02": {
+     "estado": "OMITIDA",
+     "firma": "no hay paquetes (<SALIDA>/tmp_verificador/equipo_f2/lab_v2f1/auditoria/entrada no existe)",
+     "causa": "SIN_ENTRADA_EXTERNA",
+     "detalle_causa": "auditoria/entrada no existe en un laboratorio limpio"
+    },
+    "V-CON-03": {
+     "estado": "FALLO",
+     "firma": "error del verificador: PaqueteInvalido: no se puede leer el paquete: FileNotFoundError",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "falta auditoria_ejemplo/auditoria_ejemplo.zip"
+    },
+    "V-APR-11": {
+     "estado": "OK"
+    },
+    "V-APR-12": {
+     "estado": "OK"
+    },
+    "V-APR-13": {
+     "estado": "OK"
+    },
+    "V-APR-14": {
+     "estado": "OK"
+    },
+    "V-APR-15": {
+     "estado": "OK"
+    },
+    "V-APR-16": {
+     "estado": "OK"
+    },
+    "V-APR-17": {
+     "estado": "OK"
+    },
+    "V-APR-18": {
+     "estado": "OK"
+    },
+    "V-APR-19": {
+     "estado": "OK"
+    },
+    "V-APR-20": {
+     "estado": "OK"
+    },
+    "V-APR-21": {
+     "estado": "OK"
+    },
+    "V-APR-22": {
+     "estado": "OK"
+    },
+    "V-APR-23": {
+     "estado": "OK"
+    },
+    "V-APR-24": {
+     "estado": "OK"
+    },
+    "V-APR-01": {
+     "estado": "OK"
+    },
+    "V-VAR-11": {
+     "estado": "FALLO",
+     "firma": "5/5 ejecutadas; errors=5",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "faltan retos/zomboid_v1/material_original/evidencias/*.txt (01_fuentes.txt…)"
+    },
+    "V-VAR-01": {
+     "estado": "FALLO",
+     "firma": "rc=1 (ver pruebas_variables.md)",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "faltan retos/zomboid_v1/material_original/evidencias/*.txt (01_fuentes.txt…)"
+    },
+    "V-ZOM-11": {
+     "estado": "FALLO",
+     "firma": "2/2 ejecutadas; failures=5, errors=1",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "faltan retos/zomboid_v1/material_original/evidencias/*.txt (01_fuentes.txt…)"
+    },
+    "V-ZOM-12": {
+     "estado": "FALLO",
+     "firma": "2/2 ejecutadas; errors=2",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "faltan retos/zomboid_v1/material_original/evidencias/*.txt (01_fuentes.txt…)"
+    },
+    "V-ZOM-13": {
+     "estado": "FALLO",
+     "firma": "3/3 ejecutadas; errors=3",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "faltan retos/zomboid_v1/material_original/evidencias/*.txt (01_fuentes.txt…)"
+    },
+    "V-ZOM-14": {
+     "estado": "FALLO",
+     "firma": "4/4 ejecutadas; errors=3",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "falta retos/zomboid_v1/paquete_desafio/desafio_zomboid_v1.zip"
+    },
+    "V-ZOM-15": {
+     "estado": "FALLO",
+     "firma": "0/6 ejecutadas; errors=1",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "faltan retos/zomboid_v1/material_original/evidencias/*.txt (01_fuentes.txt…)"
+    },
+    "V-ZOM-16": {
+     "estado": "FALLO",
+     "firma": "1/1 ejecutadas; errors=1",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "faltan retos/zomboid_v1/material_original/evidencias/*.txt (01_fuentes.txt…)"
+    },
+    "V-ZOM-17": {
+     "estado": "FALLO",
+     "firma": "4/4 ejecutadas; errors=4",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "faltan retos/zomboid_v1/material_original/evidencias/*.txt (01_fuentes.txt…)"
+    },
+    "V-ZOM-01": {
+     "estado": "FALLO",
+     "firma": "error del verificador: MaterialInvalido: no es un archivo normal: 01_fuentes.txt",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "faltan retos/zomboid_v1/material_original/evidencias/*.txt (01_fuentes.txt…)"
+    },
+    "V-CAP-11": {
+     "estado": "OK"
+    },
+    "V-CAP-12": {
+     "estado": "OK"
+    },
+    "V-CAP-13": {
+     "estado": "OK"
+    },
+    "V-CAP-14": {
+     "estado": "OK"
+    },
+    "V-CAP-15": {
+     "estado": "OK"
+    },
+    "V-CAP-16": {
+     "estado": "OK"
+    },
+    "V-CAP-17": {
+     "estado": "OK"
+    },
+    "V-CAP-18": {
+     "estado": "OK"
+    },
+    "V-CAP-19": {
+     "estado": "OK"
+    },
+    "V-CAP-20": {
+     "estado": "OK"
+    },
+    "V-CAP-21": {
+     "estado": "OK"
+    },
+    "V-CAP-22": {
+     "estado": "OK"
+    },
+    "V-CAP-23": {
+     "estado": "OK"
+    },
+    "V-CAP-24": {
+     "estado": "OK"
+    },
+    "V-CAP-25": {
+     "estado": "OK"
+    },
+    "V-CAP-26": {
+     "estado": "OK"
+    },
+    "V-CAP-27": {
+     "estado": "OK"
+    },
+    "V-CAP-28": {
+     "estado": "OK"
+    },
+    "V-BAN-11": {
+     "estado": "OK"
+    },
+    "V-BAN-12": {
+     "estado": "OK"
+    },
+    "V-BAN-13": {
+     "estado": "OK"
+    },
+    "V-BAN-14": {
+     "estado": "OK"
+    },
+    "V-BAN-01": {
+     "estado": "OK"
+    },
+    "V-FUN-11": {
+     "estado": "OK"
+    },
+    "V-FUN-12": {
+     "estado": "OK"
+    },
+    "V-FUN-13": {
+     "estado": "OK"
+    },
+    "V-FUN-14": {
+     "estado": "OK"
+    },
+    "V-FUN-15": {
+     "estado": "OK"
+    },
+    "V-FUN-16": {
+     "estado": "OK"
+    },
+    "V-FUN-17": {
+     "estado": "OK"
+    },
+    "V-FUN-18": {
+     "estado": "OK"
+    },
+    "V-FUN-19": {
+     "estado": "OK"
+    },
+    "V-FUN-20": {
+     "estado": "OK"
+    },
+    "V-FUN-21": {
+     "estado": "OK"
+    },
+    "V-FUN-22": {
+     "estado": "OK"
+    },
+    "V-FUN-01": {
+     "estado": "OK"
+    },
+    "V-REP-01": {
+     "estado": "OK"
+    },
+    "V-REP-02": {
+     "estado": "OK"
+    },
+    "V-REP-03": {
+     "estado": "OK"
+    },
+    "V-REP-04": {
+     "estado": "OK"
+    },
+    "V-DEMO-01": {
+     "estado": "OK"
+    },
+    "V-DEMO-02": {
+     "estado": "OK"
+    },
+    "V-DEMO-03": {
+     "estado": "FALLO",
+     "firma": "rc=1",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "faltan retos/zomboid_v1/material_original/evidencias/*.txt (01_fuentes.txt…)"
+    },
+    "V-DEMO-04": {
+     "estado": "FALLO",
+     "firma": "rc=1",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "faltan retos/zomboid_v1/material_original/evidencias/*.txt (01_fuentes.txt…)"
+    },
+    "V-DEMO-05": {
+     "estado": "FALLO",
+     "firma": "rc=1",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "faltan retos/zomboid_v1/material_original/evidencias/*.txt (01_fuentes.txt…)"
+    },
+    "V-DEMO-06": {
+     "estado": "FALLO",
+     "firma": "rc=1",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "faltan retos/zomboid_v1/material_original/evidencias/*.txt (01_fuentes.txt…)"
+    },
+    "V-DEMO-07": {
+     "estado": "OK"
+    },
+    "V-DEMO-08": {
+     "estado": "OK"
+    },
+    "V-DEMO-09": {
+     "estado": "OK"
+    },
+    "V-DEMO-10": {
+     "estado": "OK"
+    },
+    "V-DEMO-11": {
+     "estado": "OK"
+    },
+    "V-DEMO-12": {
+     "estado": "OK"
+    },
+    "V-DEMO-13": {
+     "estado": "OK"
+    },
+    "V-CUM-01": {
+     "estado": "FALLO",
+     "firma": "3 referencias rotas (ver traza)",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "3 referencias rotas: evidencias_claude/LEEME.md (2) y desafio_zomboid_v1.zip"
+    },
+    "V-CUM-02": {
+     "estado": "FALLO",
+     "firma": "r3: 112 nuevos, 35 cambiados, 1 quitados; v2e6: 75 nuevos, 44 cambiados, 10 quitados; v2e6r2: 70 nuevos, 43 cambiados, 10 quitados; v2e6r3: 65 nuevos, 41 cambiados, 10 quitados; v2e7: 56 nuevos, 43 cambiados, 10 quitados; v2e7r2: 38 nuevos, 46 cambiados, 11 quitados; v2e7r3: 33 nuevos, 43 cambiados, 11 quitados; v2f: 11 nuevos, 48 cambiados, 10 quitados; 56 sin documentar",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "8 rutas sin documentar, todas evidencias omitidas de zomboid_v1 (cuentan como «quitadas»)"
+    },
+    "V-CUM-03": {
+     "estado": "FALLO",
+     "firma": "19 FALLO, 49 OK, 1 OK PARCIAL (cumplimiento_resultado.md)",
+     "causa": "OMITIDO_V2F1",
+     "detalle_causa": "la tabla de cumplimiento hereda FALLO de las comprobaciones que fallan por material omitido"
+    },
+    "V-PROC-01": {
+     "estado": "OK"
+    },
+    "V-PROC-02": {
+     "estado": "OK"
+    },
+    "V-INT-05": {
+     "estado": "OK"
+    },
+    "V-QWEN-01": {
+     "estado": "NO_VERIFICADA",
+     "firma": "requiere --qwen-real y --iniciar-servidor-real (autorización explícita)",
+     "causa": "REQUIERE_QWEN_REAL",
+     "detalle_causa": "sin GGUF ni llama-server"
+    },
+    "V-QWEN-02": {
+     "estado": "NO_VERIFICADA",
+     "firma": "requiere --qwen-real y --iniciar-servidor-real (autorización explícita)",
+     "causa": "REQUIERE_QWEN_REAL",
+     "detalle_causa": "sin GGUF ni llama-server"
+    },
+    "V-QWEN-03": {
+     "estado": "NO_VERIFICADA",
+     "firma": "requiere --qwen-real y --iniciar-servidor-real (autorización explícita)",
+     "causa": "REQUIERE_QWEN_REAL",
+     "detalle_causa": "sin GGUF ni llama-server"
+    },
+    "V-QWEN-04": {
+     "estado": "NO_VERIFICADA",
+     "firma": "requiere --qwen-real y --iniciar-servidor-real (autorización explícita)",
+     "causa": "REQUIERE_QWEN_REAL",
+     "detalle_causa": "sin GGUF ni llama-server"
+    },
+    "V-QWEN-05": {
+     "estado": "NO_VERIFICADA",
+     "firma": "requiere --qwen-real y --iniciar-servidor-real (autorización explícita)",
+     "causa": "REQUIERE_QWEN_REAL",
+     "detalle_causa": "sin GGUF ni llama-server"
+    }
+   }
+  },
+  "codex": {
+   "pruebas": {
+    "test_complementos.Evaluacion.test_callback_solo_publicos_presupuesto_y_roles": {
+     "estado": "ERROR",
+     "firma": "ModuleNotFoundError: No module named 'evalua'",
+     "causa": "OMITIDO_CODEX",
+     "detalle_causa": "ModuleNotFoundError: evalua"
+    },
+    "test_complementos.Evaluacion.test_catalogo_oculto_y_casos_limite": {
+     "estado": "OK"
+    },
+    "test_complementos.Evaluacion.test_contexto_con_poco_espacio_elimina_fragmento": {
+     "estado": "OK"
+    },
+    "test_complementos.Evaluacion.test_contexto_final_v2f_no_recorta_recuerdos": {
+     "estado": "OK"
+    },
+    "test_complementos.Evaluacion.test_diagnostico_y_no_repeticion": {
+     "estado": "OK"
+    },
+    "test_complementos.Evaluacion.test_integridad_archivo_alterado": {
+     "estado": "OK"
+    },
+    "test_complementos.Evaluacion.test_publicos_no_llevan_oraculos": {
+     "estado": "OK"
+    },
+    "test_complementos.Herramientas.test_a3_no_puede_pedir_suite": {
+     "estado": "OK"
+    },
+    "test_complementos.Herramientas.test_permiso_string_no_autoriza": {
+     "estado": "OK"
+    },
+    "test_complementos.Herramientas.test_rechazo_no_modifica_registro_o_disco": {
+     "estado": "OK"
+    },
+    "test_complementos.Herramientas.test_reintento_con_mismo_codigo": {
+     "estado": "OK"
+    },
+    "test_complementos.Herramientas.test_revalidacion_en_despachador_real": {
+     "estado": "OK"
+    },
+    "test_complementos.Herramientas.test_rutas_hostiles": {
+     "estado": "OK"
+    },
+    "test_complementos.Herramientas.test_sin_autorizacion_no_prueba": {
+     "estado": "OK"
+    },
+    "test_complementos.MemoriaPura.test_aislamiento_y_duplicados": {
+     "estado": "OK"
+    },
+    "test_complementos.MemoriaPura.test_conflicto_ajeno_no_interrumpe_tarea": {
+     "estado": "OK"
+    },
+    "test_complementos.MemoriaPura.test_conflicto_numerico_mismo_ambito": {
+     "estado": "OK"
+    },
+    "test_complementos.MemoriaPura.test_contradiccion_ninguna_mayoria": {
+     "estado": "OK"
+    },
+    "test_complementos.MemoriaPura.test_entrada_no_se_modifica": {
+     "estado": "OK"
+    },
+    "test_complementos.MemoriaPura.test_estado_verificado_sin_prueba_no_entra": {
+     "estado": "OK"
+    },
+    "test_complementos.MemoriaPura.test_hash_falso_no_entra": {
+     "estado": "OK"
+    },
+    "test_complementos.MemoriaPura.test_hipotesis_no_desplaza_hecho": {
+     "estado": "OK"
+    },
+    "test_complementos.MemoriaPura.test_no_caducados_futuros_fechas_invalidas": {
+     "estado": "OK"
+    },
+    "test_complementos.MemoriaPura.test_presupuesto_no_corta_texto_ni_procedencia": {
+     "estado": "OK"
+    },
+    "test_complementos.MemoriaPura.test_prioriza_verificados": {
+     "estado": "OK"
+    },
+    "test_complementos.MemoriaPura.test_sustitucion_sin_escritura": {
+     "estado": "OK"
+    },
+    "test_complementos.MemoriaPura.test_tokenizer_explicito_y_limites": {
+     "estado": "OK"
+    },
+    "test_complementos.PuenteSQLite.test_consulta_y_rechazo_identidad_sin_escrituras": {
+     "estado": "OK"
+    },
+    "test_complementos.PuenteSQLite.test_feedback_no_es_prueba_ejecutable": {
+     "estado": "OK"
+    },
+    "test_complementos.PuenteSQLite.test_meta_incompatible_no_ddl": {
+     "estado": "OK"
+    },
+    "test_complementos.PuenteSQLite.test_proxy_interfaz_real": {
+     "estado": "OK"
+    },
+    "test_complementos.PuenteSQLite.test_prueba_real_declarativa_y_alteracion": {
+     "estado": "OK"
+    },
+    "test_complementos.PuenteSQLite.test_regex_de_evidencia_no_se_re_ejecuta": {
+     "estado": "OK"
+    },
+    "test_complementos.PuenteSQLite.test_regresion_hash_antes_despues": {
+     "estado": "OK"
+    },
+    "test_complementos.PuenteSQLite.test_sqlite_cerrada_falla_sin_inventar_resultado": {
+     "estado": "OK"
+    },
+    "test_complementos.PuenteSQLite.test_texto_manipulado_y_contaminacion": {
+     "estado": "OK"
+    },
+    "test_complementos.PuenteSQLite.test_transaccion_pendiente_rechazada": {
+     "estado": "OK"
+    }
+   }
+  },
+  "contexto": {
+   "pruebas": {
+    "test_benchmark_extra.ExtendedBenchmarkTests.test_corpus_manifest_detects_same_size_mtime_change": {
+     "estado": "OK"
+    },
+    "test_benchmark_extra.ExtendedBenchmarkTests.test_frozen_new_tasks_and_original_baseline_are_intact": {
+     "estado": "ERROR",
+     "firma": "FileNotFoundError: [Errno 2] No such file or directory: '<SALIDA>/copia_contexto/comparacion/v331/SHA256_BASELINE.json'",
+     "causa": "OMITIDO_CONTEXTO",
+     "detalle_causa": "falta comparacion/v331/SHA256_BASELINE.json"
+    },
+    "test_benchmark_extra.ExtendedBenchmarkTests.test_runner_preserves_optional_dependency_path": {
+     "estado": "OK"
+    },
+    "test_benchmark_extra.ExtendedBenchmarkTests.test_synthetic_oracles_validate_without_importing_project": {
+     "estado": "OK"
+    },
+    "test_budget_evidence_cli.BudgetPolicyTests.test_growth_requires_opt_in": {
+     "estado": "OK"
+    },
+    "test_budget_evidence_cli.BudgetPolicyTests.test_growth_respects_context_window_and_both_reservations": {
+     "estado": "OK"
+    },
+    "test_budget_evidence_cli.BudgetPolicyTests.test_invalid_initial_window_rejects_before_builder": {
+     "estado": "OK"
+    },
+    "test_budget_evidence_cli.BudgetPolicyTests.test_non_budget_failure_is_not_retried": {
+     "estado": "OK"
+    },
+    "test_budget_evidence_cli.BudgetPolicyTests.test_optional_omissions_stop_at_ceiling_and_remain_explicit": {
+     "estado": "OK"
+    },
+    "test_budget_evidence_cli.EvidenceAndCLITests.test_bundle_adaptive_required_evidence_grows_without_truncation": {
+     "estado": "OK"
+    },
+    "test_budget_evidence_cli.EvidenceAndCLITests.test_bundle_plain_text_warns_stale_sources_and_no_evidence": {
+     "estado": "OK"
+    },
+    "test_budget_evidence_cli.EvidenceAndCLITests.test_bundle_required_contains_full_code_not_only_metadata": {
+     "estado": "OK"
+    },
+    "test_budget_evidence_cli.EvidenceAndCLITests.test_cli_profiles_and_json_budget_match_text": {
+     "estado": "OK"
+    },
+    "test_budget_evidence_cli.EvidenceAndCLITests.test_cli_snapshot_refuses_overwrite_and_preserves_existing_bytes": {
+     "estado": "OK"
+    },
+    "test_budget_evidence_cli.EvidenceAndCLITests.test_delta_cli_roundtrip_and_wrong_base_rejection": {
+     "estado": "OK"
+    },
+    "test_budget_evidence_cli.EvidenceAndCLITests.test_delta_stdout_and_file_bytes_equal_reported_transport_size": {
+     "estado": "OK"
+    },
+    "test_budget_evidence_cli.EvidenceAndCLITests.test_join_inputs_applies_utf8_byte_limit_to_spanish_and_separator": {
+     "estado": "OK"
+    },
+    "test_budget_evidence_cli.EvidenceAndCLITests.test_join_inputs_stops_reading_later_files_at_accumulated_limit": {
+     "estado": "OK"
+    },
+    "test_budget_evidence_cli.EvidenceAndCLITests.test_required_over_200_lines_rejects_without_partial_code": {
+     "estado": "OK"
+    },
+    "test_budget_evidence_cli.EvidenceAndCLITests.test_test_evidence_is_candidate_not_execution": {
+     "estado": "OK"
+    },
+    "test_budget_evidence_cli.EvidenceAndCLITests.test_tokens_command_counts_exact_concatenation": {
+     "estado": "OK"
+    },
+    "test_context_output.ContextOutputTests.test_decorators_and_full_hash_in_snippet": {
+     "estado": "OK"
+    },
+    "test_context_output.ContextOutputTests.test_estimation_not_measurement": {
+     "estado": "OK"
+    },
+    "test_context_output.ContextOutputTests.test_exact_budget_with_many_omissions_and_stale_sources": {
+     "estado": "OK"
+    },
+    "test_context_output.ContextOutputTests.test_excerpt_enables_long_functions_without_silent_truncation": {
+     "estado": "OK"
+    },
+    "test_context_output.ContextOutputTests.test_fragment_rejects_budget_instead_of_truncating": {
+     "estado": "OK"
+    },
+    "test_context_output.ContextOutputTests.test_multiline_secrets_not_disclosed_even_partial_excerpt": {
+     "estado": "OK"
+    },
+    "test_context_output.ContextOutputTests.test_no_silent_query_truncation": {
+     "estado": "OK"
+    },
+    "test_context_output.ContextOutputTests.test_pem_and_bearer_multiline": {
+     "estado": "OK"
+    },
+    "test_context_output.ContextOutputTests.test_reader_limits_and_parent_traversal": {
+     "estado": "OK"
+    },
+    "test_context_output.ContextOutputTests.test_required_symbols_preserved_or_fail_explicitly": {
+     "estado": "OK"
+    },
+    "test_context_output.ContextOutputTests.test_resolved_dependency_in_packet": {
+     "estado": "OK"
+    },
+    "test_context_output.ContextOutputTests.test_symlink_changed_after_index_rejected": {
+     "estado": "OK"
+    },
+    "test_context_output.ContextOutputTests.test_task_decision_scope_and_redaction": {
+     "estado": "OK"
+    },
+    "test_data_support_v34.ImportedSupportTests.test_ambiguous_module_never_claims_complete": {
+     "estado": "OK"
+    },
+    "test_data_support_v34.ImportedSupportTests.test_bundle_merges_data_once_and_keeps_imported_callable_closure": {
+     "estado": "OK"
+    },
+    "test_data_support_v34.ImportedSupportTests.test_changed_or_symlinked_imported_file_rejected": {
+     "estado": "OK"
+    },
+    "test_data_support_v34.ImportedSupportTests.test_cyclic_reexport_is_not_claimed_complete": {
+     "estado": "OK"
+    },
+    "test_data_support_v34.ImportedSupportTests.test_imported_callable_reference_is_mandatory_without_executing_it": {
+     "estado": "OK"
+    },
+    "test_data_support_v34.ImportedSupportTests.test_imported_constant_keeps_transitive_values_without_unrelated_code": {
+     "estado": "OK"
+    },
+    "test_data_support_v34.ImportedSupportTests.test_limits_omit_whole_statements_and_report_depth": {
+     "estado": "OK"
+    },
+    "test_data_support_v34.ImportedSupportTests.test_module_attributes_from_shared_alias_do_not_lose_second_use": {
+     "estado": "OK"
+    },
+    "test_data_support_v34.ImportedSupportTests.test_mutated_and_conditional_bindings_are_explicitly_unresolved": {
+     "estado": "OK"
+    },
+    "test_data_support_v34.ImportedSupportTests.test_relative_reexport_chain": {
+     "estado": "OK"
+    },
+    "test_data_support_v34.ImportedSupportTests.test_required_imported_data_cannot_be_silently_dropped_for_budget": {
+     "estado": "OK"
+    },
+    "test_data_support_v34.ImportedSupportTests.test_secret_value_redacted_in_imported_file": {
+     "estado": "OK"
+    },
+    "test_data_support_v34.ImportedSupportTests.test_symlinked_imported_source_is_rejected": {
+     "estado": "OK"
+    },
+    "test_delta.DeltaTests.test_changed_map_roundtrips_exactly_and_json_overhead_is_counted": {
+     "estado": "OK"
+    },
+    "test_delta.DeltaTests.test_deterministic_snapshot_and_transport": {
+     "estado": "OK"
+    },
+    "test_delta.DeltaTests.test_different_origin_requires_full_context": {
+     "estado": "OK"
+    },
+    "test_delta.DeltaTests.test_full_fallback_when_patch_is_not_smaller": {
+     "estado": "OK"
+    },
+    "test_delta.DeltaTests.test_large_line_count_uses_bounded_diff_and_preserves_text": {
+     "estado": "OK"
+    },
+    "test_delta.DeltaTests.test_no_raw_query_or_hidden_metadata_is_added_to_snapshot": {
+     "estado": "OK"
+    },
+    "test_delta.DeltaTests.test_rejects_duplicate_overlap_out_of_range_and_noninteger_changes": {
+     "estado": "OK"
+    },
+    "test_delta.DeltaTests.test_rejects_missing_wrong_and_declared_mismatching_base": {
+     "estado": "OK"
+    },
+    "test_delta.DeltaTests.test_rejects_snapshot_and_patch_tampering": {
+     "estado": "OK"
+    },
+    "test_delta.DeltaTests.test_roundtrip_insert_delete_unicode_crlf_and_missing_final_newline": {
+     "estado": "OK"
+    },
+    "test_delta.DeltaTests.test_schema_rejects_unknown_fields_and_malformed_origin": {
+     "estado": "OK"
+    },
+    "test_delta.DeltaTests.test_seeded_edit_sequences_always_reconstruct_exact_text": {
+     "estado": "OK"
+    },
+    "test_delta.DeltaTests.test_unchanged_large_map_has_empty_patch": {
+     "estado": "OK"
+    },
+    "test_dependencies_v34.DependencyClosureTests.test_cycle_and_shared_callee_are_deduplicated_with_all_parent_edges": {
+     "estado": "OK"
+    },
+    "test_dependencies_v34.DependencyClosureTests.test_depth_limit_reports_exact_missing_destination": {
+     "estado": "OK"
+    },
+    "test_dependencies_v34.DependencyClosureTests.test_dynamic_receiver_is_reported_not_promoted_to_proven_dependency": {
+     "estado": "OK"
+    },
+    "test_dependencies_v34.DependencyClosureTests.test_external_import_and_reflective_builtin_are_explicit": {
+     "estado": "OK"
+    },
+    "test_dependencies_v34.DependencyClosureTests.test_import_alias_and_relative_import_follow_unique_targets": {
+     "estado": "OK"
+    },
+    "test_dependencies_v34.DependencyClosureTests.test_invalid_limits_and_seed_format_are_rejected": {
+     "estado": "OK"
+    },
+    "test_dependencies_v34.DependencyClosureTests.test_missing_or_ambiguous_seed_fails_instead_of_empty_complete": {
+     "estado": "OK"
+    },
+    "test_dependencies_v34.DependencyClosureTests.test_multiple_hops_and_builtin_are_not_silently_cut_at_four": {
+     "estado": "OK"
+    },
+    "test_dependencies_v34.DependencyClosureTests.test_node_limit_reports_omissions_without_discarding_seed": {
+     "estado": "OK"
+    },
+    "test_dependencies_v34.DependencyClosureTests.test_plan_is_deterministic_and_does_not_mutate_database": {
+     "estado": "OK"
+    },
+    "test_dependencies_v34.DependencyClosureTests.test_shadowed_builtin_and_duplicate_local_definition_are_not_assumed_safe": {
+     "estado": "OK"
+    },
+    "test_dependencies_v34.DependencyClosureTests.test_stale_graph_target_and_unknown_edge_kind_are_visible": {
+     "estado": "OK"
+    },
+    "test_evidence_v35.EvidenceV35Tests.test_changed_source_between_long_symbol_chunks_is_rejected": {
+     "estado": "OK"
+    },
+    "test_evidence_v35.EvidenceV35Tests.test_long_symbol_requires_opt_in_and_is_complete_or_rejected": {
+     "estado": "OK"
+    },
+    "test_evidence_v35.EvidenceV35Tests.test_ranges_are_lossless_and_keep_separate_gaps_and_fence_boundaries": {
+     "estado": "OK"
+    },
+    "test_evidence_v35.EvidenceV35Tests.test_required_full_function_fits_compact_budget_without_losing_lines": {
+     "estado": "OK"
+    },
+    "test_evidence_v35.EvidenceV35Tests.test_unusual_line_separator_keeps_numbered_positions": {
+     "estado": "OK"
+    },
+    "test_index.IndexTests.test_atomic_transaction_on_parse_failure": {
+     "estado": "OK"
+    },
+    "test_index.IndexTests.test_calls_are_searchable_and_nested_calls_are_not_borrowed": {
+     "estado": "OK"
+    },
+    "test_index.IndexTests.test_decorator_and_no_literal_or_syntax_error_content": {
+     "estado": "OK"
+    },
+    "test_index.IndexTests.test_duplicate_symbols_not_resolved": {
+     "estado": "OK"
+    },
+    "test_index.IndexTests.test_empty_and_malicious_fts_queries": {
+     "estado": "OK"
+    },
+    "test_index.IndexTests.test_fallback_and_fts_produce_same_search": {
+     "estado": "OK"
+    },
+    "test_index.IndexTests.test_full_hash_detects_same_size_mtime_edit": {
+     "estado": "OK"
+    },
+    "test_index.IndexTests.test_import_alias_graph_and_shadowing": {
+     "estado": "OK"
+    },
+    "test_index.IndexTests.test_imported_module_and_absolute_import": {
+     "estado": "OK"
+    },
+    "test_index.IndexTests.test_module_rebinding_does_not_claim_static_destination": {
+     "estado": "OK"
+    },
+    "test_index.IndexTests.test_old_schema_is_rejected_without_modifying_it": {
+     "estado": "OK"
+    },
+    "test_index.IndexTests.test_oversize_invalidates_old_metadata": {
+     "estado": "OK"
+    },
+    "test_index.IndexTests.test_symlink_parent_hidden_and_fifo_are_denied": {
+     "estado": "OK"
+    },
+    "test_informes.ReportTests.test_complete_measured_samples_are_aggregated_separately_from_estimates": {
+     "estado": "OK"
+    },
+    "test_informes.ReportTests.test_markdown_distinguishes_partial_version_measurement": {
+     "estado": "OK"
+    },
+    "test_informes.ReportTests.test_markdown_does_not_claim_measurement_when_none_exists": {
+     "estado": "OK"
+    },
+    "test_informes.ReportTests.test_markdown_shows_actual_repetitions_and_measured_counts": {
+     "estado": "OK"
+    },
+    "test_informes.ReportTests.test_one_missing_measurement_keeps_all_corresponding_aggregates_null": {
+     "estado": "OK"
+    },
+    "test_informes.ReportTests.test_zero_measured_tokens_is_valid_and_not_missing": {
+     "estado": "OK"
+    },
+    "test_integracion.TestAdaptador.test_contexto_requerido_no_cabe_rechaza_antes_de_backend": {
+     "estado": "OK"
+    },
+    "test_integracion.TestAdaptador.test_envuelve_datos_sin_modificar_sistema_y_respeta_reserva": {
+     "estado": "OK"
+    },
+    "test_integracion.TestAdaptador.test_motor_a_prompt_a_backend_simulado_y_hashes_de_turnos": {
+     "estado": "OK"
+    },
+    "test_integracion.TestAdaptador.test_no_crea_indice_implicitamente": {
+     "estado": "OK"
+    },
+    "test_integracion.TestAdaptador.test_paquete_no_cabe_se_omite_entero_no_recorta_datos_previos": {
+     "estado": "OK"
+    },
+    "test_integracion.TestGuardiaCTX.test_ausencia_y_frontera_de_tokens_no_se_inventan_ni_rechazan": {
+     "estado": "OK"
+    },
+    "test_integracion.TestGuardiaCTX.test_continuacion_usa_la_misma_guardia_y_debito_unico": {
+     "estado": "OK"
+    },
+    "test_integracion.TestGuardiaCTX.test_experimento_rechaza_pero_informa_respuesta_vacia": {
+     "estado": "ERROR",
+     "firma": "FileNotFoundError: [Errno 2] No such file or directory: '<SALIDA>/copia_contexto/referencia_original/laboratorio_ctx_experimental/src/eq2/orquestador.py'",
+     "causa": "OMITIDO_CONTEXTO",
+     "detalle_causa": "falta referencia_original/laboratorio_ctx_experimental"
+    },
+    "test_integracion.TestGuardiaCTX.test_guardia_rechaza_exceso_con_motivo_explicito_sin_votos": {
+     "estado": "OK"
+    },
+    "test_integracion.TestGuardiaCTX.test_original_registra_exceso_pero_acepta_respuesta": {
+     "estado": "OK"
+    },
+    "test_integracion.TestGuardiaCTX.test_stop_sigue_deteniendo_sesion": {
+     "estado": "OK"
+    },
+    "test_integracion.TestGuardiaCTX.test_tokens_invalidos_rechazados_sin_coercion": {
+     "estado": "OK"
+    },
+    "test_metrics_v34.MetricsV34Tests.test_abstention_does_not_score_perfect_precision_or_recall": {
+     "estado": "OK"
+    },
+    "test_metrics_v34.MetricsV34Tests.test_duplicate_symbols_cannot_inflate_hits": {
+     "estado": "OK"
+    },
+    "test_metrics_v34.MetricsV34Tests.test_historical_precision_at_5_has_exact_forty_percent_ceiling": {
+     "estado": "OK"
+    },
+    "test_metrics_v34.MetricsV34Tests.test_missing_dependency_reduces_recall_instead_of_disappearing_from_denominator": {
+     "estado": "OK"
+    },
+    "test_metrics_v34.MetricsV34Tests.test_new_oracles_reference_real_ast_symbols_without_importing_corpus": {
+     "estado": "ERROR",
+     "firma": "FileNotFoundError: [Errno 2] No such file or directory: '<SALIDA>/copia_contexto/referencia_original/equipo_ia_referencia/src/eq2/compresion.py'",
+     "causa": "OMITIDO_CONTEXTO",
+     "detalle_causa": "falta referencia_original/equipo_ia_referencia"
+    },
+    "test_metrics_v34.MetricsV34Tests.test_packet_precision_counts_all_added_symbols": {
+     "estado": "OK"
+    },
+    "test_metrics_v34.MetricsV34Tests.test_precision_returned_is_separate_from_unchanged_fixed_five_denominator": {
+     "estado": "OK"
+    },
+    "test_metrics_v34.MetricsV34Tests.test_prior_and_new_oracles_are_frozen": {
+     "estado": "ERROR",
+     "firma": "FileNotFoundError: [Errno 2] No such file or directory: '<SALIDA>/copia_contexto/comparacion/v331/SHA256_BASELINE.json'",
+     "causa": "OMITIDO_CONTEXTO",
+     "detalle_causa": "falta comparacion/v331/SHA256_BASELINE.json"
+    },
+    "test_packets_v34.PacketV34ReviewTests.test_auxiliary_test_requires_link_to_exact_target_not_homonymous_function": {
+     "estado": "OK"
+    },
+    "test_packets_v34.PacketV34ReviewTests.test_budget_does_not_silently_hide_static_dependencies": {
+     "estado": "OK"
+    },
+    "test_packets_v34.PacketV34ReviewTests.test_changed_file_cannot_satisfy_required_context": {
+     "estado": "OK"
+    },
+    "test_packets_v34.PacketV34ReviewTests.test_depth_limit_is_visible_and_strict_mode_refuses_it": {
+     "estado": "OK"
+    },
+    "test_packets_v34.PacketV34ReviewTests.test_different_hash_between_fragment_and_support_is_rejected": {
+     "estado": "OK"
+    },
+    "test_packets_v34.PacketV34ReviewTests.test_explicit_document_path_remains_available_without_python_symbols": {
+     "estado": "OK"
+    },
+    "test_packets_v34.PacketV34ReviewTests.test_explicit_requirement_keeps_its_closure_even_in_partial_bundle_mode": {
+     "estado": "OK"
+    },
+    "test_packets_v34.PacketV34ReviewTests.test_inferred_class_target_keeps_its_source_without_require": {
+     "estado": "OK"
+    },
+    "test_packets_v34.PacketV34ReviewTests.test_overlapping_class_and_method_are_emitted_once": {
+     "estado": "OK"
+    },
+    "test_packets_v34.PacketV34ReviewTests.test_packet_keeps_more_than_four_proven_dependencies": {
+     "estado": "OK"
+    },
+    "test_packets_v34.PacketV34ReviewTests.test_requested_test_is_evidence_even_when_extra_tests_are_disabled": {
+     "estado": "OK"
+    },
+    "test_packets_v34.PacketV34ReviewTests.test_required_bundle_preserves_calls_imports_and_transitive_constants": {
+     "estado": "OK"
+    },
+    "test_packets_v34.PacketV34ReviewTests.test_support_redacts_neutral_credential_value_before_merging": {
+     "estado": "OK"
+    },
+    "test_packets_v34.PacketV34ReviewTests.test_symlinked_parent_after_scan_is_rejected": {
+     "estado": "OK"
+    },
+    "test_packets_v34.PacketV34ReviewTests.test_unknown_query_is_explicitly_insufficient": {
+     "estado": "OK"
+    },
+    "test_real_tokenizer.RealTokenizerTests.test_estimate_does_not_masquerade_as_real_count": {
+     "estado": "OMITIDA",
+     "firma": "tokenizers no instalado; prueba real no ejecutada",
+     "causa": "DEPENDENCIA_OPCIONAL_AUSENTE",
+     "detalle_causa": "tokenizers no instalado"
+    },
+    "test_real_tokenizer.RealTokenizerTests.test_gpt2_known_ids_and_empty_text": {
+     "estado": "OMITIDA",
+     "firma": "tokenizers no instalado; prueba real no ejecutada",
+     "causa": "DEPENDENCIA_OPCIONAL_AUSENTE",
+     "detalle_causa": "tokenizers no instalado"
+    },
+    "test_real_tokenizer.RealTokenizerTests.test_real_json_truncation_and_padding_are_disabled": {
+     "estado": "OMITIDA",
+     "firma": "tokenizers no instalado; prueba real no ejecutada",
+     "causa": "DEPENDENCIA_OPCIONAL_AUSENTE",
+     "detalle_causa": "tokenizers no instalado"
+    },
+    "test_real_tokenizer.RealTokenizerTests.test_unicode_spanish_code_count_and_roundtrip": {
+     "estado": "OMITIDA",
+     "firma": "tokenizers no instalado; prueba real no ejecutada",
+     "causa": "DEPENDENCIA_OPCIONAL_AUSENTE",
+     "detalle_causa": "tokenizers no instalado"
+    },
+    "test_regresion.TestRegressionV33.test_dependency_cycle_rejection_keeps_previous_edges": {
+     "estado": "OK"
+    },
+    "test_regresion.TestRegressionV33.test_oversized_changed_file_cannot_produce_old_snippet": {
+     "estado": "OK"
+    },
+    "test_regresion.TestRegressionV33.test_packet_never_exceeds_budget_with_many_matches": {
+     "estado": "OK"
+    },
+    "test_regresion.TestRegressionV33.test_same_size_and_mtime_change_is_detected": {
+     "estado": "OK"
+    },
+    "test_regresion.TestRegressionV33.test_scan_does_not_execute_project": {
+     "estado": "OK"
+    },
+    "test_regresion.TestRegressionV33.test_symlink_directory_to_external_file_is_not_read": {
+     "estado": "OK"
+    },
+    "test_regresion.TestRegressionV33.test_unbounded_query_is_rejected_or_budgeted": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_accent_and_camel_case_search": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_ambiguous_same_operation_is_not_silently_treated_as_unique": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_boundaries_and_unknown_query": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_camelcase_entry_outside_named_module_remains_explicit": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_class_anchor_preserves_other_operations_and_unnamed_methods": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_class_and_explicit_function_requests_are_both_preserved": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_class_container_requires_class_intent": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_dependency_cycle_is_finite_and_keeps_each_symbol_once": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_duplicate_definitions_are_reported_as_ambiguous": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_exact_qualified_identifier_overrides_cross_module_noise": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_explicit_document_file_is_returned_without_invented_symbols": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_explicit_file_basename_ambiguity_preserves_all_matches": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_five_symbol_dependency_chain_precedes_lexical_fill": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_fts_fallback_preserves_selection_and_order": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_json_and_invalid_python_are_available_only_when_named": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_module_and_multiple_operations_select_specific_symbols": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_module_request_mentioning_tests_keeps_production_operations": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_multimodule_query_preserves_both_explicit_operations": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_named_module_without_query_operation_keeps_its_best_entrypoint": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_recall_pool_retains_nonselected_candidates": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_request_words_that_are_real_module_or_operation_names_are_preserved": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_retrieve_returns_direct_answers_and_dependencies_without_lexical_fill": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_scan_update_does_not_leave_stale_retrieval_state": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_static_dependencies_precede_unrelated_lexical_fill": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_test_request_does_not_get_production_results_as_direct_answers": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_uncertain_module_query_retains_explicit_recall_fallback": {
+     "estado": "OK"
+    },
+    "test_retrieval_v34.RetrievalV34Tests.test_unicode_camelcase_is_an_explicit_identifier": {
+     "estado": "OK"
+    },
+    "test_retrieval_v35.SelectionV35Tests.test_broad_module_only_request_does_not_drop_possible_operations": {
+     "estado": "OK"
+    },
+    "test_retrieval_v35.SelectionV35Tests.test_class_name_is_scope_when_matching_method_has_separate_operation": {
+     "estado": "OK"
+    },
+    "test_retrieval_v35.SelectionV35Tests.test_compound_and_separate_module_with_own_operation_are_both_retained": {
+     "estado": "OK"
+    },
+    "test_retrieval_v35.SelectionV35Tests.test_compound_module_is_not_split_into_unrequested_module_anchors": {
+     "estado": "OK"
+    },
+    "test_retrieval_v35.SelectionV35Tests.test_exact_function_name_survives_class_name_context": {
+     "estado": "OK"
+    },
+    "test_retrieval_v35.SelectionV35Tests.test_explicit_test_request_retains_related_negative_case": {
+     "estado": "OK"
+    },
+    "test_retrieval_v35.SelectionV35Tests.test_module_word_is_not_an_unrequested_operation_but_dependencies_survive": {
+     "estado": "OK"
+    },
+    "test_revision.RevisionIndependienteTests.test_crlf_and_cr_have_ast_compatible_line_numbers": {
+     "estado": "OK"
+    },
+    "test_revision.RevisionIndependienteTests.test_pep263_encoding_preserves_source": {
+     "estado": "OK"
+    },
+    "test_revision.RevisionIndependienteTests.test_sensitive_argument_default_hides_multiline_value": {
+     "estado": "OK"
+    },
+    "test_revision.RevisionIndependienteTests.test_subscript_sensitive_assignment_hides_multiline_value": {
+     "estado": "OK"
+    },
+    "test_revision.RevisionIndependienteTests.test_unicode_separator_does_not_shift_ast_line_numbers": {
+     "estado": "OK"
+    },
+    "test_support_v34.SupportContextTests.test_arguments_and_comprehension_locals_do_not_select_module_values": {
+     "estado": "OK"
+    },
+    "test_support_v34.SupportContextTests.test_changed_hash_and_symlink_rejected": {
+     "estado": "OK"
+    },
+    "test_support_v34.SupportContextTests.test_conditional_rebinding_retains_guard_and_warns": {
+     "estado": "OK"
+    },
+    "test_support_v34.SupportContextTests.test_defaults_decorator_and_forward_type_annotations_have_support": {
+     "estado": "OK"
+    },
+    "test_support_v34.SupportContextTests.test_descendant_and_class_annotations_retain_imports": {
+     "estado": "OK"
+    },
+    "test_support_v34.SupportContextTests.test_dynamic_module_namespace_read_or_write_is_explicit": {
+     "estado": "OK"
+    },
+    "test_support_v34.SupportContextTests.test_dynamic_namespace_and_wildcard_are_not_claimed_complete": {
+     "estado": "OK"
+    },
+    "test_support_v34.SupportContextTests.test_import_alias_and_transitive_constant_support_excludes_unrelated": {
+     "estado": "OK"
+    },
+    "test_support_v34.SupportContextTests.test_imported_module_attributes_need_local_import_only": {
+     "estado": "OK"
+    },
+    "test_support_v34.SupportContextTests.test_line_limit_omits_whole_statement_instead_of_truncation": {
+     "estado": "OK"
+    },
+    "test_support_v34.SupportContextTests.test_method_and_nested_global_references": {
+     "estado": "OK"
+    },
+    "test_support_v34.SupportContextTests.test_method_default_class_binding_is_not_replaced_with_module_binding": {
+     "estado": "OK"
+    },
+    "test_support_v34.SupportContextTests.test_module_rebindings_and_mutations_never_claim_initial_value_complete": {
+     "estado": "OK"
+    },
+    "test_support_v34.SupportContextTests.test_multiline_sensitive_constant_is_redacted_before_return": {
+     "estado": "OK"
+    },
+    "test_support_v34.SupportContextTests.test_nested_default_does_not_confuse_outer_argument_with_module_value": {
+     "estado": "OK"
+    },
+    "test_support_v34.SupportContextTests.test_pass_through_free_variable_requires_enclosing_scope": {
+     "estado": "OK"
+    },
+    "test_support_v34.SupportContextTests.test_pep263_and_unicode_line_numbers": {
+     "estado": "OK"
+    },
+    "test_support_v34.SupportContextTests.test_selected_nested_closure_is_explicitly_unresolved": {
+     "estado": "OK"
+    },
+    "test_support_v34.SupportContextTests.test_wildcard_can_replace_known_names_and_builtins": {
+     "estado": "OK"
+    },
+    "test_tokenizer_configuration.TokenizerConfigurationTests.test_json_configuration_cannot_truncate_or_pad_counted_text": {
+     "estado": "OK"
+    },
+    "unittest.loader._FailedTest.test_fast_index": {
+     "estado": "ERROR",
+     "firma": "ImportError: Failed to import test module: test_fast_index … FileNotFoundError: [Errno 2] No such file or directory: '<SALIDA>/copia_contexto/comparacion/v33_validado/contexto_core/index.py'",
+     "causa": "OMITIDO_CONTEXTO",
+     "detalle_causa": "el módulo carga comparacion/v33_validado al importarse"
+    }
+   }
+  }
+ }
+}

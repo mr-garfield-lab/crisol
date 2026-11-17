@@ -1,0 +1,19 @@
+{
+ "version": 2,
+ "fecha_utc": "2026-11-11T20:10:00Z",
+ "estado": "PRERREGISTRADO, NO EJECUTADO: pendiente de revisión con GPT-6",
+ "sha256": {
+  "evaluacion_f1/tareas_f1.json": "1a6dbbe03bf4b4c0fbd5afd8f475434507c65b4f416696f877609e598e68bebe",
+  "evaluacion_f1/oraculos_f1.json": "7cf35f6a77e6a5188d55f0e0ebc07d79cdd4dcd3ce09f3ccfabbdd3fceff31f4",
+  "evaluacion_f1/definicion.py": "cc5fcdca1c142c96f2379021e6206bb21bc46a27cfac54475d8d9a8c5f14cd6b",
+  "evaluacion_f1/prerregistrar.py": "b465d3470f5803988c2cad344d347ca621e18bf5b0208097c6fe5d0f01bacbd6",
+  "eq3/evaluacion_f1.py": "b9683f26601731136640396736e624f1340693238f32f93b6956e6b30cc3bde6",
+  "pruebas/test_eq3_evaluacion_f1.py": "78b791e9b656dc247f14d75a9d25709ba21a4ad3f9dea0f94fe08b68523afe91",
+  "v3/mutaciones/v31_f1_oraculos.json": "247625c4cc26bbfab084779574344171dcf6944b678660e578e5ff96c078f378",
+  "docs/V31_F1_PLAN_EVALUACION.md": "9831ce38f24c5107bc15cac2c836e78aaf26b533c3a3e0dd5dae67f6323f48a4",
+  "eq3/evaluar_f1.py": "e9674aababa42fddb1b83a18c6a75818a5d567e97628b6e84795c716cabdc483",
+  "pruebas/test_eq3_evaluar_f1.py": "4056c5ee23c57f23bc9e2f7cc873f5ae3232a4c45c9899079baad76266bd3eb9",
+  "pruebas/aux_evaluar_f1.py": "fc3ac76c0736ca8fc4bf9ce294c08890edaa3f5e9b3583a3f8ddf4afec621ea9",
+  "v3/mutaciones/v31_f1_ejecutor.json": "aa46553a3f0a50a840198424a6ca8873e202fac709f42c195b65b9fa3381704c"
+ }
+}

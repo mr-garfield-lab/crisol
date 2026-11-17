@@ -1,0 +1,146 @@
+{
+ "descripcion": "V3.1 F1-VRAM-EXP: tope 6912 MiB, VRAM ajena y estable, terceros, aborto total y separación",
+ "orden": [
+  "{python}",
+  "-B",
+  "-m",
+  "unittest",
+  "discover",
+  "-s",
+  "pruebas",
+  "-t",
+  "pruebas",
+  "-p",
+  "test_eq3_evaluar_f1_vram_exp.py"
+ ],
+ "copiar": [
+  "pruebas",
+  "sistema",
+  "eq3",
+  "evaluacion_f1"
+ ],
+ "enlazar": [],
+ "copiar_raiz": [],
+ "limite_s": 900,
+ "mutaciones": [
+  {
+   "id": "F1X_01_tope_mas_alto",
+   "archivo": "eq3/evaluar_f1_vram_exp.py",
+   "antes": "VRAM_TOPE_EXP = 6912\n",
+   "despues": "VRAM_TOPE_EXP = 7168\n",
+   "motivo": "subir el tope más allá de lo autorizado"
+  },
+  {
+   "id": "F1X_02_vigia_sin_tope",
+   "archivo": "eq3/evaluar_f1_vram_exp.py",
+   "antes": "super().__init__(medir=medir, intervalo=intervalo, tope=tope)",
+   "despues": "super().__init__(medir=medir, intervalo=intervalo, tope=10**6)",
+   "motivo": "el vigía experimental no corta por VRAM"
+  },
+  {
+   "id": "F1X_03_terceros_ignorados",
+   "archivo": "eq3/evaluar_f1_vram_exp.py",
+   "antes": "        if motivos and self.excedida is None:",
+   "despues": "        if False:",
+   "motivo": "no detener la tarea si aparece actividad de terceros"
+  },
+  {
+   "id": "F1X_04_entrada_durante_tarea",
+   "archivo": "eq3/evaluar_f1_vram_exp.py",
+   "antes": "a[\"inactividad_s\"] < self.reloj() - self.t0",
+   "despues": "a[\"inactividad_s\"] < 0",
+   "motivo": "no detectar teclado o ratón a mitad de una tarea"
+  },
+  {
+   "id": "F1X_05_sesiones_falla_abierto",
+   "archivo": "eq3/evaluar_f1_vram_exp.py",
+   "antes": "        motivos.append(\"sesiones_no_medibles\")",
+   "despues": "        pass",
+   "motivo": "si no se pueden medir las sesiones, suponer que no hay nadie"
+  },
+  {
+   "id": "F1X_06_otra_sesion_ignorada",
+   "archivo": "eq3/evaluar_f1_vram_exp.py",
+   "antes": "        if s[\"activas_ajenas\"]:",
+   "despues": "        if False:",
+   "motivo": "ignorar otra sesión de Windows activa"
+  },
+  {
+   "id": "F1X_07_pantalla_completa_ignorada",
+   "archivo": "eq3/evaluar_f1_vram_exp.py",
+   "antes": "    elif n in NOTIFICACION_OCUPADA:",
+   "despues": "    elif False:",
+   "motivo": "ignorar un juego o una aplicación a pantalla completa"
+  },
+  {
+   "id": "F1X_08_sin_inactividad_minima",
+   "archivo": "eq3/evaluar_f1_vram_exp.py",
+   "antes": "    if inact and min(inact) < inactividad_min:",
+   "despues": "    if False:",
+   "motivo": "empezar aunque alguien acabe de usar el teclado o el ratón"
+  },
+  {
+   "id": "F1X_09_vram_ajena_sin_limite",
+   "archivo": "eq3/evaluar_f1_vram_exp.py",
+   "antes": "    elif max(vram) > VRAM_OTRAS_MAX_EXP:",
+   "despues": "    elif max(vram) > 10**6:",
+   "motivo": "empezar con cualquier VRAM de otras aplicaciones"
+  },
+  {
+   "id": "F1X_10_vram_inestable_aceptada",
+   "archivo": "eq3/evaluar_f1_vram_exp.py",
+   "antes": "    elif max(vram) - min(vram) > VARIACION_OTRAS_MAX:",
+   "despues": "    elif False:",
+   "motivo": "empezar con consumo de GPU inestable"
+  },
+  {
+   "id": "F1X_11_uso_gpu_ignorado",
+   "archivo": "eq3/evaluar_f1_vram_exp.py",
+   "antes": "    elif max(uso) > UTILIZACION_GPU_MAX:",
+   "despues": "    elif False:",
+   "motivo": "empezar con la GPU ocupada por otra aplicación"
+  },
+  {
+   "id": "F1X_12_vram_no_aborta_todo",
+   "archivo": "eq3/evaluar_f1_vram_exp.py",
+   "antes": "                            abortada = vigia.excedida\n",
+   "despues": "                            pass\n",
+   "motivo": "seguir con las demás tareas tras superar el tope"
+  },
+  {
+   "id": "F1X_13_sin_repetir_tras_terceros",
+   "archivo": "eq3/evaluar_f1_vram_exp.py",
+   "antes": "len(interrumpidos) < MAX_INTERRUPCIONES",
+   "despues": "len(interrumpidos) < 0",
+   "motivo": "puntuar una tarea cortada por terceros en vez de repetirla"
+  },
+  {
+   "id": "F1X_14_no_espera_al_pc_libre",
+   "archivo": "eq3/evaluar_f1_vram_exp.py",
+   "antes": "                        if not espera[\"ok\"]:",
+   "despues": "                        if False:",
+   "motivo": "lanzar Qwen aunque el PC esté en uso"
+  },
+  {
+   "id": "F1X_15_resultados_mezclados",
+   "archivo": "eq3/evaluar_f1_vram_exp.py",
+   "antes": "    if \"vram_exp\" not in str(salida).lower():",
+   "despues": "    if False:",
+   "motivo": "escribir los resultados experimentales junto a los estables"
+  },
+  {
+   "id": "F1X_16_stop_e3_sin_accion",
+   "archivo": "eq3/evaluar_f1_vram_exp.py",
+   "antes": "            for accion in list(self.acciones):",
+   "despues": "            for accion in []:",
+   "motivo": "no crear el STOP de una tarea E3 al detectar terceros"
+  },
+  {
+   "id": "F1X_17_abortada_valida",
+   "archivo": "eq3/evaluar_f1_vram_exp.py",
+   "antes": "    res[\"valida\"] = abortada is None",
+   "despues": "    res[\"valida\"] = True",
+   "motivo": "dar por válida una evaluación abortada"
+  }
+ ]
+}

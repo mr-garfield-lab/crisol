@@ -1,0 +1,5 @@
+{
+ "titulo": "Demostración: ordenar sin modificar la entrada",
+ "instrucciones": "Crea ordenar.py con una función ordenar(xs) que devuelva una lista nueva ordenada de menor a mayor sin modificar la lista de entrada. Criterios: devuelve la lista ordenada; no modifica la entrada; funciona con la lista vacía.",
+ "max_iteraciones": 2
+}

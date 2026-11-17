@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "declared_before_benchmark": true,
+  "selection_policy": "Tareas nuevas construidas por lectura de codigo y AST, congeladas antes de consultar salidas V3.5; no corpus externo real ni prueba LLM. minimum_relevant_manual_not_exhaustive",
+  "budget_estimated_tokens": 2000,
+  "query_file_limit": 12,
+  "tasks": [
+    {
+      "id": "memory_system",
+      "query": "vigilancia leer_mem_available parsear_meminfo",
+      "relevant": [
+        [
+          "src/eq2/vigilancia.py",
+          "leer_mem_available"
+        ],
+        [
+          "src/eq2/vigilancia.py",
+          "parsear_meminfo"
+        ]
+      ],
+      "evidence": [
+        "src/eq2/vigilancia.py",
+        "leer_mem_available"
+      ],
+      "oracle_scope": "minimum_relevant_manual_not_exhaustive"
+    },
+    {
+      "id": "advisory_permissions",
+      "query": "asesoria importar intentos_de_permisos",
+      "relevant": [
+        [
+          "src/eq2/asesoria.py",
+          "importar"
+        ],
+        [
+          "src/eq2/asesoria.py",
+          "intentos_de_permisos"
+        ]
+      ],
+      "evidence": [
+        "src/eq2/asesoria.py",
+        "importar"
+      ],
+      "oracle_scope": "minimum_relevant_manual_not_exhaustive"
+    },
+    {
+      "id": "aggregate_metrics",
+      "query": "metricas agregar votacion",
+      "relevant": [
+        [
+          "src/eq2/metricas.py",
+          "agregar"
+        ],
+        [
+          "src/eq2/metricas.py",
+          "votacion"
+        ]
+      ],
+      "evidence": [
+        "src/eq2/metricas.py",
+        "agregar"
+      ],
+      "oracle_scope": "minimum_relevant_manual_not_exhaustive"
+    },
+    {
+      "id": "plan_review",
+      "query": "motor criterios_de revision_de",
+      "relevant": [
+        [
+          "src/eq2/motor.py",
+          "criterios_de"
+        ],
+        [
+          "src/eq2/motor.py",
+          "revision_de"
+        ]
+      ],
+      "evidence": [
+        "src/eq2/motor.py",
+        "criterios_de"
+      ],
+      "oracle_scope": "minimum_relevant_manual_not_exhaustive"
+    },
+    {
+      "id": "plugin_selection",
+      "query": "extensiones plugin_para PluginPython analizar_estatico",
+      "relevant": [
+        [
+          "src/eq2/extensiones.py",
+          "plugin_para"
+        ],
+        [
+          "src/eq2/extensiones.py",
+          "PluginPython.analizar_estatico"
+        ]
+      ],
+      "evidence": [
+        "src/eq2/extensiones.py",
+        "plugin_para"
+      ],
+      "oracle_scope": "minimum_relevant_manual_not_exhaustive"
+    },
+    {
+      "id": "process_environment",
+      "query": "servidor entorno puerto_libre",
+      "relevant": [
+        [
+          "src/eq2/servidor.py",
+          "entorno"
+        ],
+        [
+          "src/eq2/servidor.py",
+          "puerto_libre"
+        ]
+      ],
+      "evidence": [
+        "src/eq2/servidor.py",
+        "entorno"
+      ],
+      "oracle_scope": "minimum_relevant_manual_not_exhaustive"
+    },
+    {
+      "id": "challenge_scoring",
+      "query": "retos puntuar comprobar_cita parsear",
+      "relevant": [
+        [
+          "src/eq2/retos.py",
+          "puntuar"
+        ],
+        [
+          "src/eq2/retos.py",
+          "comprobar_cita"
+        ],
+        [
+          "src/eq2/retos.py",
+          "parsear"
+        ]
+      ],
+      "evidence": [
+        "src/eq2/retos.py",
+        "puntuar"
+      ],
+      "oracle_scope": "minimum_relevant_manual_not_exhaustive"
+    },
+    {
+      "id": "incident_dependency",
+      "query": "incidencias RegistroIncidencias anadir_dependencia y _alcanzables",
+      "relevant": [
+        [
+          "src/eq2/incidencias.py",
+          "RegistroIncidencias.anadir_dependencia"
+        ],
+        [
+          "src/eq2/incidencias.py",
+          "RegistroIncidencias._alcanzables"
+        ]
+      ],
+      "evidence": [
+        "src/eq2/incidencias.py",
+        "RegistroIncidencias.anadir_dependencia"
+      ],
+      "oracle_scope": "minimum_relevant_manual_not_exhaustive"
+    }
+  ]
+}

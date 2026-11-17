@@ -1,0 +1,35 @@
+{
+  "equipo_f2_v2f1.zip": {
+    "sha256": "11fc08378ab56517e0151aa3bfe4bb2e547587792fad6681c12cbbb867157126",
+    "original_entries": 305,
+    "included_files": 234,
+    "excluded_by_reason": {
+      "generated/binary": 2,
+      "evidencias_claude": 61,
+      "evidencias": 8
+    }
+  },
+  "EquipoIA.zip": {
+    "sha256": "ec93b6ee185cfc7afca5de7303a57844810265050070e63d6179aae603179e6b",
+    "original_entries": 525,
+    "included_files": 20,
+    "excluded_by_reason": {
+      "manifest-for-full-archive": 1,
+      "evaluador_anterior": 31,
+      "evidencias": 472,
+      "referencia": 1
+    }
+  },
+  "CONTEXTO_LIGERO_V3_5_DESCARGA.zip": {
+    "sha256": "3a619b71795bada3cadca82164f899bee684cd2604134ad1828eb127c557e529",
+    "original_entries": 4972,
+    "included_files": 104,
+    "excluded_by_reason": {
+      "comparacion": 38,
+      "historial": 21,
+      "referencia_original": 232,
+      "resultados": 4576,
+      "manifest-for-full-archive": 1
+    }
+  }
+}

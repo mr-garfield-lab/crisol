@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "ahora": "2026-10-30T00:00:00+00:00",
+  "registros": [
+    {"clave":"orden","texto":"sorted ordena una lista de enteros conservando la lista original sin mutación.","estado":"verificada","ambito":"python"},
+    {"clave":"orden_hip","texto":"Ordenar lista con sort conserva siempre la lista original.","estado":"hipotesis","ambito":"python"},
+    {"clave":"puerto","texto":"El servicio Faro utiliza puerto=8081 en la configuración comprobada.","estado":"verificada","ambito":"faro"},
+    {"clave":"puerto_hip","texto":"El servicio Faro utiliza puerto=9000 en la configuración supuesta.","estado":"hipotesis","ambito":"faro"},
+    {"clave":"cache_a","texto":"La cache utiliza capacidad=20 elementos.","estado":"verificada","ambito":"cache"},
+    {"clave":"cache_b","texto":"La cache utiliza capacidad=40 elementos.","estado":"verificada","ambito":"cache"},
+    {"clave":"alterado","texto":"El checksum corrupto es válido sin comprobar los bytes.","estado":"verificada","ambito":"checksum","alterar_sha":true},
+    {"clave":"pares","texto":"Contar pares en 0..n incluye ambos extremos: range(n + 1); para n=0 hay un entero par, el cero.","estado":"verificada","ambito":"python"},
+    {"clave":"mediana","texto":"La mediana de una lista vacía lanza ValueError; con cantidad par se promedian los dos centrales.","estado":"verificada","ambito":"python"},
+    {"clave":"dedup","texto":"Deduplicar conservando el orden de primera aparición se consigue con dict.fromkeys para enteros.","estado":"verificada","ambito":"python"},
+    {"clave":"rotar","texto":"Rotar con pasos negativos requiere normalizar k módulo la longitud; una lista vacía necesita un caso aparte.","estado":"observado","ambito":"python"},
+    {"clave":"caducado","texto":"El límite anterior de memoria era 100 elementos.","estado":"verificada","ambito":"memoria","caduca":"2026-01-01T00:00:00+00:00"},
+    {"clave":"nulo","texto":"El valor nulo None se distingue de una cadena vacía; ambos valores tienen contratos diferentes.","estado":"verificada","ambito":"python"}
+  ],
+  "consultas": [
+    {"id":"M01","grupo":"base","consulta":"ordenar lista sorted","relevantes":["orden"]},
+    {"id":"M02","grupo":"base","consulta":"puerto faro","relevantes":["puerto"]},
+    {"id":"M03","grupo":"base","consulta":"cache capacidad","relevantes":[]},
+    {"id":"M04","grupo":"base","consulta":"checksum corrupto","relevantes":[]},
+    {"id":"M05","grupo":"base","consulta":"contar pares","relevantes":["pares"]},
+    {"id":"M06","grupo":"base","consulta":"mediana vacía","relevantes":["mediana"]},
+    {"id":"M07","grupo":"reservado","consulta":"deduplicar conservar orden","relevantes":["dedup"]},
+    {"id":"M08","grupo":"reservado","consulta":"rotar pasos negativos","relevantes":["rotar"]},
+    {"id":"M09","grupo":"reservado","consulta":"límite memoria elementos","relevantes":[]},
+    {"id":"M10","grupo":"reservado","consulta":"valor nulo vacío","relevantes":["nulo"]},
+    {"id":"M11","grupo":"reservado","consulta":"sorting without side effects","relevantes":["orden"]},
+    {"id":"M12","grupo":"reservado","consulta":"clasificación no destructiva","relevantes":["orden"]}
+  ]
+}

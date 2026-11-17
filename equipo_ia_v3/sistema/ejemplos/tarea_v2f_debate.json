@@ -1,0 +1,7 @@
+{
+ "titulo": "V2-F: debate por evidencias (dedup)",
+ "tipo": "debate_codigo",
+ "instrucciones": "Implementa dedup(xs) en solucion.py: devuelve una lista nueva sin duplicados que conserva el orden de la PRIMERA aparición de cada elemento. No modifiques la lista recibida. Ejemplo: dedup([1, 2, 1]) == [1, 2]",
+ "casos": ["dedup([3, 1, 3, 2, 1]) == [3, 1, 2]", "dedup([]) == []"],
+ "propiedades": ["no_muta_argumentos", "determinista"]
+}

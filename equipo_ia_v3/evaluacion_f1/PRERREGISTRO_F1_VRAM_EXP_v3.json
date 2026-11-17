@@ -1,0 +1,43 @@
+{
+ "version": 3,
+ "variante": "F1-VRAM-EXP",
+ "base": "prerregistro V2 (sin cambios)",
+ "fecha_utc": "2026-11-11T22:23:21Z",
+ "estado": "PRERREGISTRADO, NO EJECUTADO",
+ "limites": {
+  "vram_tope_MiB": 6912,
+  "vram_otras_max_MiB": 1832,
+  "pico_qwen_medido_MiB": 4780,
+  "margen_MiB": 300,
+  "variacion_otras_max_MiB": 200,
+  "uso_gpu_max_pct": 40,
+  "inactividad_min_s": 600,
+  "ventana_inicio_s": 60,
+  "ventana_tarea_s": 10,
+  "max_espera_s": 3600,
+  "max_interrupciones_por_tarea": 2
+ },
+ "sin_cambios": "tareas, oráculos, prompts, configuraciones, orden, temperaturas, semillas, regla de decisión, STOP, monitor de memoria y propiedad de procesos: los del prerregistro V2",
+ "sha256": {
+  "evaluacion_f1/tareas_f1.json": "1a6dbbe03bf4b4c0fbd5afd8f475434507c65b4f416696f877609e598e68bebe",
+  "evaluacion_f1/oraculos_f1.json": "7cf35f6a77e6a5188d55f0e0ebc07d79cdd4dcd3ce09f3ccfabbdd3fceff31f4",
+  "evaluacion_f1/definicion.py": "cc5fcdca1c142c96f2379021e6206bb21bc46a27cfac54475d8d9a8c5f14cd6b",
+  "evaluacion_f1/prerregistrar.py": "b465d3470f5803988c2cad344d347ca621e18bf5b0208097c6fe5d0f01bacbd6",
+  "eq3/evaluacion_f1.py": "b9683f26601731136640396736e624f1340693238f32f93b6956e6b30cc3bde6",
+  "pruebas/test_eq3_evaluacion_f1.py": "78b791e9b656dc247f14d75a9d25709ba21a4ad3f9dea0f94fe08b68523afe91",
+  "v3/mutaciones/v31_f1_oraculos.json": "247625c4cc26bbfab084779574344171dcf6944b678660e578e5ff96c078f378",
+  "docs/V31_F1_PLAN_EVALUACION.md": "9831ce38f24c5107bc15cac2c836e78aaf26b533c3a3e0dd5dae67f6323f48a4",
+  "eq3/evaluar_f1.py": "e9674aababa42fddb1b83a18c6a75818a5d567e97628b6e84795c716cabdc483",
+  "pruebas/test_eq3_evaluar_f1.py": "4056c5ee23c57f23bc9e2f7cc873f5ae3232a4c45c9899079baad76266bd3eb9",
+  "pruebas/aux_evaluar_f1.py": "fc3ac76c0736ca8fc4bf9ce294c08890edaa3f5e9b3583a3f8ddf4afec621ea9",
+  "v3/mutaciones/v31_f1_ejecutor.json": "aa46553a3f0a50a840198424a6ca8873e202fac709f42c195b65b9fa3381704c",
+  "evaluacion_f1/PRERREGISTRO_F1_v1.json": "3bb06f3d45ff5a7493577588f47971f7d258c19f59427f101d1cb088322cbd02",
+  "evaluacion_f1/PRERREGISTRO_F1.json": "0f7001ec392b998f0db6d75cda919ee523faf79555d54472f37255e24a318858",
+  "eq3/evaluar_f1_vram_exp.py": "850df0d99860309ee329c0cbcbd78f22a1e30b32a28af93c52248d412e4e58ea",
+  "pruebas/test_eq3_evaluar_f1_vram_exp.py": "5e294bdcca833d2b63a294c4c21d874d6be9bedaa9e84de2a0bfee34ab7fa002",
+  "pruebas/aux_evaluar_f1_vram_exp.py": "f8697b5a92f432fc963fe5cfc956cbc4309bba34800d100ac84e9e39709018dd",
+  "v3/mutaciones/v31_f1_vram_exp.json": "6b3269a6c1354f775a26684d2dd16a8b8d1e9af73064c78c598da5a9303f7af5",
+  "evaluacion_f1/prerregistrar_vram_exp.py": "cc3e5de6c6dc36961de20b6e71eee6a1cf3738f1127e9f9e406b486ad63b9f6c",
+  "docs/V31_F1_VRAM_EXP.md": "f59cd23c4ee8f5c6a6bc889be876909c7c20ea692ab691902384705ed944e12d"
+ }
+}

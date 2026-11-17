@@ -1,0 +1,7 @@
+{
+ "titulo": "V2-F: mediana con plan, contraejemplos de A3 y memoria",
+ "instrucciones": "Crea mediana(xs) en solucion.py: devuelve la mediana de una lista de números; con longitud par, la media de los dos centrales; con la lista vacía lanza ValueError. No modifiques la lista recibida. Ejemplo: mediana([3, 1, 2]) == 2",
+ "max_iteraciones": 2,
+ "motor": "v2f",
+ "politica_falta": "preguntar"
+}

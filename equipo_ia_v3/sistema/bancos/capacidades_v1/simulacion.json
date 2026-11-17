@@ -1,0 +1,527 @@
+{
+ "banco": "capacidades_v1",
+ "nota": "SOLO para el modo SIMULADO: variantes de código (correcta y con defectos) y casos que «creen» los agentes. Las etiquetas correcto/detecta se calcularon EJECUTANDO cada caso contra cada variante con el ejecutor restringido; test_v2f_banco lo vuelve a comprobar.",
+ "parametros": {
+  "p_acierto": 0.5,
+  "correlacion": 0.5,
+  "p_reparar": 0.8,
+  "p_terco": 0.25,
+  "p_impugna_erroneo": 0.6,
+  "p_impugna_correcto": 0.1,
+  "p_retira": 0.7,
+  "p_corrige_prueba": 0.7,
+  "p_caso_erroneo": 0.25,
+  "explicacion": {
+   "p_acierto": "probabilidad de que una propuesta sea la variante correcta",
+   "correlacion": "probabilidad de que A2/A3 repitan el resultado de A1 (mismo modelo): 0 = independientes, 1 = idénticos",
+   "p_reparar": "probabilidad de corregir un defecto cuando la evidencia ejecutada lo muestra",
+   "p_terco": "probabilidad de mantener la propia propuesta aunque la evidencia la descarte",
+   "p_impugna_erroneo": "probabilidad de impugnar un caso ajeno que es erróneo",
+   "p_impugna_correcto": "probabilidad de impugnar por error un caso ajeno correcto",
+   "p_retira": "probabilidad de que A3 retire un caso erróneo al ver la impugnación",
+   "p_corrige_prueba": "probabilidad de que A2 corrija una prueba errónea al revisar el plan",
+   "p_caso_erroneo": "probabilidad de que un caso escrito por un agente sea uno de los erróneos del pool"
+  }
+ },
+ "tareas": {
+  "mediana": {
+   "variantes": {
+    "correcta": {
+     "codigo": "def mediana(xs):\n    if not xs:\n        raise ValueError('lista vacía')\n    s = sorted(xs)\n    n = len(s)\n    if n % 2:\n        return s[n // 2]\n    return (s[n // 2 - 1] + s[n // 2]) / 2\n",
+     "correcta": true,
+     "falla_oraculo": []
+    },
+    "defecto_par": {
+     "codigo": "def mediana(xs):\n    if not xs:\n        raise ValueError('lista vacía')\n    s = sorted(xs)\n    return s[len(s) // 2]\n",
+     "correcta": false,
+     "falla_oraculo": [
+      "mediana([1, 2, 3, 4]) == 2.5",
+      "mediana([5, 1, 4, 2]) == 3.0"
+     ]
+    },
+    "defecto_vacia": {
+     "codigo": "def mediana(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2:\n        return s[n // 2]\n    return (s[n // 2 - 1] + s[n // 2]) / 2\n",
+     "correcta": false,
+     "falla_oraculo": [
+      "mediana([]) lanza ValueError"
+     ]
+    }
+   },
+   "casos_agentes": [
+    {
+     "caso": "mediana([4, 1, 3, 2]) == 2.5",
+     "correcto": true,
+     "detecta": [
+      "defecto_par"
+     ]
+    },
+    {
+     "caso": "mediana(()) lanza ValueError",
+     "correcto": true,
+     "detecta": [
+      "defecto_vacia"
+     ]
+    },
+    {
+     "caso": "mediana([9]) == 9",
+     "correcto": true,
+     "detecta": []
+    },
+    {
+     "caso": "mediana([1, 5]) == 3.0",
+     "correcto": true,
+     "detecta": [
+      "defecto_par"
+     ]
+    },
+    {
+     "caso": "mediana([1, 2, 3, 4]) == 2",
+     "correcto": false,
+     "detecta": []
+    },
+    {
+     "caso": "mediana([]) == 0",
+     "correcto": false,
+     "detecta": []
+    }
+   ]
+  },
+  "dedup": {
+   "variantes": {
+    "correcta": {
+     "codigo": "def dedup(xs):\n    vistos = set()\n    out = []\n    for x in xs:\n        if x not in vistos:\n            vistos.add(x)\n            out.append(x)\n    return out\n",
+     "correcta": true,
+     "falla_oraculo": []
+    },
+    "defecto_orden": {
+     "codigo": "def dedup(xs):\n    return sorted(set(xs))\n",
+     "correcta": false,
+     "falla_oraculo": [
+      "dedup(['b', 'a', 'b']) == ['b', 'a']",
+      "dedup([2, 1]) == [2, 1]",
+      "dedup([3, 1, 3, 2, 1]) == [3, 1, 2]"
+     ]
+    },
+    "defecto_ultima": {
+     "codigo": "def dedup(xs):\n    out = []\n    for x in reversed(xs):\n        if x not in out:\n            out.insert(0, x)\n    return out\n",
+     "correcta": false,
+     "falla_oraculo": [
+      "dedup(['b', 'a', 'b']) == ['b', 'a']",
+      "dedup([1, 2, 3, 2, 1, 4]) == [1, 2, 3, 4]",
+      "dedup([3, 1, 3, 2, 1]) == [3, 1, 2]"
+     ]
+    }
+   },
+   "casos_agentes": [
+    {
+     "caso": "dedup([3, 1, 3]) == [3, 1]",
+     "correcto": true,
+     "detecta": [
+      "defecto_orden",
+      "defecto_ultima"
+     ]
+    },
+    {
+     "caso": "dedup([0]) == [0]",
+     "correcto": true,
+     "detecta": []
+    },
+    {
+     "caso": "dedup([2, 1, 2, 1]) == [2, 1]",
+     "correcto": true,
+     "detecta": [
+      "defecto_orden"
+     ]
+    },
+    {
+     "caso": "dedup([1, 2, 1, 3]) == [1, 2, 3]",
+     "correcto": true,
+     "detecta": [
+      "defecto_ultima"
+     ]
+    },
+    {
+     "caso": "dedup([3, 1, 3]) == [1, 3]",
+     "correcto": false,
+     "detecta": []
+    },
+    {
+     "caso": "dedup([1, 1]) == [1, 1]",
+     "correcto": false,
+     "detecta": []
+    }
+   ]
+  },
+  "balanceados": {
+   "variantes": {
+    "correcta": {
+     "codigo": "def balanceados(s):\n    pares = {')': '(', ']': '[', '}': '{'}\n    pila = []\n    for c in s:\n        if c in '([{':\n            pila.append(c)\n        elif c in pares:\n            if not pila or pila[-1] != pares[c]:\n                return False\n            pila.pop()\n    return not pila\n",
+     "correcta": true,
+     "falla_oraculo": []
+    },
+    "defecto_conteo": {
+     "codigo": "def balanceados(s):\n    for a, b in ('()', '[]', '{}'):\n        if s.count(a) != s.count(b):\n            return False\n    return True\n",
+     "correcta": false,
+     "falla_oraculo": [
+      "balanceados('([)]') == False",
+      "balanceados(')(') == False"
+     ]
+    },
+    "defecto_pila_vacia": {
+     "codigo": "def balanceados(s):\n    pares = {')': '(', ']': '[', '}': '{'}\n    pila = []\n    for c in s:\n        if c in '([{':\n            pila.append(c)\n        elif c in pares:\n            if pila.pop() != pares[c]:\n                return False\n    return not pila\n",
+     "correcta": false,
+     "falla_oraculo": [
+      "balanceados(')(') == False"
+     ]
+    }
+   },
+   "casos_agentes": [
+    {
+     "caso": "balanceados('[(])') == False",
+     "correcto": true,
+     "detecta": [
+      "defecto_conteo"
+     ]
+    },
+    {
+     "caso": "balanceados(')') == False",
+     "correcto": true,
+     "detecta": [
+      "defecto_pila_vacia"
+     ]
+    },
+    {
+     "caso": "balanceados('(a)') == True",
+     "correcto": true,
+     "detecta": []
+    },
+    {
+     "caso": "balanceados('abc') == True",
+     "correcto": true,
+     "detecta": []
+    },
+    {
+     "caso": "balanceados('([)]') == True",
+     "correcto": false,
+     "detecta": []
+    },
+    {
+     "caso": "balanceados('[]') == False",
+     "correcto": false,
+     "detecta": []
+    }
+   ]
+  },
+  "fusionar": {
+   "variantes": {
+    "correcta": {
+     "codigo": "def fusionar(intervalos):\n    out = []\n    for a, b in sorted(intervalos):\n        if out and a <= out[-1][1]:\n            out[-1][1] = max(out[-1][1], b)\n        else:\n            out.append([a, b])\n    return out\n",
+     "correcta": true,
+     "falla_oraculo": []
+    },
+    "defecto_sin_ordenar": {
+     "codigo": "def fusionar(intervalos):\n    out = []\n    for a, b in intervalos:\n        if out and a <= out[-1][1]:\n            out[-1][1] = max(out[-1][1], b)\n        else:\n            out.append([a, b])\n    return out\n",
+     "correcta": false,
+     "falla_oraculo": [
+      "fusionar([[5, 6], [1, 2]]) == [[1, 2], [5, 6]]",
+      "fusionar([[8, 9], [1, 4], [3, 5]]) == [[1, 5], [8, 9]]"
+     ]
+    },
+    "defecto_toque": {
+     "codigo": "def fusionar(intervalos):\n    out = []\n    for a, b in sorted(intervalos):\n        if out and a < out[-1][1]:\n            out[-1][1] = max(out[-1][1], b)\n        else:\n            out.append([a, b])\n    return out\n",
+     "correcta": false,
+     "falla_oraculo": [
+      "fusionar([[1, 2], [2, 3]]) == [[1, 3]]"
+     ]
+    }
+   },
+   "casos_agentes": [
+    {
+     "caso": "fusionar([[3, 4], [1, 2]]) == [[1, 2], [3, 4]]",
+     "correcto": true,
+     "detecta": [
+      "defecto_sin_ordenar"
+     ]
+    },
+    {
+     "caso": "fusionar([[1, 4], [4, 5]]) == [[1, 5]]",
+     "correcto": true,
+     "detecta": [
+      "defecto_toque"
+     ]
+    },
+    {
+     "caso": "fusionar([[1, 1]]) == [[1, 1]]",
+     "correcto": true,
+     "detecta": []
+    },
+    {
+     "caso": "fusionar([[1, 5], [2, 3]]) == [[1, 5]]",
+     "correcto": true,
+     "detecta": []
+    },
+    {
+     "caso": "fusionar([[1, 2], [2, 3]]) == [[1, 2], [2, 3]]",
+     "correcto": false,
+     "detecta": []
+    },
+    {
+     "caso": "fusionar([[2, 1]]) == [[1, 2]]",
+     "correcto": false,
+     "detecta": []
+    }
+   ]
+  },
+  "busqueda": {
+   "variantes": {
+    "correcta": {
+     "codigo": "def busqueda(xs, x):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        m = (lo + hi) // 2\n        if xs[m] == x:\n            return m\n        if xs[m] < x:\n            lo = m + 1\n        else:\n            hi = m - 1\n    return -1\n",
+     "correcta": true,
+     "falla_oraculo": []
+    },
+    "defecto_limite": {
+     "codigo": "def busqueda(xs, x):\n    lo, hi = 0, len(xs) - 1\n    while lo < hi:\n        m = (lo + hi) // 2\n        if xs[m] == x:\n            return m\n        if xs[m] < x:\n            lo = m + 1\n        else:\n            hi = m - 1\n    return -1\n",
+     "correcta": false,
+     "falla_oraculo": [
+      "busqueda([1, 3, 5, 7], 7) == 3",
+      "busqueda([2], 2) == 0"
+     ]
+    },
+    "defecto_vacia": {
+     "codigo": "def busqueda(xs, x):\n    lo, hi = 0, len(xs) - 1\n    while True:\n        m = (lo + hi) // 2\n        if xs[m] == x:\n            return m\n        if lo >= hi:\n            return -1\n        if xs[m] < x:\n            lo = m + 1\n        else:\n            hi = m - 1\n",
+     "correcta": false,
+     "falla_oraculo": [
+      "busqueda([], 1) == -1"
+     ]
+    }
+   },
+   "casos_agentes": [
+    {
+     "caso": "busqueda([1, 2, 3], 3) == 2",
+     "correcto": true,
+     "detecta": [
+      "defecto_limite"
+     ]
+    },
+    {
+     "caso": "busqueda([], 5) == -1",
+     "correcto": true,
+     "detecta": [
+      "defecto_vacia"
+     ]
+    },
+    {
+     "caso": "busqueda([4], 4) == 0",
+     "correcto": true,
+     "detecta": [
+      "defecto_limite"
+     ]
+    },
+    {
+     "caso": "busqueda([1, 2], 9) == -1",
+     "correcto": true,
+     "detecta": []
+    },
+    {
+     "caso": "busqueda([1, 2, 3], 3) == 3",
+     "correcto": false,
+     "detecta": []
+    },
+    {
+     "caso": "busqueda([], 5) == 0",
+     "correcto": false,
+     "detecta": []
+    }
+   ]
+  },
+  "rotar": {
+   "variantes": {
+    "correcta": {
+     "codigo": "def rotar(xs, k):\n    if not xs:\n        return []\n    k = k % len(xs)\n    return xs[-k:] + xs[:-k] if k else list(xs)\n",
+     "correcta": true,
+     "falla_oraculo": []
+    },
+    "defecto_modulo": {
+     "codigo": "def rotar(xs, k):\n    if not xs or k == 0:\n        return list(xs)\n    return xs[-k:] + xs[:-k]\n",
+     "correcta": false,
+     "falla_oraculo": [
+      "rotar([1, 2, 3], 4) == [3, 1, 2]"
+     ]
+    },
+    "defecto_vacia": {
+     "codigo": "def rotar(xs, k):\n    k = k % len(xs)\n    return xs[-k:] + xs[:-k] if k else list(xs)\n",
+     "correcta": false,
+     "falla_oraculo": [
+      "rotar([], 3) == []"
+     ]
+    }
+   },
+   "casos_agentes": [
+    {
+     "caso": "rotar([1, 2, 3], 3) == [1, 2, 3]",
+     "correcto": true,
+     "detecta": []
+    },
+    {
+     "caso": "rotar([], 1) == []",
+     "correcto": true,
+     "detecta": [
+      "defecto_vacia"
+     ]
+    },
+    {
+     "caso": "rotar([1, 2, 3], 5) == [2, 3, 1]",
+     "correcto": true,
+     "detecta": [
+      "defecto_modulo"
+     ]
+    },
+    {
+     "caso": "rotar([4, 5], -1) == [5, 4]",
+     "correcto": true,
+     "detecta": []
+    },
+    {
+     "caso": "rotar([1, 2, 3], 1) == [2, 3, 1]",
+     "correcto": false,
+     "detecta": []
+    },
+    {
+     "caso": "rotar([], 1) lanza ValueError",
+     "correcto": false,
+     "detecta": []
+    }
+   ]
+  },
+  "romano": {
+   "variantes": {
+    "correcta": {
+     "codigo": "def romano(s):\n    v = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}\n    total = 0\n    for i, c in enumerate(s):\n        if i + 1 < len(s) and v[c] < v[s[i + 1]]:\n            total -= v[c]\n        else:\n            total += v[c]\n    return total\n",
+     "correcta": true,
+     "falla_oraculo": []
+    },
+    "defecto_resta": {
+     "codigo": "def romano(s):\n    v = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}\n    return sum(v[c] for c in s)\n",
+     "correcta": false,
+     "falla_oraculo": [
+      "romano('CDXLIV') == 444",
+      "romano('IV') == 4",
+      "romano('IX') == 9",
+      "romano('MCMXCIV') == 1994"
+     ]
+    },
+    "defecto_doble": {
+     "codigo": "def romano(s):\n    v = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}\n    total = 0\n    previo = 0\n    for c in s:\n        if v[c] > previo and previo:\n            total += v[c] - previo\n        else:\n            total += v[c]\n        previo = v[c]\n    return total\n",
+     "correcta": false,
+     "falla_oraculo": [
+      "romano('CDXLIV') == 444",
+      "romano('IV') == 4",
+      "romano('IX') == 9",
+      "romano('MCMXCIV') == 1994"
+     ]
+    }
+   },
+   "casos_agentes": [
+    {
+     "caso": "romano('XL') == 40",
+     "correcto": true,
+     "detecta": [
+      "defecto_doble",
+      "defecto_resta"
+     ]
+    },
+    {
+     "caso": "romano('III') == 3",
+     "correcto": true,
+     "detecta": []
+    },
+    {
+     "caso": "romano('XC') == 90",
+     "correcto": true,
+     "detecta": [
+      "defecto_doble",
+      "defecto_resta"
+     ]
+    },
+    {
+     "caso": "romano('MMM') == 3000",
+     "correcto": true,
+     "detecta": []
+    },
+    {
+     "caso": "romano('IV') == 6",
+     "correcto": false,
+     "detecta": []
+    },
+    {
+     "caso": "romano('IX') == 11",
+     "correcto": false,
+     "detecta": []
+    }
+   ]
+  },
+  "contar": {
+   "variantes": {
+    "correcta": {
+     "codigo": "def contar(texto):\n    out = {}\n    for p in texto.split():\n        p = p.strip('.,;:!?').lower()\n        if p:\n            out[p] = out.get(p, 0) + 1\n    return out\n",
+     "correcta": true,
+     "falla_oraculo": []
+    },
+    "defecto_mayus": {
+     "codigo": "def contar(texto):\n    out = {}\n    for p in texto.split():\n        p = p.strip('.,;:!?')\n        if p:\n            out[p] = out.get(p, 0) + 1\n    return out\n",
+     "correcta": false,
+     "falla_oraculo": [
+      "contar('A a. a?') == {'a': 3}",
+      "contar('Hola hola') == {'hola': 2}",
+      "contar('Ya: ya ¿ya?') == {'ya': 2, '¿ya': 1}"
+     ]
+    },
+    "defecto_puntuacion": {
+     "codigo": "def contar(texto):\n    out = {}\n    for p in texto.lower().split():\n        out[p] = out.get(p, 0) + 1\n    return out\n",
+     "correcta": false,
+     "falla_oraculo": [
+      "contar('A a. a?') == {'a': 3}",
+      "contar('Ya: ya ¿ya?') == {'ya': 2, '¿ya': 1}",
+      "contar('si, no; si!') == {'si': 2, 'no': 1}"
+     ]
+    }
+   },
+   "casos_agentes": [
+    {
+     "caso": "contar('Sol sol') == {'sol': 2}",
+     "correcto": true,
+     "detecta": [
+      "defecto_mayus"
+     ]
+    },
+    {
+     "caso": "contar('x, x.') == {'x': 2}",
+     "correcto": true,
+     "detecta": [
+      "defecto_puntuacion"
+     ]
+    },
+    {
+     "caso": "contar('   ') == {}",
+     "correcto": true,
+     "detecta": []
+    },
+    {
+     "caso": "contar('a b') == {'a': 1, 'b': 1}",
+     "correcto": true,
+     "detecta": []
+    },
+    {
+     "caso": "contar('Sol sol') == {'Sol': 1, 'sol': 1}",
+     "correcto": false,
+     "detecta": []
+    },
+    {
+     "caso": "contar('x, x.') == {'x,': 1, 'x.': 1}",
+     "correcto": false,
+     "detecta": []
+    }
+   ]
+  }
+ }
+}

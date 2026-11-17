@@ -1,0 +1,110 @@
+{
+ "formato": "eq2/auditoria",
+ "version_formato": 1,
+ "id": "AUD-EJEMPLO-0001",
+ "titulo": "Paquete de ejemplo de V2-E.5-r3",
+ "autor": "Claude (desarrollo de Equipo IA)",
+ "origen": "incluido en la versión",
+ "creado": "2026-10-26T12:00:00-03:00",
+ "compatible_con": [
+  "f2-v2e5-r3",
+  "f2-v2e6-r1",
+  "f2-v2e6-r2",
+  "f2-v2e6-r3",
+  "f2-v2e7-r1",
+  "f2-v2e7-r2",
+  "f2-v2e7-r3",
+  "f2-v2f",
+  "f2-v2f1"
+ ],
+ "descripcion": "Demuestra el formato y las operaciones declarativas.",
+ "pruebas": [
+  {
+   "id": "EJ-01",
+   "objetivo": "el clasificador mantiene sus veredictos en cuatro casos etiquetados",
+   "operacion": "clasificar_criticas",
+   "parametros": {
+    "archivo": "datos/criticas.json"
+   },
+   "criterio": {
+    "veredictos": {
+     "EJ-C03": [
+      "falsa_no_detectada"
+     ],
+     "EJ-C05": [
+      "acierto_falsa_detectada"
+     ],
+     "EJ-C10": [
+      "acierto_fundamentada"
+     ]
+    },
+    "resumen": {
+     "casos": 4
+    }
+   },
+   "recursos": {},
+   "segundos_max": 30
+  },
+  {
+   "id": "EJ-02",
+   "objetivo": "la validación de personalidad clasifica respuestas válidas, maliciosas, inválidas y contradictorias",
+   "operacion": "validar_perfil",
+   "parametros": {
+    "archivo": "datos/personalidad.json"
+   },
+   "criterio": {},
+   "recursos": {},
+   "segundos_max": 30
+  },
+  {
+   "id": "EJ-03",
+   "objetivo": "solo las formas exactas de parada se tratan como STOP",
+   "operacion": "motivo_parada",
+   "parametros": {
+    "archivo": "datos/parada.json"
+   },
+   "criterio": {},
+   "recursos": {},
+   "segundos_max": 30
+  },
+  {
+   "id": "EJ-04",
+   "objetivo": "el análisis estático detecta el error de sintaxis",
+   "operacion": "analisis_estatico",
+   "parametros": {
+    "archivo": "datos/estatico.json"
+   },
+   "criterio": {
+    "tipos_error": [
+     "modulo_inexistente",
+     "sintaxis"
+    ]
+   },
+   "recursos": {},
+   "segundos_max": 30
+  },
+  {
+   "id": "EJ-05",
+   "objetivo": "repetir la clasificación de motivos de parada",
+   "operacion": "repetir_prueba",
+   "parametros": {
+    "prueba": "test_v2e5r3_stop.TestClasificacionDeMotivos",
+    "repeticiones": 2
+   },
+   "criterio": {},
+   "recursos": {},
+   "segundos_max": 60
+  },
+  {
+   "id": "EJ-06",
+   "objetivo": "una prueba que pide ejecutar código Python debe quedar NO_DISPONIBLE",
+   "operacion": "python",
+   "parametros": {
+    "codigo": "print('esto nunca se ejecuta')"
+   },
+   "criterio": {},
+   "recursos": {},
+   "segundos_max": 10
+  }
+ ]
+}

@@ -1,0 +1,280 @@
+{
+ "descripcion": "V3.1 F1-VRAM-EXP-V4.3: lo de V4.2 + procedencia en el control de fugas del oráculo",
+ "orden": [
+  "{python}",
+  "-B",
+  "-m",
+  "unittest",
+  "discover",
+  "-s",
+  "pruebas",
+  "-t",
+  "pruebas",
+  "-p",
+  "test_eq3_*_v4_3.py"
+ ],
+ "copiar": [
+  "pruebas",
+  "sistema",
+  "eq3",
+  "evaluacion_f1",
+  "lab_vram"
+ ],
+ "enlazar": [],
+ "copiar_raiz": [],
+ "limite_s": 600,
+ "mutaciones": [
+  {
+   "id": "F1V43_01_fit_por_defecto",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "E2 = [\"--fit\", \"off\", ",
+   "despues": "E2 = [",
+   "motivo": "volver a --fit on (descarga silenciosa)"
+  },
+  {
+   "id": "F1V43_02_margen_menor",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "MARGEN = 500 ",
+   "despues": "MARGEN = 200 ",
+   "motivo": "un margen menor que el verificado"
+  },
+  {
+   "id": "F1V43_03_pico_estimado",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "PICO_E2_MEDIDO = 4420 ",
+   "despues": "PICO_E2_MEDIDO = 4000 ",
+   "motivo": "usar un pico sin verificar"
+  },
+  {
+   "id": "F1V43_04_escritorio_cualquiera",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "        elif p[\"clase\"] not in ESCRITORIO:",
+   "despues": "        elif False:",
+   "motivo": "tratar una ventana a pantalla completa (vídeo) como escritorio"
+  },
+  {
+   "id": "F1V43_05_primer_plano_falla_abierto",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "            motivos.append(\"primer_plano_no_medible\")",
+   "despues": "            pass",
+   "motivo": "si no se puede ver el primer plano, suponer que no hay nadie"
+  },
+  {
+   "id": "F1V43_06_inactividad_falla_abierto",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "        motivos.append(\"inactividad_no_medible\")",
+   "despues": "        pass",
+   "motivo": "si no se puede medir la inactividad, suponer que no hay nadie"
+  },
+  {
+   "id": "F1V43_07_vram_ajena_sin_limite",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "    elif max(vram) > VRAM_OTRAS_MAX:",
+   "despues": "    elif max(vram) > 10**6:",
+   "motivo": "empezar con cualquier VRAM ajena"
+  },
+  {
+   "id": "F1V43_08_persona_ignorada",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "    return {\"ok\": not p[\"hay\"] and not recursos,",
+   "despues": "    return {\"ok\": not recursos,",
+   "motivo": "empezar aunque haya una persona"
+  },
+  {
+   "id": "F1V43_09_capas_cpu_aceptadas",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "    out[\"ok\"] = (bool(capas) and capas[-1][0] == capas[-1][1] and",
+   "despues": "    out[\"ok\"] = (bool(capas) and",
+   "motivo": "aceptar capas en la CPU (descarga silenciosa)"
+  },
+  {
+   "id": "F1V43_10_fit_aceptado",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "and not out[\"fit_ajusto\"])",
+   "despues": "and True)",
+   "motivo": "aceptar que --fit cambie la colocación"
+  },
+  {
+   "id": "F1V43_11_config_no_marca",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "        fila[\"infraestructura\"] = \"configuracion_llama_no_e2\"",
+   "despues": "        pass",
+   "motivo": "puntuar una tarea que no corrió con E2"
+  },
+  {
+   "id": "F1V43_12_sin_restaurar_al_salir",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "        if fondo is not None:\n            fondo.restaurar()",
+   "despues": "        if False:\n            fondo.restaurar()",
+   "motivo": "no devolver el fondo animado al terminar o ante un error"
+  },
+  {
+   "id": "F1V43_13_persona_sin_fondo",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "            if fondo is not None and fondo.c.estado != \"normal\":",
+   "despues": "            if False:",
+   "motivo": "no devolver el fondo animado cuando aparece una persona"
+  },
+  {
+   "id": "F1V43_14_fondo_no_detenido_aceptado",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "            if fondo is not None and not fondo.liberar():",
+   "despues": "            if fondo is not None and not (fondo.liberar() or True):",
+   "motivo": "empezar aunque el fondo animado no se haya detenido"
+  },
+  {
+   "id": "F1V43_15_e2_cambiado_sin_detectar",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": " or pre.get(\"llama_e2\") != E2:",
+   "despues": ":",
+   "motivo": "cambiar E2 sin que el prerregistro lo detecte"
+  },
+  {
+   "id": "F1V43_16_sin_guardian",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "        if self.guardian is None:\n            self.marca.parent",
+   "despues": "        if False:\n            self.marca.parent",
+   "motivo": "detener el fondo sin guardián independiente"
+  },
+  {
+   "id": "F1V43_17_guardian_fallido_aceptado",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "            if not self.guardian or self.guardian.get(\"rc\") != 0 or not self.guardian.get(\"pid\"):",
+   "despues": "            if False:",
+   "motivo": "detener el fondo aunque el guardián no arrancara"
+  },
+  {
+   "id": "F1V43_18_sin_marca_aceptado",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "        if self.marca is None:\n            self.anotar(",
+   "despues": "        if False:\n            self.anotar(",
+   "motivo": "detener el fondo sin marca (sin guardián posible)"
+  },
+  {
+   "id": "F1V43_19_marca_no_retirada",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "            self.marca.unlink(missing_ok=True)            # el guardián",
+   "despues": "            pass            # el guardián",
+   "motivo": "dejar la marca: el guardián reanudaría el fondo tarde o dos veces"
+  },
+  {
+   "id": "F1V43_20_sin_e2_no_aborta",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "    if sin_e2:",
+   "despues": "    if False:",
+   "motivo": "seguir evaluando aunque la tarea no corriera con E2"
+  },
+  {
+   "id": "F1V43_21_puertas_sueltas",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "    if pu.get(\"codigo\") != huella_codigo():",
+   "despues": "    if False:",
+   "motivo": "aceptar puertas pasadas con otro código o prerregistro"
+  },
+  {
+   "id": "F1V43_22_g10_sin_e2",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "            and estatico[\"comparar_usa_e2_para_todas\"] and real",
+   "despues": "            and real",
+   "motivo": "dar por equivalentes configuraciones que no usan E2"
+  },
+  {
+   "id": "F1V43_P01_exime_en_s1",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "if not base or configuracion != \"E3\" or not respuestas:",
+   "despues": "if not base or not respuestas:",
+   "motivo": "eximir relevos también en S1 y S1×3"
+  },
+  {
+   "id": "F1V43_P02_fuentes_del_evaluador",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "\"problemas\", \"intentos\", \"casos\", \"sugerencias\"})",
+   "despues": "\"problemas\", \"intentos\", \"casos\", \"sugerencias\", \"tarea\", \"orden_trabajo\", \"experiencias\"})",
+   "motivo": "aceptar como relevo los bloques del evaluador"
+  },
+  {
+   "id": "F1V43_P03_sin_comprobar_bloque",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "    if fuente not in FUENTES_RELEVO:\n        return None\n",
+   "despues": "",
+   "motivo": "aceptar cualquier posición del prompt (cabeceras incluidas)"
+  },
+  {
+   "id": "F1V43_P04_sin_contexto",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "b - a >= len(v) + CONTEXTO_MIN",
+   "despues": "b - a >= len(v)",
+   "motivo": "basta con que el literal aparezca en una respuesta"
+  },
+  {
+   "id": "F1V43_P05_una_verificada_basta",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "fugas = [e for e in base if e in sin_verificar or e not in vistas]",
+   "despues": "fugas = [e for e in base if e not in vistas]",
+   "motivo": "una aparición verificada exime a las demás"
+  },
+  {
+   "id": "F1V43_P06_forma_repr_olvidada",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "{json.dumps(o[\"esperado\"], ensure_ascii=False),\n                                                            repr(o[\"esperado\"])}",
+   "despues": "{json.dumps(o[\"esperado\"], ensure_ascii=False)}",
+   "motivo": "no buscar la forma repr del esperado"
+  },
+  {
+   "id": "F1V43_P07_exposicion_ignorada",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "[] if estado[\"expuesto\"] else respuestas",
+   "despues": "respuestas",
+   "motivo": "seguir eximiendo relevos tras una exposición"
+  },
+  {
+   "id": "F1V43_P08_sin_quitar_numero_de_linea",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "linea = _norm(_NUMERO_LINEA.sub(\"\", prompt[ini:len(prompt) if fin < 0 else fin], count=1))",
+   "despues": "linea = _norm(prompt[ini:len(prompt) if fin < 0 else fin])",
+   "motivo": "no quitar el número de línea del controlador"
+  },
+  {
+   "id": "F1V43_P09_protector_no_restaurado",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "        EV.proteger_backend = original\n",
+   "despues": "        pass\n",
+   "motivo": "dejar el protector de V4.3 puesto en la estable"
+  },
+  {
+   "id": "F1V43_P10_tarea_sin_protector",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "    with _protector_v43(configuracion):\n        fila = EV.ejecutar_tarea(",
+   "despues": "    if True:\n        fila = EV.ejecutar_tarea(",
+   "motivo": "ejecutar_tarea_e2 con el protector de la estable"
+  },
+  {
+   "id": "F1V43_P11_fuga_no_anotada",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "            res[\"abortada\"], res[\"valida\"] = f\"fuga_del_oraculo: {e}\", False\n",
+   "despues": "",
+   "motivo": "no anotar la fuga en comparacion.json"
+  },
+  {
+   "id": "F1V43_P12_fuga_no_aborta",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "            raise EV.FugaDeOraculo(f\"texto del oráculo en un prompt: {fugas}\")",
+   "despues": "            pass",
+   "motivo": "una fuga no verificada no aborta"
+  },
+  {
+   "id": "F1V43_P13_el_prompt_como_procedencia",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "[] if estado[\"expuesto\"] else respuestas,",
+   "despues": "([] if estado[\"expuesto\"] else respuestas) + [{\"norm\": _norm(texto), \"sha256\": \"\"}],",
+   "motivo": "contar el propio prompt (no una respuesta del modelo) como procedencia"
+  },
+  {
+   "id": "F1V43_P14_g10_sin_procedencia",
+   "archivo": "eq3/evaluar_f1_vram_exp_v4_3.py",
+   "antes": "and real[\"rc\"] == 0 and procedencia[\"rc\"] == 0}",
+   "despues": "and real[\"rc\"] == 0}",
+   "motivo": "G10 sin las pruebas de procedencia"
+  }
+ ]
+}

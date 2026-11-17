@@ -1,0 +1,24 @@
+{
+ "descripcion": "V3.1 F0.5: las defensas de eq3 rechazan las uniones de directorio de Windows (antes solo is_symlink)",
+ "orden": ["{python}", "-B", "-m", "unittest", "discover", "-s", "pruebas", "-t", "pruebas"],
+ "copiar": ["eq3", "pruebas", "equipo3.py", "contexto_ligero", "complementos_codex", "v3"],
+ "enlazar": ["sistema"],
+ "limite_s": 900,
+ "mutaciones": [
+  {"id": "M1_ingesta_sigue_uniones", "archivo": "eq3/ingesta.py",
+   "antes": "        if es_enlace(actual):\n            raise ErrorValidacion",
+   "despues": "        if actual.is_symlink():\n            raise ErrorValidacion",
+   "motivo": "importar de la traza archivos alcanzados a través de una unión de directorio",
+   "requiere": "windows"},
+  {"id": "M2_listar_a_traves_de_una_union", "archivo": "eq3/cambios.py",
+   "antes": "            if es_enlace(base) or not base.is_dir():",
+   "despues": "            if base.is_symlink() or not base.is_dir():",
+   "motivo": "que un agente liste una carpeta de fuera del proyecto a través de una unión",
+   "requiere": "windows"},
+  {"id": "M3_listar_muestra_uniones", "archivo": "eq3/cambios.py",
+   "antes": "                                                       if not es_enlace(p))}",
+   "despues": "                                                       if not p.is_symlink())}",
+   "motivo": "mostrar a los agentes las uniones del proyecto como carpetas normales",
+   "requiere": "windows"}
+ ]
+}

@@ -1,0 +1,345 @@
+{
+  "version": 1,
+  "declared_before_benchmark": true,
+  "selection_policy": "Seis flujos aislados de cinco funciones pertinentes y tres distractores cada uno; fijados antes de observar retrieval V3.4. Evalua cobertura funcional estatica, no respuestas LLM.",
+  "budget_estimated_tokens": 2000,
+  "query_file_limit": 12,
+  "tasks": [
+    {
+      "id": "flujo_pedidos",
+      "query": "pedidos flujo completo para procesar pedido: normalizar, validar, calcular, guardar y conservar dependencias",
+      "relevant": [
+        [
+          "pedidos.py",
+          "normalizar_pedido"
+        ],
+        [
+          "pedidos.py",
+          "validar_pedido"
+        ],
+        [
+          "pedidos.py",
+          "calcular_pedido"
+        ],
+        [
+          "pedidos.py",
+          "guardar_pedido"
+        ],
+        [
+          "pedidos.py",
+          "procesar_pedido"
+        ]
+      ],
+      "direct_relevant": [
+        [
+          "pedidos.py",
+          "procesar_pedido"
+        ]
+      ],
+      "dependency_relevant": [
+        [
+          "pedidos.py",
+          "normalizar_pedido"
+        ],
+        [
+          "pedidos.py",
+          "validar_pedido"
+        ],
+        [
+          "pedidos.py",
+          "calcular_pedido"
+        ],
+        [
+          "pedidos.py",
+          "guardar_pedido"
+        ]
+      ],
+      "evidence": [
+        "pedidos.py",
+        "procesar_pedido"
+      ],
+      "oracle_scope": "exhaustive_for_this_isolated_flow",
+      "rationale": "La funcion de entrada llama las otras cuatro; los tres distractores no participan."
+    },
+    {
+      "id": "flujo_inventario",
+      "query": "inventario flujo completo para sincronizar inventario: leer, validar, actualizar, persistir y conservar dependencias",
+      "relevant": [
+        [
+          "inventario.py",
+          "leer_inventario"
+        ],
+        [
+          "inventario.py",
+          "validar_inventario"
+        ],
+        [
+          "inventario.py",
+          "actualizar_inventario"
+        ],
+        [
+          "inventario.py",
+          "persistir_inventario"
+        ],
+        [
+          "inventario.py",
+          "sincronizar_inventario"
+        ]
+      ],
+      "direct_relevant": [
+        [
+          "inventario.py",
+          "sincronizar_inventario"
+        ]
+      ],
+      "dependency_relevant": [
+        [
+          "inventario.py",
+          "leer_inventario"
+        ],
+        [
+          "inventario.py",
+          "validar_inventario"
+        ],
+        [
+          "inventario.py",
+          "actualizar_inventario"
+        ],
+        [
+          "inventario.py",
+          "persistir_inventario"
+        ]
+      ],
+      "evidence": [
+        "inventario.py",
+        "sincronizar_inventario"
+      ],
+      "oracle_scope": "exhaustive_for_this_isolated_flow",
+      "rationale": "La funcion de entrada llama las otras cuatro; los tres distractores no participan."
+    },
+    {
+      "id": "flujo_envios",
+      "query": "envios flujo completo para preparar envio: normalizar, validar, cotizar, registrar y conservar dependencias",
+      "relevant": [
+        [
+          "envios.py",
+          "normalizar_envio"
+        ],
+        [
+          "envios.py",
+          "validar_envio"
+        ],
+        [
+          "envios.py",
+          "cotizar_envio"
+        ],
+        [
+          "envios.py",
+          "registrar_envio"
+        ],
+        [
+          "envios.py",
+          "preparar_envio"
+        ]
+      ],
+      "direct_relevant": [
+        [
+          "envios.py",
+          "preparar_envio"
+        ]
+      ],
+      "dependency_relevant": [
+        [
+          "envios.py",
+          "normalizar_envio"
+        ],
+        [
+          "envios.py",
+          "validar_envio"
+        ],
+        [
+          "envios.py",
+          "cotizar_envio"
+        ],
+        [
+          "envios.py",
+          "registrar_envio"
+        ]
+      ],
+      "evidence": [
+        "envios.py",
+        "preparar_envio"
+      ],
+      "oracle_scope": "exhaustive_for_this_isolated_flow",
+      "rationale": "La funcion de entrada llama las otras cuatro; los tres distractores no participan."
+    },
+    {
+      "id": "flujo_sesiones",
+      "query": "sesiones flujo completo para mantener sesion: cargar, validar, renovar, guardar y conservar dependencias",
+      "relevant": [
+        [
+          "sesiones.py",
+          "cargar_sesion"
+        ],
+        [
+          "sesiones.py",
+          "validar_sesion"
+        ],
+        [
+          "sesiones.py",
+          "renovar_sesion"
+        ],
+        [
+          "sesiones.py",
+          "guardar_sesion"
+        ],
+        [
+          "sesiones.py",
+          "mantener_sesion"
+        ]
+      ],
+      "direct_relevant": [
+        [
+          "sesiones.py",
+          "mantener_sesion"
+        ]
+      ],
+      "dependency_relevant": [
+        [
+          "sesiones.py",
+          "cargar_sesion"
+        ],
+        [
+          "sesiones.py",
+          "validar_sesion"
+        ],
+        [
+          "sesiones.py",
+          "renovar_sesion"
+        ],
+        [
+          "sesiones.py",
+          "guardar_sesion"
+        ]
+      ],
+      "evidence": [
+        "sesiones.py",
+        "mantener_sesion"
+      ],
+      "oracle_scope": "exhaustive_for_this_isolated_flow",
+      "rationale": "La funcion de entrada llama las otras cuatro; los tres distractores no participan."
+    },
+    {
+      "id": "flujo_reservas",
+      "query": "reservas flujo completo para confirmar reserva: normalizar, validar, comprobar, guardar y conservar dependencias",
+      "relevant": [
+        [
+          "reservas.py",
+          "normalizar_reserva"
+        ],
+        [
+          "reservas.py",
+          "validar_reserva"
+        ],
+        [
+          "reservas.py",
+          "comprobar_reserva"
+        ],
+        [
+          "reservas.py",
+          "guardar_reserva"
+        ],
+        [
+          "reservas.py",
+          "confirmar_reserva"
+        ]
+      ],
+      "direct_relevant": [
+        [
+          "reservas.py",
+          "confirmar_reserva"
+        ]
+      ],
+      "dependency_relevant": [
+        [
+          "reservas.py",
+          "normalizar_reserva"
+        ],
+        [
+          "reservas.py",
+          "validar_reserva"
+        ],
+        [
+          "reservas.py",
+          "comprobar_reserva"
+        ],
+        [
+          "reservas.py",
+          "guardar_reserva"
+        ]
+      ],
+      "evidence": [
+        "reservas.py",
+        "confirmar_reserva"
+      ],
+      "oracle_scope": "exhaustive_for_this_isolated_flow",
+      "rationale": "La funcion de entrada llama las otras cuatro; los tres distractores no participan."
+    },
+    {
+      "id": "flujo_reembolsos",
+      "query": "reembolsos flujo completo para tramitar reembolso: cargar, validar, calcular, registrar y conservar dependencias",
+      "relevant": [
+        [
+          "reembolsos.py",
+          "cargar_reembolso"
+        ],
+        [
+          "reembolsos.py",
+          "validar_reembolso"
+        ],
+        [
+          "reembolsos.py",
+          "calcular_reembolso"
+        ],
+        [
+          "reembolsos.py",
+          "registrar_reembolso"
+        ],
+        [
+          "reembolsos.py",
+          "tramitar_reembolso"
+        ]
+      ],
+      "direct_relevant": [
+        [
+          "reembolsos.py",
+          "tramitar_reembolso"
+        ]
+      ],
+      "dependency_relevant": [
+        [
+          "reembolsos.py",
+          "cargar_reembolso"
+        ],
+        [
+          "reembolsos.py",
+          "validar_reembolso"
+        ],
+        [
+          "reembolsos.py",
+          "calcular_reembolso"
+        ],
+        [
+          "reembolsos.py",
+          "registrar_reembolso"
+        ]
+      ],
+      "evidence": [
+        "reembolsos.py",
+        "tramitar_reembolso"
+      ],
+      "oracle_scope": "exhaustive_for_this_isolated_flow",
+      "rationale": "La funcion de entrada llama las otras cuatro; los tres distractores no participan."
+    }
+  ]
+}

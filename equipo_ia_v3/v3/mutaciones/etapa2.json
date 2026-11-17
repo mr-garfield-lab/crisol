@@ -1,0 +1,28 @@
+{
+ "descripcion": "Etapa 2: índice de código, contexto, grafo de tareas y medición (Contexto Ligero reutilizado)",
+ "orden": ["{python}", "-B", "-m", "unittest", "discover", "-s", "pruebas", "-t", "pruebas", "-p", "test_eq3_grafo.py"],
+ "copiar": ["eq3", "pruebas", "equipo3.py", "contexto_ligero"],
+ "enlazar": ["sistema"],
+ "limite_s": 600,
+ "mutaciones": [
+  {"id": "M1_versiones_sin_enlazar", "archivo": "eq3/grafo.py",
+   "antes": "                    arista(f\"ver:{eid}/v{v}\", f\"ver:{eid}/v{v - 1}\", \"depends_on\")",
+   "despues": "                    pass", "motivo": "perder la cadena de versiones en el grafo"},
+  {"id": "M2_ejecucion_sin_objetivo", "archivo": "eq3/grafo.py",
+   "antes": "            arista(f\"ejec:{eid}\", f\"obj:{e['objetivo_id']}\", \"depends_on\")",
+   "despues": "            pass", "motivo": "una ejecución desconectada de su objetivo"},
+  {"id": "M3_experiencias_sin_enlazar", "archivo": "eq3/grafo.py",
+   "antes": "                arista(f\"exp:{x['agente']}/{x['recuerdo_id']}\", f\"ejec:{eid}\", \"relates_to\")",
+   "despues": "                pass", "motivo": "la memoria de los agentes no se enlazaría con lo que la produjo"},
+  {"id": "M4_reimportar_duplica_o_rompe", "archivo": "eq3/grafo.py",
+   "antes": "self.db.execute(\"INSERT OR REPLACE INTO decisions VALUES (?, ?, ?, ?)\",",
+   "despues": "self.db.execute(\"INSERT INTO decisions VALUES (?, ?, ?, ?)\",",
+   "motivo": "reimportar la traza fallaría o duplicaría decisiones"},
+  {"id": "M5_oraculos_sin_traducir_rutas", "archivo": "eq3/grafo.py",
+   "antes": "rel = ruta[4:] if ruta.startswith(\"src/\") else ruta", "despues": "rel = ruta",
+   "motivo": "la medición descartaría en silencio todos los oráculos"},
+  {"id": "M6_copia_de_contexto_alterada", "archivo": "contexto_ligero/LEEME.md",
+   "antes": "# Contexto Ligero V3.5\n", "despues": "# Contexto Ligero V3.5 (modificado)\n",
+   "motivo": "la copia reutilizada dejaría de ser idéntica a su origen"}
+ ]
+}

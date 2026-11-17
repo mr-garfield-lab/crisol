@@ -1,0 +1,44 @@
+{
+ "version": 4,
+ "variante": "F1-VRAM-EXP-V4",
+ "base": "prerregistro V3 (F1-VRAM-EXP) sin cambios, que incluye V2 y V1",
+ "fecha_utc": "2026-11-12T07:40:34Z",
+ "estado": "PRERREGISTRADO, NO EJECUTADO (la evaluación F1 completa NO está autorizada)",
+ "llama_e2": [
+  "--fit",
+  "off",
+  "-ngl",
+  "all",
+  "-fa",
+  "on",
+  "-ub",
+  "128",
+  "-b",
+  "512",
+  "-lv",
+  "4"
+ ],
+ "limites": {
+  "vram_tope_MiB": 6912,
+  "vram_otras_max_MiB": 1992,
+  "pico_e2_medido_MiB": 4420,
+  "crecimiento_ajeno_max_MiB": 251,
+  "margen_MiB": 500,
+  "variacion_otras_max_MiB": 200,
+  "uso_gpu_max_pct": 40,
+  "inactividad_min_s": 600
+ },
+ "fondo_animado": "Wallpaper Engine: -control stop con el PC libre; -control play al terminar, abortar, fallar o si aparece una persona; nunca se cierra ni se fuerza",
+ "sin_cambios": "tareas, oráculos, prompts, configuraciones, orden, temperaturas, semillas, regla de decisión, STOP, monitor de memoria, propiedad de procesos y reintentos por terceros: los de V3",
+ "sha256": {
+  "evaluacion_f1/PRERREGISTRO_F1.json": "0f7001ec392b998f0db6d75cda919ee523faf79555d54472f37255e24a318858",
+  "evaluacion_f1/PRERREGISTRO_F1_v1.json": "3bb06f3d45ff5a7493577588f47971f7d258c19f59427f101d1cb088322cbd02",
+  "evaluacion_f1/PRERREGISTRO_F1_VRAM_EXP_v3.json": "3985efacec4891b77fe50e8c7f2b0de473dc385e17ead275b704cb0a605d2f86",
+  "eq3/evaluar_f1_vram_exp_v4.py": "7b5cae56a342b53a97721114cfe06a754909c780da4dd123bc7f7285802b6901",
+  "lab_vram/wallpaper.py": "4c6d0d48f34101982a2ae27ac1d7e42ac2316e7193b3f0a54a680e5d56dbda44",
+  "pruebas/test_eq3_evaluar_f1_vram_exp_v4.py": "fa5c41d857c774617e9537bdd5e62b885ae60a6f02ce572d635f5a10d863c98f",
+  "v3/mutaciones/v31_f1_vram_exp_v4.json": "696da5c733723b585625d4a47d08e2bab5ae94796c05db74b33d0558e463bb47",
+  "evaluacion_f1/prerregistrar_vram_exp_v4.py": "8bd6923c8173f1469bb7e64f14d9f17b74ada74597a77b6b2b8aa79d35966faa",
+  "docs/V31_F1_VRAM_EXP_V4.md": "e34854ac51563db4ba3160c17349d35cf79f065ebc9c9e690d14635033d08144"
+ }
+}

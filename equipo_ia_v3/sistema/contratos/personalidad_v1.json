@@ -1,0 +1,96 @@
+{
+ "$comment": "Contrato de personalidad de Equipo IA, versión 1.0. Documentación del formato: la validación real la hace eq2.personalidad.validar_contrato (esquema CERRADO). Un documento válido no se activa: en el futuro solo podrá entrar como PROPUESTA pendiente de aprobación del usuario.",
+ "contrato": "eq2/personalidad",
+ "version_contrato": "1.<n> (se aceptan las versiones menores 1.x; otra versión mayor se rechaza)",
+ "campos": {
+  "contrato": {
+   "tipo": "texto",
+   "valor": "eq2/personalidad",
+   "obligatorio": true
+  },
+  "version_contrato": {
+   "tipo": "texto",
+   "patron": "^1\\.\\d{1,3}$",
+   "obligatorio": true
+  },
+  "agente": {
+   "tipo": "texto",
+   "valores": [
+    "A1",
+    "A2",
+    "A3"
+   ],
+   "obligatorio": true
+  },
+  "perfil": {
+   "obligatorio": true,
+   "campos": {
+    "rasgos": {
+     "tipo": "lista de 1 a 4 textos",
+     "patron_de_cada_uno": "una o dos palabras en minúsculas, 3–24 letras (a-z, tildes, ñ, ü, guion o espacio)",
+     "prohibido": "rasgos que aludan a permisos, rol, función, seguridad, límites, criterios, evaluación, votos, instrucciones, sistema o código"
+    },
+    "estilo": {
+     "tono": [
+      "formal",
+      "neutral",
+      "cercano"
+     ],
+     "verbosidad": "entero 1–5",
+     "formato": [
+      "prosa",
+      "listas",
+      "mixto"
+     ]
+    },
+    "preferencias": {
+     "ejemplos": "booleano",
+     "explicar_razonamiento": "booleano",
+     "pedir_aclaraciones": [
+      "rara_vez",
+      "a_veces",
+      "a_menudo"
+     ]
+    }
+   }
+  },
+  "origen": {
+   "obligatorio": true,
+   "campos": {
+    "tipo": [
+     "modulo_externo",
+     "simulado",
+     "qwen"
+    ],
+    "proveedor": "texto 1–80",
+    "version_modulo": "texto 1–80"
+   }
+  },
+  "creado": {
+   "tipo": "fecha ISO 8601",
+   "obligatorio": true
+  },
+  "notas": {
+   "tipo": "texto ≤ 300",
+   "obligatorio": false
+  }
+ },
+ "nunca_admitido": [
+  "permisos",
+  "rol",
+  "funcion",
+  "seguridad",
+  "modo_b",
+  "politicas",
+  "criterios",
+  "limites",
+  "evaluacion",
+  "herramientas",
+  "acceso",
+  "privilegios",
+  "votos",
+  "prompt",
+  "instrucciones"
+ ],
+ "efecto_en_V2-E.5-r3": "ninguno: el perfil no se inyecta en los prompts ni cambia permisos, votos, límites o criterios"
+}

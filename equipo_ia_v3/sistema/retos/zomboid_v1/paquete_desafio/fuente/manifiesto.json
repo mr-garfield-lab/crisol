@@ -1,0 +1,67 @@
+{
+ "formato": "eq2/desafio",
+ "version_formato": 1,
+ "id": "DES-ZOMBOID-0001",
+ "titulo": "Reto Zomboid v1: diagnóstico estático con oráculos",
+ "autor": "Claude (desarrollo de Equipo IA)",
+ "origen": "incluido en la versión; evidencias = extractos del registro aportados por el usuario",
+ "creado": "2026-10-26T12:00:00-03:00",
+ "compatible_con": [
+  "f2-v2e6-r1",
+  "f2-v2e6-r2",
+  "f2-v2e6-r3",
+  "f2-v2e7-r1",
+  "f2-v2e7-r2",
+  "f2-v2e7-r3",
+  "f2-v2f",
+  "f2-v2f1"
+ ],
+ "descripcion": "Paquete declarativo de desafío: material, oráculos y respuestas de calibración. No contiene código.",
+ "pruebas": [
+  {
+   "id": "DZ-01",
+   "objetivo": "el generador propio es reproducible con la semilla 42",
+   "operacion": "generar_reto",
+   "parametros": {
+    "reto": "reto",
+    "semilla": 42,
+    "n": 3
+   },
+   "criterio": {
+    "casos": [
+     "viewpoint",
+     "plantillas",
+     "inicio"
+    ]
+   },
+   "recursos": {},
+   "segundos_max": 30
+  },
+  {
+   "id": "DZ-02",
+   "objetivo": "el puntuador separa respuestas de referencia buenas (>=10) y malas (<=3) con sus penalizaciones",
+   "operacion": "puntuar_reto",
+   "parametros": {
+    "reto": "reto",
+    "archivo": "datos/respuestas.json"
+   },
+   "criterio": {},
+   "recursos": {},
+   "segundos_max": 60
+  },
+  {
+   "id": "DZ-03",
+   "objetivo": "una prueba que pide el modelo real no se ejecuta desde un paquete",
+   "operacion": "puntuar_reto",
+   "parametros": {
+    "reto": "reto",
+    "archivo": "datos/respuestas.json"
+   },
+   "criterio": {},
+   "recursos": {
+    "modelo": true
+   },
+   "segundos_max": 60
+  }
+ ]
+}

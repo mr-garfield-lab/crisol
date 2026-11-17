@@ -1,0 +1,23 @@
+{
+  "acciones": [
+    {
+      "accion": "agregar",
+      "objeto": "Base.Bandage",
+      "cantidad": 2
+    },
+    {
+      "accion": "consumir",
+      "objeto": "Base.Bandage",
+      "cantidad": 1
+    },
+    {
+      "accion": "comprobar",
+      "objeto": "Base.Bandage",
+      "cantidad": 1
+    },
+    {
+      "accion": "evento",
+      "objeto": "OnPlayerUpdate"
+    }
+  ]
+}

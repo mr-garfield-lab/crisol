@@ -1,0 +1,2 @@
+# Opcional. El motor básico usa solamente la biblioteca estándar.
+tokenizers==0.22.2

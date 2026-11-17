@@ -1,0 +1,14 @@
+{
+ "origen": "fuentes/codex_complementos (selección de EquipoIA.zip, SHA-256 en ORIGENES_SHA256.json)",
+ "regla": "copia IDÉNTICA, sin modificaciones; las adaptaciones van en eq3/, nunca aquí",
+ "archivos": {
+  "INTEGRACION_CLAUDE.md": "4215bace75e8d049764d7961b1aed6ad4f1b629dbd5e229a9532f9ae45757316",
+  "LEEME.md": "7393c1834a73f43dacc3abebb26880a6743e342a4b6c0eb85650bb738df81dbf",
+  "complementos/__init__.py": "da2c0526642a4f438e2756d7b89047fb2d99c505a6f5822a565adee68e521d06",
+  "complementos/contexto_v2f.py": "06e15f430e3eed34b85b8945381c575b0dccea9ed904f3d67f70536fabd72e5a",
+  "complementos/diagnostico.py": "d4f537270fa8132c026573e1e15b874211881b8da0ad7ab584c854a768f3cb5b",
+  "complementos/herramientas.py": "599425b2e79168546b9972c85afaf34a20973fbd6858c17802cd48cce3fba521",
+  "complementos/memoria.py": "a1ef663158495c64a7a862e185f6342d41201e21c5e807e47f0aa25b91ce329b",
+  "complementos/v2f.py": "76df188fc0daf111d51a997b14060debcf3b5d3ca29fb52c2de8279a9144e689"
+ }
+}

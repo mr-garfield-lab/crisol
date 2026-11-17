@@ -1,0 +1,90 @@
+{
+ "descripcion": "V3.1 F1: servidor real del PC con el ciclo de vida de V2-F.1",
+ "orden": [
+  "{python}",
+  "-B",
+  "-m",
+  "unittest",
+  "discover",
+  "-s",
+  "pruebas",
+  "-t",
+  "pruebas",
+  "-p",
+  "test_eq3_servidor_pc.py"
+ ],
+ "copiar": [
+  "pruebas",
+  "sistema",
+  "eq3"
+ ],
+ "enlazar": [],
+ "copiar_raiz": [],
+ "limite_s": 900,
+ "mutaciones": [
+  {
+   "id": "F1S_01_sin_sha256",
+   "archivo": "eq3/servidor_pc.py",
+   "antes": "        if sha256_archivo(p) != d[\"sha256\"]:",
+   "despues": "        if False:",
+   "motivo": "dar por bueno un binario o un modelo con otro contenido"
+  },
+  {
+   "id": "F1S_02_sin_tamano",
+   "archivo": "eq3/servidor_pc.py",
+   "antes": "        if st.st_size != d[\"bytes\"]:",
+   "despues": "        if False:",
+   "motivo": "no comprobar el tamaño de los componentes externos"
+  },
+  {
+   "id": "F1S_03_archivo_de_mas",
+   "archivo": "eq3/servidor_pc.py",
+   "antes": "            problemas.append(f\"archivo no registrado: {n}\")",
+   "despues": "            pass",
+   "motivo": "ignorar un archivo no registrado junto al ejecutable (p. ej. una DLL plantada)"
+  },
+  {
+   "id": "F1S_04_cambio_posterior",
+   "archivo": "eq3/servidor_pc.py",
+   "antes": "    if cambiados:",
+   "despues": "    if False:",
+   "motivo": "lanzar con un componente cambiado después de verificarlo"
+  },
+  {
+   "id": "F1S_05_sin_verificacion",
+   "archivo": "eq3/servidor_pc.py",
+   "antes": "    if verificacion.get(\"ok\") is not True or not verificacion.get(\"huellas\"):",
+   "despues": "    if False:",
+   "motivo": "crear el backend sin una verificación correcta"
+  },
+  {
+   "id": "F1S_06_detector_abierto",
+   "archivo": "eq3/servidor_pc.py",
+   "antes": "        return SIN_LISTA",
+   "despues": "        return None",
+   "motivo": "no lanzar nada si no se pueden listar los procesos -> lanzar igualmente (falla abierto)",
+   "requiere": "windows"
+  },
+  {
+   "id": "F1S_07_lista_vacia_creible",
+   "archivo": "eq3/servidor_pc.py",
+   "antes": "    if not procesos:                                             # None o lista vacía: una lista vacía no es creíble",
+   "despues": "    if procesos is None:",
+   "motivo": "creer una lista de procesos vacía"
+  },
+  {
+   "id": "F1S_08_nombre_con_mayusculas",
+   "archivo": "eq3/servidor_pc.py",
+   "antes": "    return [(pid, n) for pid, n in procesos if n.lower().startswith(PREFIJO_LLAMA)]",
+   "despues": "    return [(pid, n) for pid, n in procesos if n.startswith(PREFIJO_LLAMA)]",
+   "motivo": "no detectar LLAMA-server.exe por las mayúsculas"
+  },
+  {
+   "id": "F1S_09_hilos_sin_aplicar",
+   "archivo": "eq3/servidor_pc.py",
+   "antes": "    config.HILOS = int(hilos)",
+   "despues": "    pass",
+   "motivo": "no aplicar los hilos del PC"
+  }
+ ]
+}

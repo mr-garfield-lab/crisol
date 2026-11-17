@@ -1,0 +1,158 @@
+{
+ "version": "5.1",
+ "variante": "F1-V5.1",
+ "base": "F1-V5 (código, prerregistro y evidencia conservados sin cambios)",
+ "fecha_utc": "2026-11-13T21:05:16Z",
+ "estado": "PRERREGISTRADO ANTES DE LAS PUERTAS; autorizado por el usuario (2026-11-13) preparar la versión completa; el cribado y el equipo se lanzan SOLO con su aprobación",
+ "motivo": "equipo1 de V5 se abortó en T08 (E3 qwen3+yi) por un falso positivo del control de fugas: la continuación (prefill) reenvía la respuesta cortada del propio modelo como mensaje «assistant»; diagnóstico reproducido en evidencias/v31_f1_v5/diagnostico_t08",
+ "cambios_sobre_v5": [
+  "control de fugas: un mensaje «assistant» que repite byte a byte (SHA-256) una respuesta de ESTE servidor en ESTA tarea no cuenta como texto del evaluador; se anota (ecos_verificados); todo lo demás, igual (fallo cerrado)",
+  "seis cerebros: los de V5 + Gemma 4 E4B y Ministral 3 8B (aptos en el banco de capacidad); cribado S1 de las 15 tareas con los seis, con la regla de V5",
+  "descanso al empezar cada bloque: ≥ 60 s y ≤ 55 °C sin freno de software (máx. 300 s; si no, se anota); ningún límite térmico cambia",
+  "puerta G17: regresión real del caso T08 (E3 qwen3 + yi)"
+ ],
+ "cerebros": {
+  "qwen25": {
+   "archivo": "modelos/qwen2.5-coder-7b-instruct-q4_k_m.gguf",
+   "sha256": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+   "bytes": 4683073536,
+   "familia": "qwen",
+   "origen": "https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+   "licencia": "Apache-2.0"
+  },
+  "qwen3": {
+   "archivo": "modelos/Qwen_Qwen3-8B-Q4_K_M.gguf",
+   "sha256": "54fffa050078e984116639c83dfb64b5aa6d4cd474e018b076777c632bbccccd",
+   "bytes": 5027784224,
+   "familia": "qwen",
+   "origen": "https://huggingface.co/bartowski/Qwen_Qwen3-8B-GGUF",
+   "licencia": "Apache-2.0"
+  },
+  "granite": {
+   "archivo": "modelos/granite-3.3-8b-instruct-Q4_K_M.gguf",
+   "sha256": "77bcee066a76dcdd10d0d123c87e32c8ec2c74e31b6ffd87ebee49c9ac215dca",
+   "bytes": 4942873344,
+   "familia": "granite",
+   "origen": "https://huggingface.co/ibm-granite/granite-3.3-8b-instruct-GGUF",
+   "licencia": "Apache-2.0"
+  },
+  "yi": {
+   "archivo": "modelos/Yi-Coder-9B-Chat-Q4_K_M.gguf",
+   "sha256": "251cc196e3813d149694f362bb0f8f154f3320abe44724eebe58c23dc54f201d",
+   "bytes": 5328958272,
+   "familia": "yi",
+   "origen": "https://huggingface.co/bartowski/Yi-Coder-9B-Chat-GGUF",
+   "licencia": "Apache-2.0"
+  },
+  "gemma4": {
+   "archivo": "modelos/gemma-4-E4B-it-Q4_K_M.gguf",
+   "sha256": "85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87",
+   "bytes": 4977171584,
+   "familia": "gemma",
+   "origen": "https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF (revisión bfc15c382204943c3a8fff0c750b94ae2364d7a3)",
+   "licencia": "Apache-2.0",
+   "publicado": "2026-04"
+  },
+  "ministral3": {
+   "archivo": "modelos/Ministral-3-8B-Instruct-2512-Q4_K_M.gguf",
+   "sha256": "33e7a72cf5e6e2cfc2f2847075acc013d68bba023e35310cef86b5cf8fdca761",
+   "bytes": 5198911904,
+   "familia": "mistral",
+   "origen": "https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512-GGUF (revisión 0102285ad796bd99af90f58de616092e5630e970)",
+   "licencia": "Apache-2.0",
+   "publicado": "2025-12"
+  }
+ },
+ "orden_cribado": [
+  "qwen25",
+  "qwen3",
+  "granite",
+  "yi",
+  "gemma4",
+  "ministral3"
+ ],
+ "descanso_bloque": {
+  "descanso_s": 60,
+  "objetivo_C": 55,
+  "max_s": 300
+ },
+ "llama_e2": [
+  "--fit",
+  "off",
+  "-ngl",
+  "all",
+  "-fa",
+  "on",
+  "-ub",
+  "128",
+  "-b",
+  "512",
+  "-lv",
+  "4",
+  "-ctk",
+  "q8_0",
+  "-ctv",
+  "q8_0",
+  "--reasoning",
+  "off"
+ ],
+ "ctx": 4096,
+ "limites": {
+  "vram_tope_MiB": 6912,
+  "vram_otras_max_MiB": 1100,
+  "pico_max_MiB": 5312,
+  "margen_MiB": 500
+ },
+ "ruta_agentes": {
+  "A1": "generador",
+  "A2": "revisor",
+  "A3": "revisor"
+ },
+ "orden_equipo": {
+  "1": [
+   "S1",
+   "E3_uno",
+   "E3_dos"
+  ],
+  "2": [
+   "E3_dos",
+   "E3_uno",
+   "S1"
+  ]
+ },
+ "reglas": {
+  "cribado": "S1, 15 tareas, 1 repetición, 6 cerebros. Generador = más CORRECTO; empate → menos FALLO_SEGURIDAD; empate → orden del registro. Revisor = el mejor de OTRA familia con la misma regla. Solo cuentan los cerebros con todas sus filas y sin fallos de infraestructura.",
+  "equipo": "S1(generador), E3 con un cerebro y E3 con dos, 2 repeticiones contrabalanceadas. H1: E3 dos supera a S1; H2: E3 dos supera a E3 uno.",
+  "supera": "≥ 3 CORRECTO más en TODAS las repeticiones y no más FALLO_SEGURIDAD (la de F1)"
+ },
+ "politica_interrupcion": "una fase abortada (STOP, térmica crítica, externo inseguro, VRAM, fuga, cambio de cerebro fallido o > 4 h de espera) NO es válida, se conserva y NO se reinicia sola; una tarea cortada por terceros se repite desde cero (≤ 2)",
+ "sin_cambios": "tareas, oráculos, prompts, temperatura, semillas, topes de salida por paso, protocolo térmico y sus límites, vigía de VRAM, persona y recursos, fondo animado, STOP global, E2 de V5 y control de fugas con procedencia: los de V5 y V4.5.1",
+ "sha256": {
+  "eq3/evaluar_f1_v5_1.py": "fe6874016d731a3c81c3b52ba141b8119a08603aa02053c943f66f7ac4ab04a0",
+  "eq3/modelos_v5_1.json": "8be6ec8c121d1e5fdb2ee053ea03a59e766eebe74f404576bb74acff23a8df3c",
+  "pruebas/test_eq3_evaluar_f1_v5_1.py": "be24cf509f3b24c6040075121a1c53639db95461772ec83d9e99fedd7aba8aca",
+  "v3/mutaciones/v31_f1_v5_1.json": "bafaad2be3829494b8e095909dfab34d89a71d0d6bfe3f92640d112d21896e04",
+  "evaluacion_f1/prerregistrar_v5_1.py": "7b538dbcd985b3baabbda5977891b31a0143035b6cad78d2ba2ef80be9ab756f",
+  "docs/V31_F1_V5_1.md": "d36bba66e4462a5057f3eadccca2cb39cad9686960989d6da96415e8ddfdebdd",
+  "eq3/evaluar_f1_v5.py": "ac8db746159b0d8e0ded3a52ebd560966ee059cb5c530225e3c3c0e0e13f1f58",
+  "eq3/modelos_v5.json": "30f4c9df619cb86fb4629dd1a90fab00d172b1a7ada6c9869a2258a3c69fa69d",
+  "pruebas/test_eq3_evaluar_f1_v5.py": "51a75e011ecfc61d01e3e8c986422f95756fcc4b59a4e734c0255948e6d89fe6",
+  "v3/mutaciones/v31_f1_v5.json": "f4b70f93ffe83f9e8cf8257ea390e0259cef8ab16a537e1760c9d07e2854ac35",
+  "evaluacion_f1/prerregistrar_v5.py": "1a7816a954b736a7ee000e7fb9012109f09a1012fa65c818c32c138eb7a568af",
+  "evaluacion_f1/PRERREGISTRO_F1_V5.json": "1743e42d30176d738f11d1de3d85a7838e169a5b4840103db74667e5ddee8555",
+  "docs/V31_F1_V5.md": "e7b2b8b67fdf2b17018139d0e6b3d3b7545964fb826018d84cb969d31c5cdd96",
+  "evidencias/v31_f1_v5/puertas2/puertas.json": "150092b6a52a4c777a9283ca8c3136659f002dc3fc662f0d76e20bc5edd0d1d5",
+  "evidencias/v31_f1_v5/cribado1/comparacion.json": "fc983f31e8cc743ca73e4e5c00f3e23aed4253ab422332b4faae7cb8824144d3",
+  "evidencias/v31_f1_v5/equipo1/comparacion.json": "81df463ced93198a9302768da0f05c47965624b1265ce516e876d4287da1afe1",
+  "evidencias/v31_f1_v5/diagnostico_t08/diagnostico.json": "951c70fe3bf05e10d2abf35919474b05dbae269d6b95db1067f3062c2cb728e8",
+  "evidencias/v31_f1_v5/diagnostico_t08/diario_control_fugas.json": "42bc3b73023726b930b36d5600daa96fb0fad056fb906123b65f97be17a1213b",
+  "evidencias/v31_f1_v5/banco1/analisis.json": "72e72de1f70c179ec4e2fca72b4059b4b0d61113af4ebadb43622c9111391987",
+  "lab_vram/banco_modelos_extra.json": "1655aeb74d24212e8ae92b6d6285e97918baa53db4132a8c440d3616e5b004ac",
+  "evaluacion_f1/PRERREGISTRO_BANCO_CAPACIDAD_V5.json": "c9442485037c17e79a0f6e1e73f7aa2bc54df9d0669437b0442decc33897e482",
+  "evaluacion_f1/PRERREGISTRO_F1_VRAM_EXP_v4_5_1.json": "d60a887586bbda21204ddccbf1d541cb46a58063c49dbbaf0a688fc90af07ee8",
+  "eq3/evaluar_f1_vram_exp_v4_5_1.py": "059bc572e571e0b34ee83244ec8d4433e624f183cecd40f538fe33c4fd5cb02f",
+  "eq3/termica_v4_5.py": "84f823c154e565592b44c1e1ec93a1603aa60e66a5b4f84467d5e177cc2f52d3",
+  "eq3/externos_f1.json": "9b97316536ab050471fc04bed9f2f157eb11a7a6cc967f5a791677e2d3abdabc",
+  "eq3/servidor_pc.py": "eb0097c8d21784ac88300b661d879d7784fa7f9b17db31183a3806eee3e80a9d"
+ }
+}

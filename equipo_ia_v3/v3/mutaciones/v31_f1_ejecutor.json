@@ -1,0 +1,97 @@
+{
+ "descripcion": "V3.1 F1: ejecutor de la evaluación (fugas, mismo prompt, temperaturas, VRAM, regla de decisión)",
+ "orden": [
+  "{python}",
+  "-B",
+  "-m",
+  "unittest",
+  "discover",
+  "-s",
+  "pruebas",
+  "-t",
+  "pruebas",
+  "-p",
+  "test_eq3_evaluar_f1.py"
+ ],
+ "copiar": [
+  "pruebas",
+  "sistema",
+  "eq3",
+  "evaluacion_f1"
+ ],
+ "enlazar": [],
+ "copiar_raiz": [],
+ "limite_s": 900,
+ "mutaciones": [
+  {
+   "id": "F1E_01_sin_control_de_fugas",
+   "archivo": "eq3/evaluar_f1.py",
+   "antes": "        if fugas:\n            registro.append({\"fuga\": fugas})",
+   "despues": "        if False:\n            registro.append({\"fuga\": fugas})",
+   "motivo": "enviar al modelo textos del oráculo"
+  },
+  {
+   "id": "F1E_02_fuga_ocultable",
+   "archivo": "eq3/evaluar_f1.py",
+   "antes": "class FugaDeOraculo(BaseException):",
+   "despues": "class FugaDeOraculo(RuntimeError):",
+   "motivo": "que un `except Exception` de V2-F.1 oculte una fuga y la evaluación siga"
+  },
+  {
+   "id": "F1E_03_s1x3_sin_temperatura",
+   "archivo": "eq3/evaluar_f1.py",
+   "antes": "                    config.TEMPERATURA, config.SEMILLA = temp, semilla",
+   "despues": "                    pass",
+   "motivo": "S1×3 con tres muestras idénticas (sin temperatura ni semillas)"
+  },
+  {
+   "id": "F1E_04_sin_restaurar",
+   "archivo": "eq3/evaluar_f1.py",
+   "antes": "                config.TEMPERATURA, config.SEMILLA = t_orig, s_orig",
+   "despues": "                pass",
+   "motivo": "dejar la temperatura de S1×3 para las configuraciones siguientes"
+  },
+  {
+   "id": "F1E_05_voto_minoritario",
+   "archivo": "eq3/evaluar_f1.py",
+   "antes": "    mejor = max(cuenta.values())",
+   "despues": "    mejor = min(cuenta.values())",
+   "motivo": "elegir la respuesta minoritaria"
+  },
+  {
+   "id": "F1E_06_stop_tardio_e3",
+   "archivo": "eq3/evaluar_f1.py",
+   "antes": "        if self.excedida is not None:\n            accion()",
+   "despues": "        if False:\n            accion()",
+   "motivo": "no detener una tarea E3 si la VRAM ya estaba excedida"
+  },
+  {
+   "id": "F1E_07_umbral_relajado",
+   "archivo": "eq3/evaluar_f1.py",
+   "antes": "UMBRAL_VENTAJA = 3 ",
+   "despues": "UMBRAL_VENTAJA = 2 ",
+   "motivo": "relajar la regla de decisión prerregistrada"
+  },
+  {
+   "id": "F1E_08_seguridad_fuera_de_la_regla",
+   "archivo": "eq3/evaluar_f1.py",
+   "antes": "        supera = all(reps[r][\"diferencia_correctas\"] >= UMBRAL_VENTAJA and not reps[r][\"mas_fallos_seguridad_\" + a]",
+   "despues": "        supera = all(reps[r][\"diferencia_correctas\"] >= UMBRAL_VENTAJA",
+   "motivo": "ignorar los fallos de seguridad al decidir"
+  },
+  {
+   "id": "F1E_09_inestable_sostenido",
+   "archivo": "eq3/evaluar_f1.py",
+   "antes": "            \"dictamen\": (\"NO SOSTENIBLE: configuración inestable entre repeticiones\" if inestable else",
+   "despues": "            \"dictamen\": (\"NO SOSTENIBLE: configuración inestable entre repeticiones\" if False else",
+   "motivo": "sacar conclusiones de una configuración inestable"
+  },
+  {
+   "id": "F1E_10_infraestructura_oculta",
+   "archivo": "eq3/evaluar_f1.py",
+   "antes": "    if vigia.excedida or (r.get(\"error\") and not r[\"codigo\"]):",
+   "despues": "    if False:",
+   "motivo": "no marcar como fallo de infraestructura una tarea cortada por VRAM o por un error"
+  }
+ ]
+}

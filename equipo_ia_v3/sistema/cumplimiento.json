@@ -1,0 +1,1042 @@
+{
+ "formato": "eq2/cumplimiento",
+ "version": 1,
+ "version_equipo": "f2-v2f1",
+ "nota": "requisito -> archivos -> pruebas -> resultado. El resultado de cada verificación se escribe en verificacion/<id>/cumplimiento_resultado.md (V-CUM-03). «no_verificable» explica lo que no se pudo comprobar.",
+ "requisitos": [
+  {
+   "id": "R-A1",
+   "fuente": "ACUM §A",
+   "requisito": "Coordinador + A1/A2/A3 con UN solo Qwen secuencial (NP=1, 4 hilos), sin servicios de pago",
+   "archivos": [
+    "src/eq2/orquestador.py",
+    "src/eq2/config.py",
+    "src/eq2/servidor.py"
+   ],
+   "pruebas": [
+    "test_orquestador.TestFlujoNormal",
+    "test_v2_servidor.TestArgv",
+    "test_v2d.TestServidorFalsoV2D"
+   ],
+   "verificacion": [
+    "V-EST-03"
+   ]
+  },
+  {
+   "id": "R-A2",
+   "fuente": "ACUM §A",
+   "requisito": "Persistencia SQLite separada para sesión, agentes y aprendizaje; relaciones conservadas",
+   "archivos": [
+    "src/eq2/memoria.py",
+    "src/eq2/aprendizaje.py",
+    "src/eq2/incidencias.py"
+   ],
+   "pruebas": [
+    "test_memoria.TestAislamiento",
+    "test_memoria.TestSesionDB",
+    "test_v2e6_calidad.TestAislamientoYTransacciones",
+    "test_v2e6_aprendizaje.TestContaminacionYRecuperacion"
+   ],
+   "verificacion": []
+  },
+  {
+   "id": "R-A3",
+   "fuente": "ACUM §A",
+   "requisito": "Personalidad JSON con contrato y controles; sin voces/avatares/Gemini; desactivada por defecto",
+   "archivos": [
+    "src/eq2/personalidad.py",
+    "contratos/personalidad_v1.json",
+    "PERSONALIDAD.md"
+   ],
+   "pruebas": [
+    "test_v2e5r3.TestContratoPersonalidad",
+    "test_v2e5r2.TestProteccion"
+   ],
+   "verificacion": [
+    "V-EST-03"
+   ]
+  },
+  {
+   "id": "R-A4",
+   "fuente": "ACUM §A",
+   "requisito": "Adaptadores Android/Termux, Linux y Windows sin afirmar plataformas no ejecutadas",
+   "archivos": [
+    "src/eq2/plataforma.py",
+    "PLATAFORMAS.md"
+   ],
+   "pruebas": [
+    "test_v2e5.TestAdaptadores"
+   ],
+   "verificacion": [],
+   "nota": "solo se ejecutó en Linux (sandbox); Termux y Windows no se ejecutaron"
+  },
+  {
+   "id": "R-A5",
+   "fuente": "ACUM §A / INSTR",
+   "requisito": "MODO_B_HABILITADO=False; sin ejecutar código de agentes; sin shell en paquetes; sin red",
+   "archivos": [
+    "src/eq2/config.py",
+    "validar_estatico.py",
+    "src/eq2/paquetes_auditoria.py"
+   ],
+   "pruebas": [
+    "test_v2e.TestModoB",
+    "test_estatico.TestEstatico",
+    "test_v2e6_retos.TestPaqueteDesafio"
+   ],
+   "verificacion": [
+    "V-EST-01",
+    "V-EST-03"
+   ]
+  },
+  {
+   "id": "R-B1",
+   "fuente": "ACUM §B / INSTR 2",
+   "requisito": "A1: parches como TEXTO, alternativas, contratos, pruebas propuestas, supuestos y riesgos",
+   "archivos": [
+    "src/eq2/laboratorios.py"
+   ],
+   "pruebas": [
+    "test_v2e6_laboratorios.TestA1Textos"
+   ],
+   "verificacion": []
+  },
+  {
+   "id": "R-B2",
+   "fuente": "ACUM §B / INSTR 2",
+   "requisito": "A2: perfilado estático sin benchmarks, hipótesis competidoras falsables, evidencia con fuente y líneas, solicitud de datos",
+   "archivos": [
+    "src/eq2/laboratorios.py"
+   ],
+   "pruebas": [
+    "test_v2e6_laboratorios.TestEvidenciaCitada",
+    "test_v2e6_laboratorios.TestHipotesisYFalsacion"
+   ],
+   "verificacion": []
+  },
+  {
+   "id": "R-B3",
+   "fuente": "ACUM §B / INSTR 2",
+   "requisito": "A3: contraejemplos citados, comprobaciones declarativas (las evalúa el laboratorio), falsación, rechazo/abstención razonados",
+   "archivos": [
+    "src/eq2/laboratorios.py"
+   ],
+   "pruebas": [
+    "test_v2e6_laboratorios.TestHipotesisYFalsacion",
+    "test_v2e6_laboratorios.TestA1Textos",
+    "test_v2e6_laboratorios.TestLineasYReglas"
+   ],
+   "verificacion": []
+  },
+  {
+   "id": "R-B4",
+   "fuente": "ACUM §B / INSTR 2",
+   "requisito": "Espacios independientes con artefactos, versiones, procedencia, permisos y límites; rechazo de evidencia insuficiente",
+   "archivos": [
+    "src/eq2/laboratorios.py"
+   ],
+   "pruebas": [
+    "test_v2e6_laboratorios.TestArtefactos",
+    "test_v2e6_laboratorios.TestEvidenciaCitada",
+    "test_v2e5r2.TestLaboratorios",
+    "test_v2e5r3.TestLaboratoriosR3"
+   ],
+   "verificacion": []
+  },
+  {
+   "id": "R-B5",
+   "fuente": "ACUM §B",
+   "requisito": "Pendientes del coordinador (7 estados); aprobada_con_cambios nunca pasa a verificado sin comprobación positiva sobre esa propuesta",
+   "archivos": [
+    "src/eq2/laboratorios.py"
+   ],
+   "pruebas": [
+    "test_v2e6_laboratorios.TestPendientes"
+   ],
+   "verificacion": []
+  },
+  {
+   "id": "R-C1",
+   "fuente": "ACUM §C / INSTR 4",
+   "requisito": "Estados hipotesis/sin_verificar/verificada_por_prueba/refutada/supersedida con historia inmutable de evidencias y transiciones",
+   "archivos": [
+    "src/eq2/aprendizaje.py"
+   ],
+   "pruebas": [
+    "test_v2e6_aprendizaje.TestEstadosYEvidencia"
+   ],
+   "verificacion": []
+  },
+  {
+   "id": "R-C2",
+   "fuente": "ACUM §C / INSTR 4",
+   "requisito": "Voto, opinión, consenso y evaluación simulada NUNCA verifican ni refutan; confianza verbal guardada como baja",
+   "archivos": [
+    "src/eq2/aprendizaje.py"
+   ],
+   "pruebas": [
+    "test_v2e6_aprendizaje.TestEstadosYEvidencia"
+   ],
+   "verificacion": []
+  },
+  {
+   "id": "R-C3",
+   "fuente": "ACUM §C / INSTR 4",
+   "requisito": "Recuperación con relevancia, deduplicación y caducidad; el prompt recibe METADATOS (tipo, confianza, estado, fuente, tarea/turno, fecha, contradicciones)",
+   "archivos": [
+    "src/eq2/aprendizaje.py",
+    "src/eq2/prompts.py",
+    "src/eq2/orquestador.py"
+   ],
+   "pruebas": [
+    "test_v2e6_aprendizaje.TestContaminacionYRecuperacion",
+    "test_v2e6_aprendizaje.TestOrquestadorAprende"
+   ],
+   "verificacion": []
+  },
+  {
+   "id": "R-C4",
+   "fuente": "ACUM §C / INSTR 4",
+   "requisito": "Protección contra contaminación: sin autoedición de código, permisos o configuración; contradicciones detectadas",
+   "archivos": [
+    "src/eq2/aprendizaje.py"
+   ],
+   "pruebas": [
+    "test_v2e6_aprendizaje.TestContaminacionYRecuperacion",
+    "test_v2e6_aprendizaje.TestOrquestadorAprende"
+   ],
+   "verificacion": []
+  },
+  {
+   "id": "R-C5",
+   "fuente": "ACUM §C / INSTR 4",
+   "requisito": "Feedback humano solo con autorización explícita; revocación auditable",
+   "archivos": [
+    "src/eq2/aprendizaje.py",
+    "aprender.py"
+   ],
+   "pruebas": [
+    "test_v2e6_aprendizaje.TestEstadosYEvidencia",
+    "test_v2e6_aprendizaje.TestCLI"
+   ],
+   "verificacion": []
+  },
+  {
+   "id": "R-C6",
+   "fuente": "ACUM §C / INSTR 4",
+   "requisito": "Retención entre sesiones; el aprendizaje no solo guarda votos (hechos observados con evidencia)",
+   "archivos": [
+    "src/eq2/orquestador.py",
+    "src/eq2/aprendizaje.py"
+   ],
+   "pruebas": [
+    "test_v2e6_aprendizaje.TestOrquestadorAprende"
+   ],
+   "verificacion": []
+  },
+  {
+   "id": "R-C7",
+   "fuente": "ACUM §C",
+   "requisito": "Evaluación pre/post: tarea inicial, feedback, variante inédita y comparación con agente sin el recuerdo; regresiones de falsas certezas (SIMULADO)",
+   "archivos": [
+    "src/eq2/evaluacion_aprendizaje.py",
+    "aprender.py"
+   ],
+   "pruebas": [
+    "test_v2e6_aprendizaje.TestEvaluacionPrePost"
+   ],
+   "verificacion": [
+    "V-APR-01",
+    "V-DEMO-01"
+   ],
+   "nota": "política determinista: demuestra el mecanismo, no el aprendizaje de Qwen"
+  },
+  {
+   "id": "R-D1",
+   "fuente": "ACUM §D / INSTR 1",
+   "requisito": "Perfiles 2048 (referencia) / 2560 (ampliado) / 3072 (experimental) con salidas separadas, reservas y retroceso por RAM/servidor",
+   "archivos": [
+    "src/eq2/perfiles_contexto.py",
+    "ejecutar_v2.py"
+   ],
+   "pruebas": [
+    "test_v2e6_contexto.TestPerfiles",
+    "test_v2e6_contexto.TestSeleccionYRetroceso",
+    "test_v2e6_contexto.TestCLIPerfil"
+   ],
+   "verificacion": [
+    "V-CTX-01"
+   ]
+  },
+  {
+   "id": "R-D2",
+   "fuente": "ACUM §D / INSTR 1",
+   "requisito": "Límites ESTRICTOS de tokens por tarea y por sesión con pruebas de agotamiento; truncamiento visible",
+   "archivos": [
+    "src/eq2/orquestador.py",
+    "src/eq2/perfiles_contexto.py",
+    "src/eq2/retos.py"
+   ],
+   "pruebas": [
+    "test_v2e6_contexto.TestLimitesDeTokens",
+    "test_v2c.TestTruncadosEnFases",
+    "test_v2e6_retos.TestGenerador"
+   ],
+   "verificacion": []
+  },
+  {
+   "id": "R-D3",
+   "fuente": "ACUM §D / INSTR 1",
+   "requisito": "Estimación vs tokens reales y métricas de tiempo/RAM (medidas cuando la plataforma lo permite)",
+   "archivos": [
+    "src/eq2/orquestador.py",
+    "src/eq2/metricas.py",
+    "verificar.py"
+   ],
+   "pruebas": [
+    "test_v2d.TestMetricasYPlataforma",
+    "test_verificador.TestVerificadorV2E6"
+   ],
+   "verificacion": [],
+   "no_verificable": "los perfiles 2560/3072 NO se midieron con Qwen real en el dispositivo"
+  },
+  {
+   "id": "R-E1",
+   "fuente": "ACUM §E",
+   "requisito": "Suite anterior conservada (STOP, integridad, SQLite, seguridad, paquetes, regresión)",
+   "archivos": [
+    "tests/test_v2e5r3_stop.py",
+    "tests/test_v2e5r3.py"
+   ],
+   "pruebas": [
+    "test_v2e5r3_stop",
+    "test_v2e5r3",
+    "test_v2e5r2",
+    "test_v2e5"
+   ],
+   "verificacion": [
+    "V-REP-01",
+    "V-INT-04"
+   ]
+  },
+  {
+   "id": "R-E2",
+   "fuente": "ACUM §E / INSTR 5",
+   "requisito": "Casos variables con semillas fijas (11, 42, 2026) + opcional, niveles de dificultad, perturbaciones, adversarios y oráculos ocultos",
+   "archivos": [
+    "src/eq2/pruebas_variables.py",
+    "retos.py"
+   ],
+   "pruebas": [
+    "test_v2e6_retos.TestPruebasVariables"
+   ],
+   "verificacion": [
+    "V-VAR-01",
+    "V-DEMO-06"
+   ]
+  },
+  {
+   "id": "R-E3",
+   "fuente": "ACUM §E / INSTR 3",
+   "requisito": "Independencia: A3 no asume que A1 tiene razón; repetición de respuestas y votos similares detectados sin confundir similitud con copia",
+   "archivos": [
+    "src/eq2/independencia.py",
+    "src/eq2/orquestador.py"
+   ],
+   "pruebas": [
+    "test_v2e6_agentes.TestSenalesIndependencia",
+    "test_v2e6_agentes.TestIntegracionOrquestador"
+   ],
+   "verificacion": []
+  },
+  {
+   "id": "R-E4",
+   "fuente": "ACUM §E",
+   "requisito": "Distinguir resultado técnico, calidad de solución, calidad de evidencia, independencia, aprendizaje y rendimiento",
+   "archivos": [
+    "src/eq2/orquestador.py",
+    "src/eq2/protocolo.py",
+    "src/eq2/retos.py"
+   ],
+   "pruebas": [
+    "test_v2e6_agentes.TestIntegracionOrquestador",
+    "test_v2c.TestProtocolo",
+    "test_v2e6_retos.TestPuntuador"
+   ],
+   "verificacion": []
+  },
+  {
+   "id": "R-E5",
+   "fuente": "ACUM §E",
+   "requisito": "Cada funcionalidad nueva: unitaria, integración, error, demostración y evidencia",
+   "archivos": [
+    "verificar.py",
+    "evidencias_claude/LEEME.md"
+   ],
+   "pruebas": [
+    "test_verificador.TestVerificadorV2E6"
+   ],
+   "verificacion": [
+    "V-DEMO-01",
+    "V-DEMO-05"
+   ]
+  },
+  {
+   "id": "R-F1",
+   "fuente": "ACUM §F / INSTR 6",
+   "requisito": "Material Zomboid DENTRO del ZIP, íntegro (MANIFIESTO.json del usuario) y solo como datos",
+   "archivos": [
+    "retos/zomboid_v1/material_original/MANIFIESTO.json",
+    "src/eq2/retos.py"
+   ],
+   "pruebas": [
+    "test_v2e6_retos.TestMaterial"
+   ],
+   "verificacion": [
+    "V-ZOM-01"
+   ]
+  },
+  {
+   "id": "R-F2",
+   "fuente": "ACUM §F / INSTR 6",
+   "requisito": "Casos fuentes/plantillas/viewpoint/inicio separando hecho, hipótesis, falta, riesgo, acción reversible, verificación y falsación",
+   "archivos": [
+    "retos/zomboid_v1/eq2/casos.json",
+    "src/eq2/retos.py"
+   ],
+   "pruebas": [
+    "test_v2e6_retos.TestPuntuador",
+    "test_v2e6_retos.TestTuberiaYEjecucion"
+   ],
+   "verificacion": []
+  },
+  {
+   "id": "R-F3",
+   "fuente": "ACUM §F / INSTR 6",
+   "requisito": "A2 investiga, A1 plan/parches hipotéticos, A3 comprueba citas y refuta; plan nunca «verificado»",
+   "archivos": [
+    "src/eq2/retos.py",
+    "ejecutar_v2.py"
+   ],
+   "pruebas": [
+    "test_v2e6_retos.TestTuberiaYEjecucion",
+    "test_v2e6_retos.TestRetoConServidorFalso",
+    "test_v2e6_retos.TestCLI"
+   ],
+   "verificacion": []
+  },
+  {
+   "id": "R-F4",
+   "fuente": "ACUM §F / INSTR 6",
+   "requisito": "Puntuación objetiva 0–12 (CRITERIOS) + penalizaciones: citas verificables, no invención, calibración y seguridad",
+   "archivos": [
+    "src/eq2/retos.py",
+    "retos/zomboid_v1/eq2/oraculos.json"
+   ],
+   "pruebas": [
+    "test_v2e6_retos.TestPuntuador"
+   ],
+   "verificacion": [
+    "V-DEMO-03"
+   ]
+  },
+  {
+   "id": "R-F5",
+   "fuente": "ACUM §F / INSTR 6",
+   "requisito": "generar_reto.py NUNCA se ejecuta; generador propio seguro y reproducible",
+   "archivos": [
+    "src/eq2/retos.py",
+    "retos/zomboid_v1/NO_EJECUTAR.md"
+   ],
+   "pruebas": [
+    "test_v2e6_retos.TestMaterial",
+    "test_v2e6_retos.TestGenerador"
+   ],
+   "verificacion": [
+    "V-ZOM-01"
+   ]
+  },
+  {
+   "id": "R-F6",
+   "fuente": "INSTR 6",
+   "requisito": "Reto con Qwen real detrás de banderas explícitas",
+   "archivos": [
+    "ejecutar_v2.py",
+    "verificar.py"
+   ],
+   "pruebas": [
+    "test_v2e6_retos.TestCLI"
+   ],
+   "verificacion": [
+    "V-QWEN-03"
+   ],
+   "no_verificable": "Qwen real no se ejecutó en la sandbox (no hay GGUF ni llama-server)"
+  },
+  {
+   "id": "R-G1",
+   "fuente": "ACUM §G / INSTR",
+   "requisito": "Un solo ZIP autónomo; extracción en laboratorio limpio sin archivos extra",
+   "archivos": [
+    "LEEME_V2E6.md",
+    "verificar.py"
+   ],
+   "pruebas": [
+    "test_verificador.TestVerificador"
+   ],
+   "verificacion": [
+    "V-INT-01",
+    "V-INT-03"
+   ]
+  },
+  {
+   "id": "R-G2",
+   "fuente": "ACUM §G / INSTR",
+   "requisito": "Una orden `python3 -B verificar.py`: fases con INICIO/FIN, REAL/SIMULADA/OMITIDA/NO VERIFICADA, logs, eventos JSON, métricas, semillas, código de salida",
+   "archivos": [
+    "verificar.py",
+    "VERIFICADOR.md"
+   ],
+   "pruebas": [
+    "test_verificador.TestVerificador",
+    "test_verificador.TestVerificadorV2E6"
+   ],
+   "verificacion": []
+  },
+  {
+   "id": "R-G3",
+   "fuente": "ACUM §G / INSTR",
+   "requisito": "Evidencia de fábrica (evidencias_claude/) incluida en el manifiesto",
+   "archivos": [
+    "verificar.py",
+    "evidencias_claude/LEEME.md"
+   ],
+   "pruebas": [
+    "test_verificador.TestVerificador"
+   ],
+   "verificacion": [
+    "V-INT-01"
+   ]
+  },
+  {
+   "id": "R-G4",
+   "fuente": "ACUM §G / INSTR 7",
+   "requisito": "Paquetes declarativos con SHA-256 y autorización explícita; desafíos eq2/desafio; sin scripts",
+   "archivos": [
+    "src/eq2/paquetes_auditoria.py",
+    "retos/zomboid_v1/paquete_desafio/desafio_zomboid_v1.zip"
+   ],
+   "pruebas": [
+    "test_v2e5r3.TestPaquetesAuditoria",
+    "test_verificador.TestPaquetesEnElVerificador",
+    "test_v2e6_retos.TestPaqueteDesafio"
+   ],
+   "verificacion": [
+    "V-CON-01",
+    "V-CON-03"
+   ]
+  },
+  {
+   "id": "R-G5",
+   "fuente": "ACUM §G",
+   "requisito": "Qwen real solo por bandera y autorización; nunca confundido con la batería simulada",
+   "archivos": [
+    "verificar.py"
+   ],
+   "pruebas": [
+    "test_verificador.TestVerificador",
+    "test_verificador.TestVerificadorV2E6"
+   ],
+   "verificacion": [
+    "V-QWEN-01",
+    "V-QWEN-02"
+   ],
+   "no_verificable": "sin GGUF ni llama-server en la sandbox"
+  },
+  {
+   "id": "R-H1",
+   "fuente": "ACUM §H / INSTR 8",
+   "requisito": "STOP en carga, HTTP, inferencia, CONTINUACIÓN y LIMPIEZA; parada limpia vs fallo de limpieza vs fallo independiente",
+   "archivos": [
+    "src/eq2/orquestador.py",
+    "src/eq2/motor.py"
+   ],
+   "pruebas": [
+    "test_v2e5r3_stop",
+    "test_v2e6_calidad.TestStopContinuacionYLimpieza"
+   ],
+   "verificacion": [
+    "V-REP-01",
+    "V-REP-04"
+   ]
+  },
+  {
+   "id": "R-H2",
+   "fuente": "INSTR 8",
+   "requisito": "Interrupción y reanudación EXPLÍCITA sin pérdida silenciosa de evidencia",
+   "archivos": [
+    "src/eq2/orquestador.py",
+    "ejecutar_v2.py"
+   ],
+   "pruebas": [
+    "test_v2e6_calidad.TestReanudacion",
+    "test_v2e6_calidad.TestStopContinuacionYLimpieza"
+   ],
+   "verificacion": []
+  },
+  {
+   "id": "R-H3",
+   "fuente": "ACUM §H",
+   "requisito": "No tocar ~/equipo-ia, GGUF, r3, partidas ni red; todo en $TMPDIR/equipo_f2/lab_v2e6",
+   "archivos": [
+    "src/eq2/rutas.py",
+    "src/eq2/config.py"
+   ],
+   "pruebas": [
+    "test_correcciones.TestRutas",
+    "test_v2c.TestCarpetaAnteriorIntacta",
+    "test_v2e2.TestVersionYCarpetas"
+   ],
+   "verificacion": []
+  },
+  {
+   "id": "R-H4",
+   "fuente": "ACUM §H / INSTR",
+   "requisito": "SHA-256 del ZIP, manifiesto, instalación, prueba integral, rollback, tabla de cumplimiento y diferencias frente a r3",
+   "archivos": [
+    "CAMBIOS_V2E6.md",
+    "CUMPLIMIENTO_V2E6.md",
+    "ROLLBACK_V2E6.md",
+    "LIMITES_Y_RIESGOS_V2E6.md",
+    "herramientas/manifiesto_r3.txt"
+   ],
+   "pruebas": [
+    "test_verificador.TestVerificadorV2E6"
+   ],
+   "verificacion": [
+    "V-CUM-01",
+    "V-CUM-02",
+    "V-CUM-03"
+   ]
+  },
+  {
+   "id": "R-ADV-A",
+   "fuente": "Auditoría adversarial V2-E.6, caso A",
+   "requisito": "Una prueba_estatica solo cambia el estado si deriva de una EJECUCIÓN registrada (verificador, artefacto, SHA-256, resultado) que el sistema re-ejecuta; una prueba declarada, observado o dato_externo no verifican",
+   "archivos": [
+    "src/eq2/aprendizaje.py",
+    "src/eq2/evaluacion_aprendizaje.py",
+    "src/eq2/orquestador.py"
+   ],
+   "pruebas": [
+    "test_v2e6r2_adversarial.TestCasoA_PruebaDeclarada",
+    "test_v2e6_aprendizaje.TestEvaluacionPrePost"
+   ],
+   "verificacion": [
+    "V-APR-01"
+   ]
+  },
+  {
+   "id": "R-ADV-B",
+   "fuente": "Auditoría adversarial V2-E.6, caso B",
+   "requisito": "Contenido instructivo (paráfrasis, otros idiomas, ofuscaciones, cargas codificadas) rechazado o en cuarentena; nunca recuperado para un prompt; sin falsos positivos en el corpus benigno",
+   "archivos": [
+    "src/eq2/contaminacion.py",
+    "src/eq2/aprendizaje.py"
+   ],
+   "pruebas": [
+    "test_v2e6r2_adversarial.TestCasoB_Contaminacion",
+    "test_v2e6r2_adversarial.TestOrquestadorCuarentena"
+   ],
+   "nota": "heurístico: reduce el riesgo, no lo elimina"
+  },
+  {
+   "id": "R-ADV-R2",
+   "fuente": "Auditoría adversarial V2-E.6, recomendación 2",
+   "requisito": "Los recuerdos recuperados van al prompt delimitados como datos no confiables y con aviso explícito",
+   "archivos": [
+    "src/eq2/prompts.py"
+   ],
+   "pruebas": [
+    "test_v2e6r2_adversarial.TestRecomendacion2_DatosNoConfiables"
+   ]
+  },
+  {
+   "id": "R-ADV-C",
+   "fuente": "Auditoría GPT-6 de V2-E.6-r2, hallazgo C",
+   "requisito": "Instrucciones INDIRECTAS (recomendaciones, voz pasiva, presunción de corrección, normas de proceso sin anclaje, otros idiomas) en cuarentena y nunca recuperadas; los dos textos del hallazgo incluidos",
+   "archivos": [
+    "src/eq2/contaminacion.py",
+    "tests/corpus_indirecto.py"
+   ],
+   "pruebas": [
+    "test_v2e6r3_indirecta.TestHallazgoC",
+    "test_v2e6r3_indirecta.TestCorpusIndirecto",
+    "test_v2e6r3_indirecta.TestDefensaDelControl",
+    "test_v2e6r3_indirecta.TestTextosDelSistema"
+   ],
+   "nota": "heurístico: en un corpus ciego final detecta 16/30 con 3/30 falsos positivos (evidencias_claude/medicion_corpus_ciegos.txt)"
+  },
+  {
+   "id": "R-ADV-C-FP",
+   "fuente": "Auditoría GPT-6 de V2-E.6-r2, recomendación «medir falsos positivos»",
+   "requisito": "Falsos positivos medidos y explícitos: los conocidos se enumeran en el corpus y van a cuarentena, nunca a rechazo",
+   "archivos": [
+    "tests/corpus_indirecto.py"
+   ],
+   "pruebas": [
+    "test_v2e6r3_indirecta.TestCorpusIndirecto"
+   ]
+  },
+  {
+   "id": "R-ADV-C-AUT",
+   "fuente": "Auditoría GPT-6 de V2-E.6-r2, recomendación «autorización independiente del texto recuperado»",
+   "requisito": "El texto recuperado solo llega a prompts.construir; ningún módulo de permisos lee la memoria; con las mismas respuestas del modelo la decisión es idéntica con y sin una memoria maliciosa",
+   "archivos": [
+    "src/eq2/orquestador.py",
+    "src/eq2/config.py"
+   ],
+   "pruebas": [
+    "test_v2e6r3_indirecta.TestAutorizacionIndependiente"
+   ],
+   "nota": "no demuestra que el MODELO ignore la memoria: demuestra que el código no la usa para decidir"
+  },
+  {
+   "id": "R-E7-TAREAS",
+   "fuente": "Encargo V2-E.7, puntos 2-4",
+   "requisito": "Tareas LAB-NNN: importar, ejecutar, estado y exportar; instrucciones originales, archivos, acciones, salidas completas, resultados, auditoría, eventos y huellas guardados sin sobrescribir; ZIP con manifiesto SHA-256 y nombre versionado",
+   "archivos": [
+    "equipo.py",
+    "src/eq2/tareas.py"
+   ],
+   "pruebas": [
+    "test_v2e7_equipo.TestDemoEquipo"
+   ]
+  },
+  {
+   "id": "R-E7-AGENTES",
+   "fuente": "Encargo V2-E.7, punto 1",
+   "requisito": "A1 escribe el código, A2 planifica y escribe las pruebas, A3 revisa y audita la evidencia en modo lectura; el coordinador (motor) reparte y recoge; con Qwen mediante BackendLlama",
+   "archivos": [
+    "src/eq2/motor.py",
+    "src/eq2/tareas.py"
+   ],
+   "pruebas": [
+    "test_v2e7_equipo.TestDemoEquipo"
+   ],
+   "nota": "Qwen real NO verificado en esta entrega: la demo usa un guion y la ruta HTTP se probó con el servidor falso"
+  },
+  {
+   "id": "R-E7-EJECUTOR",
+   "fuente": "Encargo V2-E.7, puntos 1 y 5",
+   "requisito": "Pruebas ejecutadas de verdad solo con --autorizo-pruebas, tras una lista blanca AST, en un proceso hijo con límites y gancho de auditoría; ninguna prueba se declara aprobada sin resultado con nonce válido",
+   "archivos": [
+    "src/eq2/ejecutor_restringido.py",
+    "src/eq2/corredor_pruebas.py"
+   ],
+   "pruebas": [
+    "test_v2e7_equipo.TestEjecutorRestringido"
+   ],
+   "nota": "no es un sandbox del sistema operativo"
+  },
+  {
+   "id": "R-E7R2-PZ",
+   "fuente": "Encargo de integración PZ ModLab 0.2 (GPT-6)",
+   "requisito": "Tareas tipo modlab_pz: A1 prepara el escenario, A2 solicita operaciones del contrato (lista blanca), la herramienta se ejecuta solo con --autorizo-pruebas, A3 audita en solo lectura; guardado y exportación del sistema existente; sin ejecutar Lua ni Java",
+   "archivos": [
+    "src/eq2/modlab_pz_adaptador.py",
+    "src/eq2/tareas.py",
+    "modlab_pz/contrato_agentes.json"
+   ],
+   "pruebas": [
+    "test_v2e7r2_modlab.TestModlabPZ"
+   ],
+   "nota": "no certifica compatibilidad con Project Zomboid; Qwen real no verificado"
+  },
+  {
+   "id": "R-E7R3-A3",
+   "fuente": "Encargo V2-E.7-r3 (auditoría A3 de modlab_pz)",
+   "requisito": "A3 recibe evidencia verificada en disco (SHA-256): objetivo, resultado_esperado, conclusión determinista, operaciones solicitadas y ejecutadas, cada paso con su resultado, inventario final, herramientas rechazadas/no ejecutadas/sin evidencia y advertencia de simulación; clasificación en 4 categorías; la conclusión determinista no cambia y A3 puede discrepar",
+   "archivos": [
+    "src/eq2/evidencia_pz.py",
+    "src/eq2/tareas.py",
+    "src/eq2/motor.py"
+   ],
+   "pruebas": [
+    "test_v2e7r3_auditoria_pz.TestMisionesReales",
+    "test_v2e7r3_auditoria_pz.TestEvidenciaIncompletaYContradictoria",
+    "test_v2e7r3_auditoria_pz.TestDeterminismoIntacto",
+    "test_v2e7r3_auditoria_pz.TestEvidenciaCabeEnElPrompt"
+   ],
+   "nota": "escenarios LAB-001/002/003 recreados (no se usaron los ZIP originales); textos de agentes por guion; Qwen real en S23 pendiente"
+  },
+  {
+   "id": "R-V2F-P1",
+   "fuente": "Encargo V2-F del usuario (ampliar capacidades reales de A1, A2 y A3)",
+   "requisito": "Razonamiento y planificación: subtareas con dependencias y prioridad, orden de trabajo, detección de información que falta (preguntar o asumir y marcar) y revisión del plan con evidencia sin rebajar criterios en silencio",
+   "archivos": [
+    "src/eq2/planificacion.py",
+    "src/eq2/motor_v2f.py"
+   ],
+   "pruebas": [
+    "test_v2f_componentes.TestPlanificacion",
+    "test_v2f_motor.TestPuertaDeInformacion",
+    "test_v2f_motor.TestReplanificacion"
+   ],
+   "nota": "la calidad de la descomposición que haga Qwen 3B no está medida (pendiente en el S23)"
+  },
+  {
+   "id": "R-V2F-P2",
+   "fuente": "Encargo V2-F del usuario (ampliar capacidades reales de A1, A2 y A3)",
+   "requisito": "Debate por evidencias: propuestas independientes, ejecución cruzada, objeciones y contraejemplos, impugnaciones y adjudicación determinista en la que la mayoría no sustituye a las pruebas; disputas A1-A3 y A1-A2 dentro del motor",
+   "archivos": [
+    "src/eq2/debate.py",
+    "src/eq2/tareas.py",
+    "src/eq2/motor_v2f.py"
+   ],
+   "pruebas": [
+    "test_v2f_debate.TestAdjudicacion",
+    "test_v2f_debate.TestProtocolo",
+    "test_v2f_tareas.TestDebateComoTarea",
+    "test_v2f_motor.TestDisputaYAfirmaciones",
+    "test_v2f_motor.TestReplanificacion"
+   ],
+   "nota": "agentes de guion: que Qwen produzca propuestas diversas con temperatura 0 no está medido"
+  },
+  {
+   "id": "R-V2F-P3",
+   "fuente": "Encargo V2-F del usuario (ampliar capacidades reales de A1, A2 y A3)",
+   "requisito": "Aprendizaje mediante memoria: experiencias del motor y del debate (errores, correcciones, contraejemplos, resultados) en la memoria INDIVIDUAL de cada agente, recuperadas con metadatos; hechos observados frente a hipótesis",
+   "archivos": [
+    "src/eq2/experiencias.py",
+    "src/eq2/aprendizaje.py"
+   ],
+   "pruebas": [
+    "test_v2f_componentes.TestExperiencias",
+    "test_v2f_motor.TestContraejemplosA3YMemoria",
+    "test_v2f_tareas.TestMotorV2FComoTarea"
+   ],
+   "nota": "el efecto en las respuestas de Qwen no está medido; ninguna experiencia nace verificada"
+  },
+  {
+   "id": "R-V2F-P4",
+   "fuente": "Encargo V2-F del usuario (ampliar capacidades reales de A1, A2 y A3)",
+   "requisito": "Autocorrección: precomprobación estática que ahorra llamadas, historial de intentos, contraejemplos ejecutables de A3, afirmaciones sin evidencia y retirada de casos propios",
+   "archivos": [
+    "src/eq2/autocorreccion.py",
+    "src/eq2/motor_v2f.py",
+    "src/eq2/debate.py"
+   ],
+   "pruebas": [
+    "test_v2f_componentes.TestAutocorreccion",
+    "test_v2f_motor.TestPrecomprobacion",
+    "test_v2f_motor.TestContraejemplosA3YMemoria",
+    "test_v2f_debate.TestAdjudicacion"
+   ]
+  },
+  {
+   "id": "R-V2F-P5",
+   "fuente": "Encargo V2-F del usuario (ampliar capacidades reales de A1, A2 y A3)",
+   "requisito": "Uso de herramientas: registro tipado e inmutable, permisos por agente y flujo aplicados por el despachador, casos literales sin inyección, errores clasificados y explicados al agente, sustitución explícita sin autorización",
+   "archivos": [
+    "src/eq2/herramientas.py",
+    "src/eq2/casos.py"
+   ],
+   "pruebas": [
+    "test_v2f_componentes.TestHerramientas",
+    "test_v2f_componentes.TestCasos",
+    "test_v2f_motor.TestUsoDeHerramientas"
+   ]
+  },
+  {
+   "id": "R-V2F-P6",
+   "fuente": "Encargo V2-F del usuario (ampliar capacidades reales de A1, A2 y A3)",
+   "requisito": "Medición: banco comparable de un agente frente al equipo (individual, individual con autoprueba, debate, motor) con oráculos ocultos, calidad, tiempo, tokens, errores y falsas certezas; modo simulado reproducible y modo Qwen real",
+   "archivos": [
+    "src/eq2/banco_capacidades.py",
+    "banco.py",
+    "bancos/capacidades_v1/tareas.json",
+    "bancos/capacidades_v1/oraculos.json",
+    "bancos/capacidades_v1/simulacion.json"
+   ],
+   "pruebas": [
+    "test_v2f_banco.TestDatosDelBanco",
+    "test_v2f_banco.TestBancoSimulado",
+    "test_v2f_banco.TestIdentificacionDePasos",
+    "test_v2f_banco.TestCLI"
+   ],
+   "verificacion": [
+    "V-BAN-01"
+   ],
+   "no_verificable": "la comparación con Qwen real (V-QWEN-04) solo se puede ejecutar en el S23; el modo simulado depende de los parámetros del guion"
+  },
+  {
+   "id": "R-V2F-S1",
+   "fuente": "Encargo V2-F del usuario (ampliar capacidades reales de A1, A2 y A3)",
+   "requisito": "El aprendizaje no altera permisos ni reglas: memoria contaminada rechazada o en cuarentena, registro de herramientas, política, Modo B y autorización (solo la CLI) intactos",
+   "archivos": [
+    "src/eq2/experiencias.py",
+    "src/eq2/herramientas.py",
+    "src/eq2/contaminacion.py"
+   ],
+   "pruebas": [
+    "test_v2f_motor.TestSeguridad",
+    "test_v2f_componentes.TestHerramientas",
+    "test_v2e7_equipo.TestEjecutorRestringido",
+    "test_v2f_componentes.TestExperiencias"
+   ]
+  },
+  {
+   "id": "R-V2F-S2",
+   "fuente": "Encargo V2-F del usuario (ampliar capacidades reales de A1, A2 y A3)",
+   "requisito": "Compatibilidad: el motor de V2-E.7 sigue disponible («motor»: «v2e»), sus pruebas pasan, y los prompts nuevos caben en CTX 1024 y 2048 priorizando lo esencial",
+   "archivos": [
+    "src/eq2/motor.py",
+    "src/eq2/tareas.py",
+    "src/eq2/motor_v2f.py"
+   ],
+   "pruebas": [
+    "test_v2f_tareas.TestMotorV2FComoTarea",
+    "test_v2e7_equipo.TestDemoEquipo",
+    "test_v2f_componentes.TestContextoReal",
+    "test_v2f_motor.TestSeguridad"
+   ]
+  },
+  {
+   "id": "R-V2F1-P1",
+   "fuente": "Encargo V2-F.1 del usuario (nueva versión candidata a partir de V2-F)",
+   "requisito": "Planificación y autonomía: plan con subtareas, responsables, dependencias y prioridades; replanificación ante un bloqueo estático; detección de información insuficiente (pregunta o supuesto marcado); límites de correcciones, pasos y tiempo; sin progreso (código idéntico o el mismo error tres veces) => escalada",
+   "archivos": [
+    "src/eq2/funcion_supervisada.py",
+    "src/eq2/planificacion.py"
+   ],
+   "pruebas": [
+    "test_v2f1_funcion.TestFlujoCorregible.test_flujo_completo_con_decisiones_por_evidencia",
+    "test_v2f1_funcion.TestInformacionYLimites"
+   ]
+  },
+  {
+   "id": "R-V2F1-C1",
+   "fuente": "Encargo V2-F.1 del usuario (nueva versión candidata a partir de V2-F)",
+   "requisito": "Colaboración: A2 propone mejoras con gravedad y evidencia, A3 propone casos y evalúa la evidencia; los conflictos se resuelven por evidencia verificable y no por mayoría; argumentos, rebatidas, disputas y decisiones quedan registrados",
+   "archivos": [
+    "src/eq2/funcion_supervisada.py",
+    "src/eq2/debate.py"
+   ],
+   "pruebas": [
+    "test_v2f1_funcion.TestPiezasPuras",
+    "test_v2f1_funcion.TestFlujoCorregible",
+    "test_v2f1_funcion.TestInformacionYLimites.test_disputa_queda_como_reserva"
+   ]
+  },
+  {
+   "id": "R-V2F1-M1",
+   "fuente": "Encargo V2-F.1 del usuario (nueva versión candidata a partir de V2-F)",
+   "requisito": "Memoria y aprendizaje: experiencias relevantes recuperadas por agente (bases individuales), hechos observados frente a lecciones/hipótesis, errores repetidos detectados y correcciones observadas reutilizables; la memoria no altera permisos",
+   "archivos": [
+    "src/eq2/funcion_supervisada.py",
+    "src/eq2/experiencias.py",
+    "src/eq2/interfaces_codex.py"
+   ],
+   "pruebas": [
+    "test_v2f1_funcion.TestMemoria",
+    "test_v2f1_funcion.TestInformacionYLimites.test_mismo_error_estatico_tres_veces"
+   ]
+  },
+  {
+   "id": "R-V2F1-A1",
+   "fuente": "Encargo V2-F.1 del usuario (nueva versión candidata a partir de V2-F)",
+   "requisito": "Autocorrección: diagnóstico del controlador con archivo y línea, causa probable, corrección concreta; historial de intentos; versiones conservadas con SHA-256 y mejor versión recuperable; intentos limitados con escalada al usuario",
+   "archivos": [
+    "src/eq2/funcion_supervisada.py",
+    "src/eq2/autocorreccion.py",
+    "src/eq2/proyecto.py"
+   ],
+   "pruebas": [
+    "test_v2f1_funcion.TestInformacionYLimites",
+    "test_v2f1_funcion.TestFlujoCorregible",
+    "test_v2f1_funcion.TestParadas"
+   ]
+  },
+  {
+   "id": "R-V2F1-D1",
+   "fuente": "Encargo V2-F.1 del usuario (nueva versión candidata a partir de V2-F)",
+   "requisito": "Demostración real preparada: el usuario pide una función, A1 genera, A2 revisa, A3 propone casos y evalúa, se corrige, se guardan código, intentos, decisiones y registros, y el usuario recibe un informe verificable; SIMULADA con guion aquí, con Qwen real pendiente en el S23 (V-QWEN-05)",
+   "archivos": [
+    "src/eq2/demo_funcion.py",
+    "equipo.py",
+    "ejemplos/tarea_funcion_demo.json",
+    "src/eq2/tareas.py"
+   ],
+   "pruebas": [
+    "test_v2f1_funcion.TestTareaYCli",
+    "test_v2f1_funcion.TestFlujoCorregible.test_exportar_incluye_el_informe",
+    "test_v2f1_funcion.TestFlujoCorregible.test_reproducible",
+    "test_v2f1_funcion.TestConServidorFalso"
+   ]
+  },
+  {
+   "id": "R-V2F1-S1",
+   "fuente": "Encargo V2-F.1 del usuario (nueva versión candidata a partir de V2-F)",
+   "requisito": "Seguridad: el código generado NO se ejecuta (ni con --autorizo-pruebas); solo validación estática; código peligroso bloqueado por la lista blanca sin consultar a A2/A3; casos con código rechazados; registro de herramientas, Modo B y autorización intactos",
+   "archivos": [
+    "src/eq2/funcion_supervisada.py",
+    "src/eq2/ejecutor_restringido.py",
+    "src/eq2/herramientas.py"
+   ],
+   "pruebas": [
+    "test_v2f1_funcion.TestSeguridad",
+    "test_v2f1_funcion.TestMemoria.test_la_memoria_no_altera_permisos"
+   ]
+  },
+  {
+   "id": "R-V2F1-H1",
+   "fuente": "Encargo V2-F.1 del usuario (nueva versión candidata a partir de V2-F)",
+   "requisito": "Honestidad del informe: naturaleza de cada resultado (REAL/SIMULADO/OMITIDO/FALLIDO), nunca «verificado» sin ejecución, afirmaciones sin evidencia registradas, huellas de todos los archivos y manifiesto de la ejecución",
+   "archivos": [
+    "src/eq2/funcion_supervisada.py"
+   ],
+   "pruebas": [
+    "test_v2f1_funcion.TestFlujoCorregible.test_informe_declara_la_naturaleza_y_no_dice_verificado",
+    "test_v2f1_funcion.TestFlujoCorregible.test_backend_no_simulado_se_etiqueta_real",
+    "test_v2f1_funcion.TestParadas.test_fallo_del_backend_queda_como_fallido"
+   ]
+  },
+  {
+   "id": "R-V2F1-X1",
+   "fuente": "Encargo V2-F.1 del usuario (nueva versión candidata a partir de V2-F)",
+   "requisito": "Interfaces para Codex (memoria, selección de herramientas, diagnóstico): contratos, adaptadores por defecto sobre V2-F, validación de toda salida y comprobación de conformidad; ningún componente recibe objetos con poder ni altera permisos",
+   "archivos": [
+    "src/eq2/interfaces_codex.py",
+    "INTERFACES_CODEX.md"
+   ],
+   "pruebas": [
+    "test_v2f1_codex"
+   ]
+  },
+  {
+   "id": "R-V2F1-K1",
+   "fuente": "Encargo V2-F.1 del usuario (nueva versión candidata a partir de V2-F)",
+   "requisito": "Contexto: los prompts nuevos caben en CTX 1024 y 2048 sin omitir lo esencial y la indentación del código llega al modelo (bloques de código opcionales, compatibles hacia atrás)",
+   "archivos": [
+    "src/eq2/contexto.py",
+    "src/eq2/sanea.py",
+    "src/eq2/motor.py"
+   ],
+   "pruebas": [
+    "test_v2f1_funcion.TestPrompts"
+   ]
+  },
+  {
+   "id": "R-V2F1-R1",
+   "fuente": "Encargo V2-F.1 del usuario (nueva versión candidata a partir de V2-F)",
+   "requisito": "Pruebas de interrupción deterministas (portadas de V2-E.9-r2): disparo por estado del registro del servidor falso, no por temporizador",
+   "archivos": [
+    "tests/_v2.py"
+   ],
+   "pruebas": [
+    "test_v2_backend.TestMonitorYParadas",
+    "test_v2b"
+   ]
+  }
+ ]
+}

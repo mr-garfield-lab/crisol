@@ -1,0 +1,6 @@
+{
+ "titulo": "PZ ModLab: fallo intencional de inventario",
+ "tipo": "modlab_pz",
+ "resultado_esperado": "fallo_detectado",
+ "instrucciones": "Prepara un escenario de inventario para PZ ModLab: agregar 1 Base.Hammer, consumir 2 Base.Hammer y comprobar que queda 1 Base.Hammer. Es un fallo intencional: consumir más de lo que hay debe fallar. Después solicita simular_escenario sobre escenario.json."
+}

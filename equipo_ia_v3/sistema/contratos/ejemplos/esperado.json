@@ -1,0 +1,9 @@
+{
+ "invalido_clave_extra.json": "fuera_del_esquema",
+ "invalido_contradictorio.json": "contradictoria",
+ "invalido_permisos.json": "maliciosa",
+ "invalido_rasgo_rol.json": "maliciosa",
+ "invalido_version_mayor.json": "invalida",
+ "valido_a1.json": "valida",
+ "valido_version_menor.json": "valida"
+}
