@@ -74,8 +74,11 @@ Los asistentes que trabajen con el código deben leer [`AGENTS.md`](AGENTS.md).
 
 ## Principios de seguridad
 
-- El código que escriben los cerebros se ejecuta **solo dentro de una caja aislada** (hoy, el laboratorio de Blender),
-  nunca en tu sistema.
+- El código que escriben los cerebros se ejecuta **solo en el laboratorio de Blender**, detrás de filtros: una lista de
+  módulos y llamadas permitidos, comprobada otra vez dentro de Blender, funciones internas cerradas, Blender de
+  fábrica, límites de tiempo y de memoria, y siempre sobre copias. **Todavía no es una caja aislada del sistema
+  operativo:** Blender se ejecuta con los permisos de tu usuario, así que los filtros reducen el riesgo pero no lo
+  eliminan. Un entorno aislado de verdad (por ejemplo, Windows Sandbox) está en la hoja de ruta.
 - No se borra nada. Se trabaja sobre copias y cada acción queda registrada.
 - Topes estrictos de VRAM y de temperatura; un archivo `STOP` para cualquier ejecución.
 - Sin APIs de pago y sin telemetría: todo se queda en tu PC.

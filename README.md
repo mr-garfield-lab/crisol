@@ -74,7 +74,10 @@ should read [`AGENTS.md`](AGENTS.md).
 
 ## Safety principles
 
-- Code written by brains runs **only inside a closed sandbox** (today: the Blender lab), never on your system.
+- Code written by brains runs **only inside the Blender lab**, behind filters: an allow-list of modules and calls,
+  checked again inside Blender, closed builtins, factory-settings Blender, time and memory limits, and copies only.
+  **This is not yet an operating-system sandbox:** Blender runs with your user's permissions, so the filters reduce the
+  risk but do not remove it. A real isolated environment (for example Windows Sandbox) is on the roadmap.
 - Nothing is deleted. Changes happen on copies, and every action is logged.
 - Hard VRAM and temperature caps; a `STOP` file halts any run.
 - No paid APIs and no telemetry: everything stays on your PC.

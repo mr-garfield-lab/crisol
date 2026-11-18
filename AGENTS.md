@@ -72,7 +72,8 @@ Si una persona te pide ayuda con Crisol en su propio PC:
 3. **Nunca subas los topes de VRAM o de temperatura ni quites el STOP.** Si el perfil dice que algo no cabe, recomienda un
    modelo o una cuantización menor.
 4. **Los modelos los elige la persona.** No descargues ninguno sin su permiso; dile el nombre, el origen y el tamaño.
-5. **El código que escribe un cerebro solo se ejecuta dentro de la caja aislada del laboratorio.**
+5. **El código que escribe un cerebro solo se ejecuta dentro del laboratorio de Blender, con sus filtros.** No es una caja
+   aislada del sistema operativo (corre con los permisos del usuario): nunca lo ejecutes en otro sitio ni quites filtros.
 6. **Privacidad:** el informe de `equipo_perfil.py informe` no lleva datos personales; no pidas registros con rutas o
    nombres sin avisar de lo que contienen.
 7. **Distingue lo medido de lo estimado** en lo que respondas (los perfiles lo indican).

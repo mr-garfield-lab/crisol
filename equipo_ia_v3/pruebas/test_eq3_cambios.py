@@ -71,7 +71,8 @@ class TestSeparacion(Base):
 
     def test_primera_capa_de_rutas(self):
         # Hay dos capas (esta y la de eq3.ingesta.leer); cada una se prueba por separado.
-        for mala in ("../x.py", "/etc/x.py", "a/../../x.py", ".oculto/x.py", "a\\b.py", ""):
+        for mala in ("../x.py", "/etc/x.py", "a/../../x.py", ".oculto/x.py", "a\\b.py", "",
+                     "C:/Windows/x.py", "C:x.py", "a/b:flujo.py"):              # letra de unidad y flujos NTFS
             with self.subTest(ruta=mala), self.assertRaises(C.ErrorCambio):
                 C._rel_segura(mala)
         self.assertEqual(C._rel_segura("paquete/modulo.py"), "paquete/modulo.py")
@@ -84,6 +85,12 @@ class TestSeparacion(Base):
         self.assertEqual(r["entradas"], ["calc.py"])
         r = self.c.solicitar("demo", {"agente": "A2", "herramienta": "buscar", "args": {"consulta": "doble"}})
         self.assertEqual(r["resultados"][0]["ruta"], "calc.py")
+        # 2026-11-18 (revisión de seguridad): «listar» no puede salir del proyecto con una letra de unidad
+        for fuera in ("C:/Windows", "C:", "D:/"):
+            with self.subTest(ruta=fuera):
+                r = self.c.solicitar("demo", {"agente": "A2", "herramienta": "listar", "args": {"ruta": fuera}})
+                self.assertNotEqual(r["estado"], "ok", r)
+                self.assertNotIn("entradas", r)
 
 
 class TestFlujo(Base):

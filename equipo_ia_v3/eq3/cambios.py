@@ -109,9 +109,24 @@ def _sha(b: bytes) -> str:
 
 def _rel_segura(rel: str) -> str:
     p = PurePosixPath(rel)
-    if not p.parts or p.is_absolute() or ".." in p.parts or "\\" in rel or rel.startswith("."):
+    # «:» (2026-11-18, revisión de seguridad): en Windows «C:/Windows» no es absoluta para PurePosixPath, pero al unirla a
+    # una ruta de Windows salta a esa unidad; «x:y» también abriría un flujo alternativo de NTFS.
+    if not p.parts or p.is_absolute() or ".." in p.parts or "\\" in rel or ":" in rel or rel.startswith("."):
         raise ErrorCambio(f"ruta no permitida: {rel!r}")
     return p.as_posix()
+
+
+def _dentro(raiz: Path, rel: str) -> Path:
+    """La ruta del proyecto para `rel`, comprobando cada componente (sin enlaces ni uniones de Windows en NINGÚN tramo)
+    y que el destino resuelto sigue dentro de `raiz` (segunda barrera, por si la primera se queda corta)."""
+    actual = raiz
+    for parte in PurePosixPath(_rel_segura(rel)).parts:
+        actual = actual / parte
+        if es_enlace(actual):
+            raise ErrorCambio(f"enlace no permitido en la ruta: {rel!r}")
+    if not actual.resolve().is_relative_to(raiz.resolve()):
+        raise ErrorCambio(f"la ruta sale del proyecto: {rel!r}")
+    return actual
 
 
 class Controlador:
@@ -189,7 +204,7 @@ class Controlador:
             texto = I.leer(self.lab, f"{self._rel_proyecto(proyecto)}/{_rel_segura(args['ruta'])}", MAX_CONTENIDO)
             return {"estado": "ok", "contenido": texto.decode("utf-8", "replace"), "sha256": _sha(texto)}
         if nombre == "listar":
-            base = raiz if args["ruta"] in ("", ".") else raiz / _rel_segura(args["ruta"])
+            base = raiz if args["ruta"] in ("", ".") else _dentro(raiz, args["ruta"])
             if es_enlace(base) or not base.is_dir():
                 raise ErrorCambio(f"no es una carpeta del proyecto: {args['ruta']!r}")
             return {"estado": "ok", "entradas": sorted(p.name + ("/" if p.is_dir() else "") for p in base.iterdir()
